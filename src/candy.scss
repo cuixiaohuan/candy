@@ -1,0 +1,113 @@
+// colors 
+$color-primary:             #409EFF;
+$color-info:                #6089ec;
+
+$color-msg:                 #878d99;
+$color-success:             #67c23a;
+$color-warning:             #eb9e05;
+$color-danger:              #fa5555;
+
+$color-msg-bg:              #f3f4f5;
+$color-success-bg:          #f0f9eb;
+$color-warning-bg:          oldlace;
+$color-danger-bg:           #fee;        
+
+$color-black:               #314659;
+$color-black-light:         #222222;
+$color-black-light-extra:   #333333;
+$color-silver:              #666666;
+$color-silver-light:        #888888;
+$color-silver-light-extra:  #AAAAAA;
+$color-gray:                #BBBBBB;
+$color-gray-light:          #CCCCCC;
+$color-gray-light-extra:    #DDDDDD;
+$color-white-dark:          #EEEEEE;
+$color-white-light:         #FaFaFa;
+$color-white:               #FFFFFF;
+
+// Border
+$color-border:              $color-gray-light-extra;
+$color-border-hover:        $color-gray;
+
+// 尺寸
+// 圆角
+$radius: 0;//2px;
+$font-size: 12px;
+
+// 阴影
+$popup-shadow: 0 1px 6px rgba(0,0,0,.2);
+
+$height: 32px;
+$minHeight: 24px;
+
+// mixin
+@mixin clear() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+  }
+}
+
+// 初始化
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html, body{
+  -webkit-text-size-adjust:none;
+  height: 100%;
+}
+body{
+  font: $font-size "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  color: $color-black;
+  background-color: $color-white-dark;
+}
+a{
+  color: $color-info;
+  text-decoration: none;
+  outline: 0;
+}
+
+ul, li{
+  list-style: none;
+}
+@import './ionicons';
+
+// 引入组件
+@import 'components/loading/loading';
+@import 'components/grid/grid';
+@import 'components/icon/icon';
+@import 'components/button/button';
+@import 'components/input/input';
+@import 'components/radio/radio';
+@import 'components/checkbox/checkbox';
+@import 'components/select/select';
+@import 'components/tag/tag';
+@import 'components/table/table';
+@import 'components/datepicker/datepicker';
+@import 'components/timepicker/timepicker';
+@import 'components/card/card';
+@import 'components/tabs/tabs';
+@import 'components/page/page';
+@import 'components/dropdown/dropdown';
+@import 'components/menu/menu';
+@import 'components/container/container';
+@import 'components/form/form';
+@import 'components/modal/modal';
+@import 'components/message/message';
+@import 'components/tooltip/tooltip';
+@import 'components/progress/progress';
+@import 'components/upload/upload';
+@import 'components/tree/tree';
+@import 'components/timeline/timeline';
+@import 'components/app/app';
