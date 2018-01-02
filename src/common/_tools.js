@@ -86,84 +86,6 @@ function hx(tag, props={}, children=[]){
   return new VVNode(tag, props, children)
 }
 
-function getScrollWidth(){
-  var outer = document.createElement("div")
-  outer.style.visibility = "hidden"
-  outer.style.width = "100px"
-  outer.style.msOverflowStyle = "scrollbar" // needed for WinJS apps
-
-  document.body.appendChild(outer)
-
-  var widthNoScroll = outer.offsetWidth
-  // force scrollbars
-  outer.style.overflow = "scroll"
-
-  // add innerdiv
-  var inner = document.createElement("div")
-  inner.style.width = "100%"
-  outer.appendChild(inner)
-
-  var widthWithScroll = inner.offsetWidth
-
-  // remove divs
-  outer.parentNode.removeChild(outer)
-  return widthNoScroll - widthWithScroll
-}
-
-function globalClick(exclude, callback){
-  var func = _=>{
-    var $$target = _.target
-    
-    while ($$target.parentNode != null){
-      $$target = $$target.parentNode
-
-      if ($$target === exclude){
-        return false
-      }
-    }
-
-    try{
-      callback()
-    }
-    catch (ex){}
-  }
-
-  // pc 端
-  window.addEventListener('click', _=>{
-    func(_)
-  })
-
-  // 移动端
-  window.addEventListener('touchstart', _=>{
-    func(_)
-  }, false)
-}
-
-function getTextWidth(text, font){
-  var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"))
-  var context = canvas.getContext("2d")
-  context.font = font
-  var metrics = context.measureText(text)
-  return metrics.width
-}
-
-function paddingZero(me, len){
-  me = me.toString()
-
-  if (me.length >= len){
-    return me 
-  }
-
-  var arr = []
-  arr.length = len - me.length + 1
-
-  return arr.join('0') + me
-}
-
-function isdef(o){
-  return o !== undefined
-}
-
 export {
   isArray,
   isObject,
@@ -172,10 +94,5 @@ export {
   hx,
   inArray,
   idxArray,
-  getScrollWidth,
-  globalClick,
-  getTextWidth,
-  paddingZero,
-  deepClone,
-  isdef,
+  deepClone
 }

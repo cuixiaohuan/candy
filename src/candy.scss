@@ -40,6 +40,10 @@ $popup-shadow: 0 1px 6px rgba(0,0,0,.2);
 $height: 32px;
 $minHeight: 24px;
 
+// weui
+$cCellFontSize:17px;
+$cCellsMarginTop:unit(20 / $cCellFontSize);
+
 // mixin
 @mixin clear() {
   &:before,
@@ -81,33 +85,6 @@ a{
 ul, li{
   list-style: none;
 }
-@import './ionicons';
 
 // 引入组件
-@import 'components/loading/loading';
-@import 'components/grid/grid';
-@import 'components/icon/icon';
 @import 'components/button/button';
-@import 'components/input/input';
-@import 'components/radio/radio';
-@import 'components/checkbox/checkbox';
-@import 'components/select/select';
-@import 'components/tag/tag';
-@import 'components/table/table';
-@import 'components/datepicker/datepicker';
-@import 'components/timepicker/timepicker';
-@import 'components/card/card';
-@import 'components/tabs/tabs';
-@import 'components/page/page';
-@import 'components/dropdown/dropdown';
-@import 'components/menu/menu';
-@import 'components/container/container';
-@import 'components/form/form';
-@import 'components/modal/modal';
-@import 'components/message/message';
-@import 'components/tooltip/tooltip';
-@import 'components/progress/progress';
-@import 'components/upload/upload';
-@import 'components/tree/tree';
-@import 'components/timeline/timeline';
-@import 'components/app/app';

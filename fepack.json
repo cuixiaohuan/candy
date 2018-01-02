@@ -18,7 +18,8 @@
             "qa": {
                 "watch": false,
                 "version": false,
-                "optimize": false
+                "optimize": false,
+                "www": "./fepack-temp"
             },
             "www": {
                 "watch": false,

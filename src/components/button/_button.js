@@ -1,45 +1,33 @@
 import {hx} from '../../common/_tools.js'
 
-var RButton = Vue.extend({
+var CButton = Vue.extend({
   props: {
     type: {
       type: String,
       default: 'default',
     },
-    size: String,
-    long: Boolean,
+    size: String, // mini
     htmlType: {
       type: String,
       default: 'button',
     },
-    disabled: Boolean,
-    loading: Boolean,
-    icon: String,
-
-    // icon位置，默认before
-    // 枚举: before, after
-    iconPos: {
-      type: String,
-      default: 'before'
-    }
+    disabled: Boolean
   },
   computed: {
     cls () {
       var cls = []
-      cls.push(`r-btn-${this.type}`)
+      this.type.split(' ').forEach(function(item) {
+        cls.push(`c-btn_${item}`)
+      });
       
-      if (this.disabled || this.loading){
-        cls.push('r-btn-disabled')
+      if (this.disabled){
+        cls.push('c-btn_disabled')
       }
 
-      if (this.size === 'small'){
-        cls.push('r-btn-small')
+      if (this.size === 'mini'){
+        cls.push('c-btn_mini')
       }
-
-      if (this.long === true){
-        cls.push('r-btn-long')
-      }      
-
+      
       return cls
     }
   },
@@ -50,60 +38,18 @@ var RButton = Vue.extend({
       },
     }
 
-    if (this.disabled || this.loading){
+    if (this.disabled){
       params.domProps['disabled'] = 'disabled'
     }
 
-    var $btn = hx(`button.r-btn + ${this.cls.join('+')}`, params)
+    var $btn = hx(`button.c-btn + ${this.cls.join('+')}`, params)
     var $btnTxt = hx('span', {}, [this.$slots.default])
 
-    var $icon = null
-    var icon = this.icon
-    if (this.loading){
-      icon = 'load-c'
-    }
-
-    if (icon){
-      $icon = hx('r-icon.r-button-icon', {
-        'class': {
-          'r-icon-only': $btnTxt ? false : true,
-        },
-        props: {
-          type: icon,
-          'auto-rotate': this.loading,
-        },
-      })
-    }
-
-    var $children = [$icon, $btnTxt]
-    if (this.iconPos === 'after'){
-      var $children = [$btnTxt, $icon]
-    }
+    var $children = [$btnTxt]
 
     $btn.push($children)
     return $btn.resolve(h)
   }
 })
 
-var RButtonGroup = Vue.extend({
-  props: {
-    size: String,
-  },
-  computed: {
-    cls () {
-      var cls = ['r-btn-group']
-      
-      if (this.size === 'small'){
-        cls.push('r-btn-group-small')
-      }
-      
-      return cls
-    }
-  },
-  render (h) {
-    return hx(`div.${this.cls.join('+')}`, {}, [this.$slots.default]).resolve(h)
-  }
-})
-
-Vue.component('r-button', RButton)
-Vue.component('r-button-group', RButtonGroup)
+Vue.component('c-button', CButton)
