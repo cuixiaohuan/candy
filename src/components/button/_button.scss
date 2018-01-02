@@ -1,96 +1,290 @@
-.r-btn{
+
+$cBtnHeight:46px;
+$cBtnFontSize:18px;
+$cBtnFontColor:#FFFFFF;
+$cBtnActiveFontColor:rgba(255,255,255,.6);
+$cBtnDisabledFontColor:rgba(255,255,255,.6);
+$cBtnBorderRadius:5px;
+$cBtnDefaultGap:15px;
+
+$cBtnMiniFontSize:13px;
+$cBtnMiniHeight:2.3;
+
+$cBtnDefaultFontColor:#000000;
+$cBtnDefaultActiveFontColor:rgba(0,0,0,.6);
+$cBtnDefaultDisabledFontColor:rgba(0,0,0,.3);
+
+$cBtnDefaultBg:#F8F8F8;
+$cBtnDefaultActiveBg:#DEDEDE;
+$cBtnDefaultDisabledBg:#F7F7F7;
+
+$cBtnPrimaryBg:#1AAD19;
+$cBtnPrimaryActiveBg:#179B16;
+$cBtnPrimaryDisabledBg:#9ED99D;
+
+$cBtnDangerBg:#E64340;
+$cBtnDangerActiveBg:#CE3C39;
+$cBtnDangerDisabledBg:#EC8B89;
+
+$cBtnWarnBg:#eb9e05;
+$cBtnWarnActiveBg:#ffbd17;
+$cBtnWarnDisabledBg:#ffd87e;
+
+
+$cBtnPlainPrimaryColor:rgba(26,173,25,1);
+$cBtnPlainPrimaryBorderColor:rgba(26,173,25,1);
+$cBtnPlainPrimaryActiveColor:rgba(26,173,25,.6);
+$cBtnPlainPrimaryActiveBorderColor:rgba(26,173,25,.6);
+
+$cBtnPlainDefaultColor:rgba(53,53,53,1);
+$cBtnPlainDefaultBorderColor:rgba(53,53,53,1);
+$cBtnPlainDefaultActiveColor:rgba(53,53,53,.6);
+$cBtnPlainDefaultActiveBorderColor:rgba(53,53,53,.6);
+
+$cBtnPlainWarnColor:#eb9e05;
+$cBtnPlainWarnBorderColor:#eb9e05;
+$cBtnPlainWarnActiveColor:#ffbd17;
+$cBtnPlainWarnActiveBorderColor:#ffbd17;
+
+$cBtnPlainDangerColor:#E64340;
+$cBtnPlainDangerBorderColor:#E64340;
+$cBtnPlainDangerActiveColor:#CE3C39;
+$cBtnPlainDangerActiveBorderColor:#CE3C39;
+
+$cBtnPlainDisabledBorderColor:rgba(255,255,255,.6);
+$cBtnPlainDisabledFontColor:rgba(0,0,0,.3);
+
+button, input {
+  &.c-btn {
+      width: 100%;
+      border-width: 0;
+      outline: 0;
+      -webkit-appearance: none;
+      &:focus {
+          outline: 0;
+      }
+  }
+  &.c-btn_inline,&.c-btn_mini {
+      width: auto;
+  }
+  &.c-btn_plain-primary,&.c-btn_plain-default,&.c-btn_plain-danger,&.c-btn_plain-warn,&.c-btn_plain-disabled{
+      border-width: 1px;
+      background-color: transparent;
+  }
+}
+
+// gloable
+.c-btn {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+    box-sizing: border-box;
+    font-size: $cBtnFontSize;
+    text-align: center;
+    text-decoration: none;
+    color: $cBtnFontColor;
+    line-height: $cBtnHeight/$cBtnFontSize;
+    border-radius: $cBtnBorderRadius;
+    // .setTapColor();
+    overflow: hidden;
+    &:after {
+        content: " ";
+        width: 200%;
+        height: 200%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid rgba(0, 0, 0, .2);
+        transform: scale(.5);
+        transform-origin: 0 0;
+        box-sizing: border-box;
+        border-radius: $cBtnBorderRadius*2;
+    }
+}
+.c-btn_inline {
+    display: inline-block;
+}
+
+.c-btn_mini {
   display: inline-block;
-  font: inherit;
-  height: $height;
-  line-height: $height;
-  padding: 0 15px;
-  color: $color-white;
-  white-space: nowrap;
-  text-align: center;
-  border: 1px solid $color-border;
-  border-radius: $radius;
-  cursor: pointer;
-  outline: 0;
-  -webkit-appearance: none;
-  vertical-align: middle;
-  transition: all .2s;
+  padding: 0 1.32em;
+  line-height: $cBtnMiniHeight;
+  font-size: $cBtnMiniFontSize;
+}
 
-  span{
-    vertical-align: top;
-  }
 
-  &:hover{
-    opacity: .8;
-  }
+/*gap between btn*/
+.c-btn + .c-btn {
+  margin-top: $cBtnDefaultGap;
+}
 
-  &:active{
-    opacity: 1;
-    transition: none;
-  }
+.c-btn.c-btn_inline + .c-btn.c-btn_inline {
+  margin-top: auto;
+  margin-left: $cBtnDefaultGap;
+}
 
-  .r-button-icon{
-    margin: 0 3px;
-    font-size: 18px;
-    vertical-align: top;
-  }
-
-  .r-icon-only{
-    margin: 0;
+.c-btn-area {
+  margin: $cCellsMarginTop $cBtnDefaultGap .3em; 
+}
+.c-btn-area_inline {
+  display: flex;
+  .c-btn {
+      margin-top: auto;
+      margin-right: $cBtnDefaultGap;
+      width: 100%;
+      flex: 1;
+      &:last-child {
+          margin-right: 0;
+      }
   }
 }
 
-.r-btn-primary{
-  border-color: $color-primary;
-  background-color: $color-primary;
-}
-
-.r-btn-success{
-  background-color: $color-success;
-  border-color: $color-success;
-}
-
-.r-btn-danger{
-  background-color: $color-danger;
-  border-color: $color-danger;
-}
-
-.r-btn-warning{
-  background-color: $color-warning;
-  border-color: $color-warning;
-}
-
-.r-btn-default{
-  background-color: $color-white;
-  color: $color-black-light;
-}
-
-.r-btn-disabled{
-  border-color: $color-border;
-  background-color: $color-white;
-  color: $color-gray-light;
-  cursor: not-allowed;
-}
-
-.r-btn-small, .r-btn-group-small .r-btn{
-  height: $minHeight;
-  line-height: $minHeight;
-  padding: 0 10px;
-  font-size: 12px;
-}
-
-.r-btn-long{
-  display: block;
-  width: 100%;
-}
-
-.r-btn-group{
-  overflow: hidden;
-  
-  .r-btn{
-    float: left;
+//btn_primary
+.c-btn_primary {
+  background-color: $cBtnPrimaryBg;
+  &:not(.c-btn_disabled):visited {
+      color: $cBtnFontColor;
   }
-
-  .r-btn:not(:first-child){
-    margin-left: 1px;
+  &:not(.c-btn_disabled):active {
+      color: $cBtnActiveFontColor;
+      background-color: $cBtnPrimaryActiveBg;
   }
+}
+
+//btn_danger
+.c-btn_danger {
+    background-color: $cBtnDangerBg;
+    &:not(.c-btn_disabled):visited {
+        color: $cBtnFontColor;
+    }
+    &:not(.c-btn_disabled):active {
+        color: $cBtnActiveFontColor;
+        background-color: $cBtnDangerActiveBg;
+    }
+}
+
+//btn_warn
+.c-btn_warn {
+    background-color: $cBtnWarnBg;
+    &:not(.c-btn_disabled):visited {
+        color: $cBtnFontColor;
+    }
+    &:not(.c-btn_disabled):active {
+        color: $cBtnActiveFontColor;
+        background-color: $cBtnWarnActiveBg;
+    }
+}
+
+//btn_default
+.c-btn_default {
+    color: $cBtnDefaultFontColor;
+    background-color: $cBtnDefaultBg;
+    &:not(.c-btn_disabled):visited {
+        color: $cBtnDefaultFontColor;
+    }
+    &:not(.c-btn_disabled):active {
+        color: $cBtnDefaultActiveFontColor;
+        background-color: $cBtnDefaultActiveBg;
+    }
+}
+
+//btn_plain
+// .c-btn_plain {
+//     color: $cBtnPlainDefaultColor;
+//     border: 1px solid $cBtnPlainDefaultBorderColor;
+//     &:not(.c-btn_plain-disabled):active {
+//         color:$cBtnPlainDefaultActiveColor;
+//         border-color: $cBtnPlainDefaultActiveBorderColor;
+//     }
+//     &:after {
+//         border-width: 0;
+//     }
+// }
+
+.c-btn_plain-primary {
+    color: $cBtnPlainPrimaryColor;
+    border: 1px solid $cBtnPlainPrimaryBorderColor;
+    &:not(.c-btn_plain-disabled):active {
+        color:$cBtnPlainPrimaryActiveColor;
+        border-color: $cBtnPlainPrimaryActiveBorderColor;
+    }
+    &:after {
+        border-width: 0;
+    }
+}
+
+.c-btn_plain-default {
+    color: $cBtnPlainDefaultColor;
+    border: 1px solid $cBtnPlainDefaultBorderColor;
+    &:not(.c-btn_plain-disabled):active {
+        color:$cBtnPlainDefaultActiveColor;
+        border-color: $cBtnPlainDefaultActiveBorderColor;
+    }
+    &:after {
+        border-width: 0;
+    }
+}
+
+.c-btn_plain-warn {
+    color: $cBtnPlainWarnColor;
+    border: 1px solid $cBtnPlainWarnBorderColor;
+    &:not(.c-btn_plain-disabled):active {
+        color:$cBtnPlainWarnActiveColor;
+        border-color: $cBtnPlainWarnActiveBorderColor;
+    }
+    &:after {
+        border-width: 0;
+    }
+}
+.c-btn_plain-danger {
+    color: $cBtnPlainDangerColor;
+    border: 1px solid $cBtnPlainDangerBorderColor;
+    &:not(.c-btn_plain-disabled):active {
+        color:$cBtnPlainDangerActiveColor;
+        border-color: $cBtnPlainDangerActiveBorderColor;
+    }
+    &:after {
+        border-width: 0;
+    }
+}
+
+//btn_disabled
+.c-btn_disabled {
+    color: $cBtnDisabledFontColor;
+    &.c-btn_default {
+        color: $cBtnDefaultDisabledFontColor;
+        background-color: $cBtnDefaultDisabledBg;
+    }
+    &.c-btn_primary {
+        background-color: $cBtnPrimaryDisabledBg;
+    }
+    &.c-btn_danger {
+        background-color: $cBtnDangerDisabledBg;
+    }
+    &.c-btn_warn {
+        background-color: $cBtnWarnDisabledBg;
+    }
+    &.c-btn_plain-disabled{
+        color: $cBtnPlainDisabledFontColor;
+        border-color:$cBtnPlainDisabledBorderColor;
+    }
+}
+
+//btn_loading
+.c-btn_loading{
+	.c-loading{
+		margin:-.2em .34em 0 0;
+	}
+    &.c-btn_primary, &.c-btn_danger {
+        color: $cBtnActiveFontColor;
+    }
+	&.c-btn_primary{
+        background-color: $cBtnPrimaryActiveBg;
+	}
+	&.c-btn_danger{
+        background-color: $cBtnDangerActiveBg;
+	}
 }
