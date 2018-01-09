@@ -1,0 +1,106 @@
+@import './_common';
+
+$cCellBg:#FFFFFF;
+$cCellBorderColor:#e5e5e5;
+$cCellGapV:10px;
+$cCellGapH:15px;
+$cCellInnerGapH:.35em;
+$cCellHeight: 45px;
+$cCellFontSize:17px;
+$cCellTipsFontSize:14px;
+$cCellLabelWidth:105px;
+
+// $cCellLineHeight: ($cCellHeight - 2 * $cCellGapV) / $cCellFontSize;// 高度减去上下padding的行高
+// $cCellsMarginTop: 20 / $cCellFontSize + em;
+
+// c switch
+$cSwitchHeight: 32px;
+
+// c uploader
+$cUploaderBorderColor:#D9D9D9;
+$cUploaderActiveBorderColor:#999999;
+$cUploaderFileSpacing: 9px;
+$cUploaderSize: 79px;
+$cUploaderBorderWidth: 1px;
+
+// cells_global
+.c-cells {
+    margin-top: 20px / $cCellFontSize + em;
+    background-color: $cCellBg;
+    line-height: ($cCellHeight - 2 * $cCellGapV) / $cCellFontSize;
+    font-size: $cCellFontSize; //cell中间有效高度23px，跟客户端默认图标尺寸一致
+
+    overflow: hidden; //因为每个cell的border使用before元素left搞的，ie下伪元素的containing block估计跟标准不同，在cell上用oh不生效
+
+    // onepx
+    position: relative;
+    &:before {
+        @include setTopLine($cCellBorderColor);
+        z-index: 2;
+    }
+    &:after {
+        @include setBottomLine($cCellBorderColor);
+        z-index: 2;
+    }
+}
+
+.c-cells__title {
+    margin-top: .77em; // 15px - 行高
+    margin-bottom: .3em; // 8px - 行高
+    padding-left: $cCellGapH;
+    padding-right: $cCellGapH;
+    color: $cTextColorGray;
+    font-size: $cCellTipsFontSize;
+
+    & + .c-cells {
+        margin-top: 0;
+    }
+}
+
+.c-cells__tips {
+    margin-top: .3em; // 8px - 行高
+    color: $cTextColorGray;
+    padding-left: $cCellGapH;
+    padding-right: $cCellGapH;
+    font-size: $cCellTipsFontSize;
+}
+
+.c-cell {
+    padding: $cCellGapV $cCellGapH;
+    position: relative; //这个是为了兼容cells容器onepx方案被before挡住而做的
+    display: flex;
+    align-items: center;
+    &:before {
+        @include setTopLine($cCellBorderColor);
+        left: $cCellGapH;
+        z-index: 2;
+    }
+    &:first-child {
+        &:before {
+            display: none;
+        }
+    }
+}
+.c-cell_primary{
+    align-items: flex-start;
+}
+.c-cell__bd{
+    flex: 1;
+}
+.c-cell__ft {
+    text-align: right;
+    color: $cTextColorGray;
+}
+
+// check-common
+.c-check__label {
+    @include setTapColor;
+    &:active {
+        background-color: #ECECEC;
+    }
+}
+
+.c-check{
+    position: absolute;
+    left: -9999em;
+}

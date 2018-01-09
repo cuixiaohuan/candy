@@ -1,0 +1,19 @@
+@import './../../common/_cell.scss';
+
+.c-cell__hd {
+    padding-right: $cCellInnerGapH;
+}
+.c-icon-checked {
+    &:before {
+        color: #C9C9C9;
+        font-size: 23px;
+        display: block;
+    }
+}
+
+.c-icon-checked {
+    &:before {
+        // content: '\EA06';
+        color: #09BB07;
+    }
+}

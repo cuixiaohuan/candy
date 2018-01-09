@@ -38,7 +38,20 @@ block content
     c-button(size="mini",type="plain-danger inline")| 危险按钮
     c-button(size="mini",type="plain-warn inline")| 警告按钮
     c-button(size="mini",type="plain-default inline")| 默认按钮
+
+  div.margin-10    
+    div 带icon的按钮
+    c-button(size="mini",type="plain-primary inline", icon='ion-ios-star-outline')| 原始按钮
+    c-button(size="mini",type="plain-danger inline", icon='ion-ios-settings-strong')| 危险按钮
+    c-button(size="mini",type="plain-warn inline", icon='ion-ios-analytics')| 警告按钮
+    c-button(size="mini",type="plain-default inline", icon='ion-ios-speedometer')| 默认按钮
   
+  div.margin-10    
+    div loading 按钮
+    c-button(size="",type="primary inline", :loading='true')| 原始按钮
+    c-button(size="",type="danger inline", :loading='true')| 危险按钮
+    c-button(size="",type="warn inline", :loading='true')| 警告按钮
+    c-button(size="",type="default inline", :loading='true')| 默认按钮
 
 block script
   script.

@@ -11,7 +11,12 @@ var CButton = Vue.extend({
       type: String,
       default: 'button',
     },
-    disabled: Boolean
+    disabled: Boolean,
+    icon: String,
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     cls () {
@@ -27,25 +32,43 @@ var CButton = Vue.extend({
       if (this.size === 'mini'){
         cls.push('c-btn_mini')
       }
+
+      if(this.loading){
+        cls.push('c-btn_loading')
+      }
       
       return cls
     }
   },
   render (h) {
+    var me = this
     var params = {
       domProps: {
-        type: this.htmlType,
+        type: me.htmlType,
       },
     }
-
-    if (this.disabled){
+    if (me.disabled){
       params.domProps['disabled'] = 'disabled'
     }
+    
+    var $btn = hx(`button.c-btn + ${me.cls.join('+')}`, params)
+    var $btnTxt = hx('span', {}, [me.$slots.default])
 
-    var $btn = hx(`button.c-btn + ${this.cls.join('+')}`, params)
-    var $btnTxt = hx('span', {}, [this.$slots.default])
+    var $children = []
 
-    var $children = [$btnTxt]
+    if(me.loading) {
+      var $loading = hx('i.c-loading')
+      $children.push($loading)
+    }
+
+          
+    if (!!me.icon){
+      var $icon = hx(`i.c-btn_icon+${me.icon}`)
+      $children.push($icon)
+    }
+
+    $children.push($btnTxt)
+    
 
     $btn.push($children)
     return $btn.resolve(h)

@@ -1,0 +1,28 @@
+CRadio
+extends ./layout
+
+block title
+  | Radio
+
+block content
+  div.margin-10
+    div 性别:{{xb}}
+        c-radio(v-model="xb", value="男") 男
+        c-radio(v-model="xb", value="女") 女
+
+        c-radio-group(v-model="xb")
+          c-radio(value="value1") value1
+          c-radio(value="value2") value2
+        
+  
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          xb: '男'
+        }
+      }
+    })
