@@ -1,0 +1,22 @@
+@import './../../common/_common.scss';
+@import './../../common/_cell.scss';
+
+// method2 accessbility
+// .c-cells_radio{
+    .c-cell__ft {
+        padding-left: $cCellInnerGapH;
+    }
+// }
+
+// 图标
+.c-icon-checked {
+    &:before {
+        display: block;
+        color: #09BB07;
+        font-size: 16px;
+    }
+}
+
+.c-radio-group {
+
+}

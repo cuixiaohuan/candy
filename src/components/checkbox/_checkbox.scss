@@ -1,0 +1,30 @@
+@import './../../common/_cell.scss';
+
+// .c-cells_checkbox {
+    .c-cell__hd {
+        padding-right: $cCellInnerGapH;
+    }
+    .c-icon-checked {
+        &:before {
+            // content: '\EA01';
+            color: #C9C9C9;
+            font-size: 23px;
+            display: block;
+        }
+    }
+// }
+
+// method2 accessbility
+// .c-check {
+    // checkbox
+    // .c-cells_checkbox & {
+        // &:checked {
+            .c-icon-checked {
+                &:before {
+                    // content: '\EA06';
+                    color: #09BB07;
+                }
+            }
+        // }
+    // }
+// }

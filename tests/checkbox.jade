@@ -1,0 +1,25 @@
+CRadio
+extends ./layout
+
+block title
+  | Checkbox
+
+block content
+  div.margin-10
+        div 复选框： {{xb}} 
+        c-checkbox(v-model="xb", :value="1111") checkbox1
+        c-checkbox(v-model="xb", :value="2222") checkbox2
+
+        c-checkbox-group(v-model='xb')
+            c-checkbox(:value="333") checkbox3
+            c-checkbox(:value="444") checkbox4
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          xb: [1111]
+        }
+      }
+    })

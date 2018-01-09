@@ -1,0 +1,19 @@
+extends ./layout
+
+block title
+  | Slider
+
+block content
+  div.margin-10
+    div 
+        c-slider(:value='30')
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+        }
+      }
+    })

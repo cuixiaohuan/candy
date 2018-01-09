@@ -1,7 +1,4 @@
-// mixin 
-@function setTapColor ($c:rgba(0,0,0,0)) {
-    @return $c;
-}
+@import './_mixin.scss';
 
 // 变量
 // color
@@ -53,5 +50,5 @@ a img {
 
 a {
     text-decoration: none;
-    -webkit-tap-highlight-color: setTapColor();
+    @include setTapColor;
 }

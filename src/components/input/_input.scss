@@ -1,0 +1,114 @@
+@import './../../common/_common.scss';
+$cDialogLinkColor: #3CC51F;
+
+// form-common
+.c-label{
+    display:block;
+    width:$cCellLabelWidth;
+    @include text_wrap;
+}
+.c-input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-size: inherit;
+    color: inherit;
+    height: ($cCellHeight - 2 * $cCellGapV) / $cCellFontSize + em;
+    line-height: ($cCellHeight - 2 * $cCellGapV) / $cCellFontSize;
+
+    // hides the spin-button
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+.c-textarea {
+    display: block;
+    border: 0;
+    resize: none;
+    width: 100%;
+    color: inherit;
+    font-size: 1em;
+    line-height: inherit;
+    outline: 0;
+}
+
+.c-textarea-counter{
+    color: $cTextColorTips;
+    text-align: right;
+    .c-cell_warn &{
+        color: $cTextColorWarn;
+    }
+}
+
+.c-toptips {
+    display:none;
+    position: fixed;
+    transform: translateZ(0);
+    top: 0;
+    left: 0;
+    right: 0;
+    padding:5px;
+    font-size:14px;
+    text-align: center;
+    color: #FFF;
+    z-index: 5000;
+    @include text_wrap;
+}
+.c-toptips_warn {
+    background-color: $cColorWarn;
+}
+.c-cells_form {
+    .c-cell__ft{
+        font-size:0;
+    }
+    .c-icon-warn{
+        display:none;
+    }
+    input, textarea, label[for]{
+        @include setTapColor;
+    }
+}
+.c-cell_warn{
+    color:$cTextColorWarn;
+    .c-icon-warn {
+        display: inline-block;
+    }
+}
+
+// 右侧验证码
+
+.c-cell_vcode {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+.c-vcode-img{
+    margin-left: 5px;
+    height: $cCellHeight;
+    vertical-align: middle;
+}
+
+.c-vcode-btn {
+    display: inline-block;
+    height: $cCellHeight;
+    margin-left: 5px;
+    padding: 0 0.6em 0 0.7em;
+    border-left: 1px solid $cLineColorLight;
+    line-height: $cCellHeight;
+    vertical-align: middle;
+    font-size: $cCellFontSize;
+    color: $cDialogLinkColor;
+    button &{
+        background-color: transparent;
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 0;
+        outline: 0;
+    }
+    &:active {
+        color: desaturate($cDialogLinkColor, 30%);
+    }
+}

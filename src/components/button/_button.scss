@@ -1,3 +1,4 @@
+@import './../../common/_common.scss';
 
 $cBtnHeight:46px;
 $cBtnFontSize:18px;
@@ -88,7 +89,7 @@ button, input {
     color: $cBtnFontColor;
     line-height: $cBtnHeight/$cBtnFontSize;
     border-radius: $cBtnBorderRadius;
-    // .setTapColor();
+    @include setTapColor;
     overflow: hidden;
     &:after {
         content: " ";
@@ -274,17 +275,9 @@ button, input {
 }
 
 //btn_loading
-.c-btn_loading{
-	.c-loading{
-		margin:-.2em .34em 0 0;
-	}
-    &.c-btn_primary, &.c-btn_danger {
-        color: $cBtnActiveFontColor;
-    }
-	&.c-btn_primary{
-        background-color: $cBtnPrimaryActiveBg;
-	}
-	&.c-btn_danger{
-        background-color: $cBtnDangerActiveBg;
-	}
+// .c-btn_loading{
+
+// }
+.c-btn_icon {
+	margin:-.2em .34em 0 0;
 }

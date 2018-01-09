@@ -1,0 +1,26 @@
+CRadio
+extends ./layout
+
+block title
+  | Input
+
+block content
+  div.margin-10
+        div 输入框
+        form()
+            c-input(pattern='[0-9]*', placeholder='15731114550', label='电话：', title='请输入数字', label-width='70px')
+            c-input(pattern='[a-z]*', placeholder='balabala', label='姓名：', title='请输入小写英文', label-width='70px')
+            c-input(type='date', label='日期：', label-width='70px')
+            c-input(type='datetime-local', label='日期时间：', label-width='70px')
+            c-button(type="primary inline", html-type='submit') 提交
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          xb: [1111]
+        }
+      }
+    })
