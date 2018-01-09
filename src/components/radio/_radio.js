@@ -73,7 +73,6 @@ var CRadio = Vue.extend({
                 }
             }
         }, [$bd, $ft])
-
         return $label.resolve(h)
     }
 })
