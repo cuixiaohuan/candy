@@ -1,4 +1,6 @@
-@import './../../common/_common.scss';
+@import './../../common/_common';
+@import './../../common/_icon';
+
 $cDialogLinkColor: #3CC51F;
 
 // form-common
@@ -71,6 +73,8 @@ $cDialogLinkColor: #3CC51F;
         @include setTapColor;
     }
 }
+
+// error 填写错误
 .c-cell_warn{
     color:$cTextColorWarn;
     .c-icon-warn {
@@ -79,7 +83,6 @@ $cDialogLinkColor: #3CC51F;
 }
 
 // 右侧验证码
-
 .c-cell_vcode {
     padding-top: 0;
     padding-right: 0;

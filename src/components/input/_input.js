@@ -3,23 +3,27 @@ import {hx} from '../../common/_tools.js'
 var CInput = Vue.extend({
     props: {
         type: {
-        type: String,
-        default: 'text',
+            type: String,
+            default: 'text',
         },
         pattern: String,
         label: '',
         placeholder: '',
         title: String,
-        labelWidth: String
+        labelWidth: String,
+        hasError: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         cls () {
-        var cls = []
-        this.type.split(' ').forEach(function(item) {
-            cls.push(`c-btn_${item}`)
-        });
-        
-        return cls
+            
+            var cls = []
+            if (this.hasError) {
+                cls.push('c-cell_warn')
+            }
+            return cls
         }
     },
     render (h) {
@@ -50,9 +54,7 @@ var CInput = Vue.extend({
                 width: me.labelWidth
             }
         }
-
         var $hd = hx('div.c-cell__hd', hdParams, [$label])
-
 
         // <div class="c-cell">
         //     <div class="c-cell__hd"><label class="c-label">qq</label></div>
@@ -61,7 +63,15 @@ var CInput = Vue.extend({
         //     </div>
         // </div>
 
-        var $input = hx('div.c-cell', {}, [$hd, $bd])
+        var $children = [$hd, $bd]
+        if (me.hasError) {
+
+            var $i = hx('i.c-icon-warn + ion-ios-information')
+            var $ft = hx('div.c-cell__ft', {}, [$i])
+            $children.push( $ft )
+        }
+
+        var $input = hx(`div.c-cell + ${me.cls.join("+")}`, {}, $children)
 
         return $input.resolve(h)
     }
