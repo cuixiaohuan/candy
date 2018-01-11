@@ -1,0 +1,41 @@
+@import '../../common/_common';
+
+.c-panel {
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    &:first-child {
+        margin-top: 0;
+    }
+
+    position: relative;
+    overflow: hidden;
+    &:before {
+        @include setTopLine($cLineColorLight);
+    }
+    &:after {
+        @include setBottomLine($cLineColorLight);
+    }
+}
+
+.c-panel__hd {
+    padding: 14px 15px 10px;
+    color: $cTextColorGray;
+    font-size: 13px;
+    position: relative;
+    &:after {
+        @include setBottomLine($cLineColorLight);
+        left: 15px;
+    }
+}
+
+.c-panel__bd {
+    >:first-child {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+
+
+

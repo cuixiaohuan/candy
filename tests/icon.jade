@@ -1,0 +1,27 @@
+extends ./layout
+
+block title 
+    | Icon
+
+block content
+  div.margin-10
+      c-panel(title='图标')
+        c-flex(style='margin: 20px 0;')
+          c-item
+            c-icon(type='warn' icon='ion-alert-circled')
+          c-item
+            c-icon(type='success' icon='ion-alert-circled')
+          c-item
+            c-icon(type='error' icon='ion-alert-circled')
+          c-item
+            c-icon(type='info' icon='ion-alert-circled')
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+        }
+      }
+    })

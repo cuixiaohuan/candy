@@ -29,6 +29,9 @@ $cFontSans:sans-serif;
 $cFontDefault:$cFontEN,$cFontSans;
 
 // reset
+html, body {
+    height: 100%;
+}
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;

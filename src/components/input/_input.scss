@@ -88,22 +88,47 @@ $cDialogLinkColor: #3CC51F;
     padding-right: 0;
     padding-bottom: 0;
 }
-.c-vcode-img{
+.c-vcode-img {
     margin-left: 5px;
     height: $cCellHeight;
+
+    
+    line-height: $cCellHeight;
+    
     vertical-align: middle;
+
+    img {
+        height: 100%;
+    }
 }
 
-.c-vcode-btn {
+.c-btn_vcode {
     display: inline-block;
     height: $cCellHeight;
     margin-left: 5px;
     padding: 0 0.6em 0 0.7em;
-    border-left: 1px solid $cLineColorLight;
+    border-bottom: 0;
+    border-right: 0;
+    border-top: 0;
+    border-left: 10px solid $cLineColorLight;
     line-height: $cCellHeight;
     vertical-align: middle;
     font-size: $cCellFontSize;
     color: $cDialogLinkColor;
+    background-color: #fff;
+
+    &.c-btn{
+        border-radius: 0;
+
+    }
+
+    &.c-btn:after {
+        border-right: 0;
+        border-top: 0;
+        border-bottom: 0;
+        border-radius: 0;
+    }
+
     button &{
         background-color: transparent;
         border-top: 0;

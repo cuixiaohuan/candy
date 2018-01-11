@@ -15,7 +15,7 @@ $cBtnDefaultFontColor:#000000;
 $cBtnDefaultActiveFontColor:rgba(0,0,0,.6);
 $cBtnDefaultDisabledFontColor:rgba(0,0,0,.3);
 
-$cBtnDefaultBg:#F8F8F8;
+$cBtnDefaultBg:#FFF;
 $cBtnDefaultActiveBg:#DEDEDE;
 $cBtnDefaultDisabledBg:#F7F7F7;
 
@@ -70,7 +70,7 @@ button, input {
   }
   &.c-btn_plain-primary,&.c-btn_plain-default,&.c-btn_plain-danger,&.c-btn_plain-warn,&.c-btn_plain-disabled{
       border-width: 1px;
-      background-color: transparent;
+      background-color: $cBtnDefaultBg;
   }
 }
 

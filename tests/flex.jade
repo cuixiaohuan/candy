@@ -1,0 +1,66 @@
+extends ./layout
+
+block title 
+    | FLex
+
+block style
+    style.
+        .item {
+            background: #bcf0bb;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .item10 {
+            background: #bcf0bb;
+            height: 40px;
+            line-height: 40px;
+            width: 30px;
+        }
+
+block content
+    div.margin-10
+        c-flex(:gutter='10')
+            c-item
+                div.item 1
+        c-flex(:gutter='10')
+            c-item
+                div.item 1
+            c-item
+                div.item 2
+        c-flex(:gutter='10')
+            c-item
+                div.item 1
+            c-item
+                div.item 2
+            c-item
+                div.item 3
+        c-flex(:gutter='10')
+            c-item(:offset='2')
+                div.item 1
+            c-item
+                div.item 2
+            c-item
+                div.item 3
+            c-item
+                div.item 4
+        c-flex(:gutter='10', justify-content='flex-end')
+            c-item()
+                div.item10 1
+            c-item()
+                div.item10 2
+            c-item
+                div.item10 3
+
+
+            
+block script
+    script.
+        new Vue({
+        el: '#app',
+            data () {
+                return {
+                }
+            }
+        })

@@ -6,15 +6,40 @@ block title
 
 block content
   div.margin-10
-        div.c-cells__title 输入框
-        form()
-            c-input(pattern='[0-9]*', placeholder='15731114550', label='电话：', title='请输入数字', label-width='70px')
-            c-input(pattern='[0-9]*', placeholder='15731114550', label='电话：', title='请输入数字', label-width='70px', :has-error='true')
-            c-input(pattern='[a-z]*', placeholder='balabala', label='姓名：', title='请输入小写英文', label-width='70px')
-            c-input(type='date', label='日期：', label-width='70px')
-            c-input(type='datetime-local', label='日期时间：', label-width='70px')
-        div.c-cell
-            c-button(type="primary inline", html-type='submit') 提交
+
+    form()
+      c-panel(title='输入框')
+        c-input(label='报错：', title='请输入数字', label-width='70px', :has-error='true')
+        c-input(type='text', @input='input', label='控制输入：', :trim='true', title='请输入数字', label-width='70px', v-model='phone1', :has-error='haserror')
+        c-input(type='text', pattern='[a-z]*', label='姓名：', title='请输入小写英文', label-width='70px')
+        c-input(type='password', label='密码:', label-width='70px')
+        c-input(type='phone', label='电话：', placeholder='请输入正确的电话号码', label-width='70px')
+          template(slot='right')
+            img(src="./vcode2.png", alt="")
+        c-input(label='验证码:', title='请输入正确的电话号码', label-width='70px')
+          template(slot='right')
+            c-button(type='vcode' style='height: 100%;') 获取验证码
+         
+      c-panel(title='时间日期选择')
+        c-input(type='date', label='日期:', label-width='70px')
+        c-input(type='datetime-local', label='日期时间:', label-width='70px')
+
+      c-panel(title='textarea')
+        c-input(type='textarea',label='备注：', placeholder='请输入备注信息', :rows='2', label-width='70px')
+        c-input(placeholder='请输入姓名', label-icon='ion-person', label-width='70px')
+        
+      c-panel(title='左侧图标')
+        c-input(placeholder='请输入账号')
+          template(slot='right')
+            i(class='c-icon-success ion-person')
+
+      c-panel(title='右侧图标')
+        c-input(placeholder='请输入密码' type='password')
+          template(slot='right')
+            c-icon(icon='ion-locked' type='success')
+
+        c-button(type="warn inline", html-type='submit') 提交
+
 
 block script
   script.
@@ -22,7 +47,20 @@ block script
       el: '#app',
       data () {
         return {
-          xb: [1111]
+          xb: [1111],
+          haserror: false,
+          phone1: ''
+        }
+      },
+      watch: {
+      },
+      methods: {
+        input () {
+          if ( this.phone1.length > 3) {
+            this.haserror = true
+          } else {
+            this.haserror = false
+          }
         }
       }
     })

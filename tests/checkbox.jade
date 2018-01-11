@@ -1,4 +1,3 @@
-CRadio
 extends ./layout
 
 block title
@@ -6,10 +5,11 @@ block title
 
 block content
   div.margin-10
-        div 复选框： {{xb}} 
+    c-panel(title='复选框')
         c-checkbox(v-model="xb", :value="1111") checkbox1
         c-checkbox(v-model="xb", :value="2222") checkbox2
 
+    c-panel(title='复选框group')
         c-checkbox-group(v-model='xb')
             c-checkbox(:value="333") checkbox3
             c-checkbox(:value="444") checkbox4

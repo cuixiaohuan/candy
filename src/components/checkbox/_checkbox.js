@@ -98,7 +98,7 @@ var CCheckboxGroup = Vue.extend({
     },
     computed: {
       cls () {
-        var cls = ['c-checkbox-group', 'c-cells']
+        var cls = ['c-checkbox-group']
 
         return cls
       },

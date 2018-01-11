@@ -1,4 +1,3 @@
-CRadio
 extends ./layout
 
 block title
@@ -6,14 +5,17 @@ block title
 
 block content
   div.margin-10
-    div 性别:{{xb}}
-        c-radio(v-model="xb", value="男") 男
-        c-radio(v-model="xb", value="女") 女
 
-        c-radio-group(v-model="xb")
-          c-radio(value="value1") value1
-          c-radio(value="value2") value2
-        
+    c-panel(title='单选框')
+      c-radio(v-model="xb", value="男") 男
+      c-radio(v-model="xb", value="女") 女
+      
+    c-panel(title='单选框group')
+      c-radio-group(v-model="xb")
+        c-radio(value="value1") value1
+        c-radio(value="value2") value2
+        c-radio(value="value3") value3
+    
   
 
 block script

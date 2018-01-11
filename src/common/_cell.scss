@@ -27,6 +27,7 @@ $cUploaderBorderWidth: 1px;
 .c-cells {
     margin-top: 20px / $cCellFontSize + em;
     background-color: $cCellBg;
+    // color: $cTextColorTips;
     line-height: ($cCellHeight - 2 * $cCellGapV) / $cCellFontSize;
     font-size: $cCellFontSize; //cell中间有效高度23px，跟客户端默认图标尺寸一致
 
@@ -34,23 +35,24 @@ $cUploaderBorderWidth: 1px;
 
     // onepx
     position: relative;
-    &:before {
-        @include setTopLine($cCellBorderColor);
-        z-index: 2;
-    }
-    &:after {
-        @include setBottomLine($cCellBorderColor);
-        z-index: 2;
-    }
+    // &:before {
+    //     @include setTopLine($cCellBorderColor);
+    //     z-index: 2;
+    // }
+    // &:after {
+    //     @include setBottomLine($cCellBorderColor);
+    //     z-index: 2;
+    // }
 }
 
 .c-cells__title {
-    margin-top: .77em; // 15px - 行高
-    margin-bottom: .3em; // 8px - 行高
+    padding-top: .77em; // 15px - 行高
+    padding-bottom: .3em; // 8px - 行高
     padding-left: $cCellGapH;
     padding-right: $cCellGapH;
     color: $cTextColorGray;
     font-size: $cCellTipsFontSize;
+    background-color: $cCellBg;
 
     & + .c-cells {
         margin-top: 0;
@@ -70,14 +72,16 @@ $cUploaderBorderWidth: 1px;
     position: relative; //这个是为了兼容cells容器onepx方案被before挡住而做的
     display: flex;
     align-items: center;
+    background-color: $cCellBg;
+    
     &:before {
         @include setTopLine($cCellBorderColor);
         left: $cCellGapH;
         z-index: 2;
     }
-    &:first-child {
-        &:before {
-            display: none;
+    &:last-child {
+        &:after {
+            @include setBottomLine($cCellBorderColor)
         }
     }
 }
@@ -92,6 +96,39 @@ $cUploaderBorderWidth: 1px;
     color: $cTextColorGray;
 }
 
+
+.c-cell_access {
+    @include setTapColor;
+    color: inherit;
+    &:active {
+        background-color: #ECECEC;
+    }
+    .c-cell__ft {
+        padding-right: 13px;
+        position: relative;
+        &:after {
+            content: " ";
+            @include setArrow(right, 6px, #C8C8CD, 2px);
+            position: absolute;
+            top: 50%;
+            margin-top: -4px;
+            right: 2px;
+        }
+    }
+}
+.c-cell_link{
+    color: $cLinkColorDefault;
+    font-size: 14px;
+
+    // 由于c-cell:first-child的:before为隐藏，所以这里要重新显示出来
+    &:first-child{
+        &:before{
+            display: block;
+        }
+    }
+}
+
+
 // check-common
 .c-check__label {
     @include setTapColor;
@@ -104,3 +141,4 @@ $cUploaderBorderWidth: 1px;
     position: absolute;
     left: -9999em;
 }
+

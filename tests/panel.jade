@@ -1,0 +1,24 @@
+extends ./layout
+
+block title 
+    | Panel
+
+block content
+    .margin-10
+
+        c-panel(title='panel标题')
+            template(slot='default')
+                c-list(title='文字标题', legend='说明文字3', icon='ion-ios-alarm-outline')
+                c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
+
+
+            
+block script
+    script.
+        new Vue({
+        el: '#app',
+            data () {
+                return {
+                }
+            }
+        })

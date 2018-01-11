@@ -5,54 +5,46 @@ block title
 
 block content
   div.margin-10
-    div 正常按钮
-    c-button(type="primary inline")| 原始按钮
-    c-button(type="danger inline")| 危险按钮
-    c-button(type="warn inline")| 警告按钮
-    c-button(type="default inline")| 默认按钮
+    c-panel(title='正常按钮')
+      div(style='margin: 10px;')
+        c-button(type="primary inline")| 原始按钮
+        c-button(type="danger inline")| 危险按钮
+        c-button(type="warn inline")| 警告按钮
+        c-button(type="default inline")| 默认按钮
 
   div.margin-10
-    div plain按钮
-    c-button(type="plain-primary inline")| 原始按钮
-    c-button(type="plain-danger inline")| 危险按钮
-    c-button(type="plain-warn inline")| 警告按钮
-    c-button(type="plain-default inline")| 默认按钮
+    c-panel(title='plain按钮')
+      div(style='margin: 10px;')
+        c-button(type="plain-primary inline")| 原始按钮
+        c-button(type="plain-danger inline")| 危险按钮
+        c-button(type="plain-warn inline")| 警告按钮
+        c-button(type="plain-default inline")| 默认按钮
 
   div.margin-10
-    div 禁用按钮
-    c-button(:disabled="true" type="primary")| 原始按钮
-    c-button(:disabled="true" type="danger")| 危险按钮
-    c-button(:disabled="true" type="warn")| 警告按钮
-    c-button(:disabled="true" type="plain-disabled")| plain按钮
-    c-button(:disabled="true" type="default")| 默认按钮
+    c-panel(title='禁用按钮')
+      div(style='margin: 10px;')
+        c-button(:disabled="true" type="primary")| 原始按钮
+        c-button(:disabled="true" type="danger")| 危险按钮
+        c-button(:disabled="true" type="warn")| 警告按钮
+        c-button(:disabled="true" type="plain-disabled")| plain按钮
+        c-button(:disabled="true" type="default")| 默认按钮
 
   div.margin-10
-    div 小型按钮
-    c-button(size="mini",type="primary inline")| 原始按钮
-    c-button(size="mini",type="danger inline")| 危险按钮
-    c-button(size="mini",type="warn inline")| 警告按钮
-    c-button(size="mini",type="default inline")| 默认按钮
+    c-panel(title='小型按钮')
+      div(style='margin: 10px;')
+        c-button(size="mini",type="primary inline")| 原始按钮
+        c-button(size="mini",type="danger inline")| 危险按钮
+        c-button(size="mini",type="warn inline")| 警告按钮
+        c-button(size="mini",type="default inline")| 默认按钮
   
   div.margin-10    
-    c-button(size="mini",type="plain-primary inline")| 原始按钮
-    c-button(size="mini",type="plain-danger inline")| 危险按钮
-    c-button(size="mini",type="plain-warn inline")| 警告按钮
-    c-button(size="mini",type="plain-default inline")| 默认按钮
-
-  div.margin-10    
-    div 带icon的按钮
-    c-button(size="mini",type="plain-primary inline", icon='ion-ios-star-outline')| 原始按钮
-    c-button(size="mini",type="plain-danger inline", icon='ion-ios-settings-strong')| 危险按钮
-    c-button(size="mini",type="plain-warn inline", icon='ion-ios-analytics')| 警告按钮
-    c-button(size="mini",type="plain-default inline", icon='ion-ios-speedometer')| 默认按钮
+    c-panel(title='带icon/loading的按钮')
+      div(style='margin: 10px;')
+        c-button(size="mini",type="plain-primary inline")| 原始按钮
+        c-button(size="mini",type="plain-danger inline", icon='ion-ios-settings-strong')| 危险按钮
+        c-button(size="mini",type="plain-warn inline", :loading='true')| 警告按钮
+        c-button(size="mini",type="plain-default inline", icon='ion-ios-speedometer')| 默认按钮
   
-  div.margin-10    
-    div loading 按钮
-    c-button(size="",type="primary inline", :loading='true')| 原始按钮
-    c-button(size="",type="danger inline", :loading='true')| 危险按钮
-    c-button(size="",type="warn inline", :loading='true')| 警告按钮
-    c-button(size="",type="default inline", :loading='true')| 默认按钮
-
 block script
   script.
     new Vue({

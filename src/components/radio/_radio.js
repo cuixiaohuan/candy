@@ -38,15 +38,6 @@ var CRadio = Vue.extend({
         var me = this
         var params = {
         }
-        //     <label class="c-cell c-check__label" for="x11">
-        //         <div class="c-cell__bd">
-        //             <p>cell standard</p>
-        //         </div>
-        //         <div class="c-cell__ft">
-        //             <input type="radio" class="c-check" name="radio1" id="x11"/>
-        //             <span class="c-icon-checked"></span>
-        //         </div>
-        //     </label>
 
         var $p = hx(`p`, {}, [this.$slots.default])
         var $bd = hx(`div.c-cell__bd`, {}, [$p])
@@ -90,7 +81,7 @@ var CRadioGroup = Vue.extend({
     render (h) {
       var children = this.$slots.default
   
-      return hx(`div.c-radio-group+c-cells`, {}, [children]).resolve(h)
+      return hx(`div.c-radio-group`, {}, [children]).resolve(h)
     }
   })
   
