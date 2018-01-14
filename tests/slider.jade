@@ -8,7 +8,7 @@ block title
 block content
   div.margin-10
     div 
-        c-slider(:value='50')
+        c-slider( v-model='code')
 
 
 block script
@@ -17,6 +17,7 @@ block script
       el: '#app',
       data () {
         return {
+          code: 30
         }
       }
     })

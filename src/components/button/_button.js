@@ -25,7 +25,7 @@ var CButton = Vue.extend({
         cls.push(`c-btn_${item}`)
       });
       
-      if (this.disabled){
+      if (this.disabled || this.loading){
         cls.push('c-btn_disabled')
       }
 
@@ -40,12 +40,23 @@ var CButton = Vue.extend({
       return cls
     }
   },
+  methods: {
+    triggerClick () {
+      if (this.disabled || this.loading) return 
+      this.$emit('click')
+    }
+  },
   render (h) {
     var me = this
     var params = {
       domProps: {
         type: me.htmlType,
       },
+      on: {
+        click(){
+          me.triggerClick()
+        }
+      }
     }
     if (me.disabled){
       params.domProps['disabled'] = 'disabled'

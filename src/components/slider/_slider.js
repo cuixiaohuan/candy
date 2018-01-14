@@ -39,10 +39,14 @@ var CSlider = Vue.extend({
         //     </div>
         // </div>
 
-        var $inner = hx('div.c-slider__inner')
+        var $inner = hx('div.c-slider__inner', {
+            style: {
+                width: 100 + "%"
+            },
+        })
         var $sliderTrack = hx('div.c-slider__track', {
             style: {
-                width: this.value / this.total * 100 + "%"
+                width: me.value / me.total * 100 + "%"
             },
         })
         var totalLen = this.total,
@@ -57,29 +61,25 @@ var CSlider = Vue.extend({
                 left: me.value / me.total * 100 + "%"
             },
             on: {
-                click () {
-                    console.log(111)
-                },
-                dragstart (e) {
-                    startLeft = parseInt($sliderHandler.props.style.left)
+                touchstart (e) {
+                    // startLeft = parseInt($sliderHandler.props.style.left) * totalLen / 100;
+                    startLeft = me.value;
                     startX = e.target.offsetLeft;
-
-                    console.log('startX', startX, ',startLeft:', startLeft)
+                    console.log('startX', startX)
                 },
-                drag (e){
+                touchmove(e){
                     var dist = startLeft + e.target.offsetLeft - startX,
                         percent;
+                    
                     dist = dist < 0 ? 0 : dist > totalLen ? totalLen : dist;
-                    percent =  parseInt(me.value / totalLen * 100);
-                    $sliderTrack.props.style.width= percent + '%';
+                    percent =  parseInt(dist / totalLen * 100);
+                    $sliderTrack.props.style.width = percent + '%';
                     $sliderHandler.props.style.left = percent + '%';
-                    
-                    me.$emit('input', me.total * percent)
-                    
-                    console.log('me.value', me.value, ',percent:', percent)
-                    
+
+                    me.$emit('input', percent)
+    
                     e.preventDefault();
-                }
+                },
             }
         })
 

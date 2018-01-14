@@ -1,0 +1,20 @@
+extends ./layout
+
+block title 
+    | Loadmore
+
+block content
+    c-panel(title='loadmore')
+        c-loadmore(:loading='false', :no-data='false', :has-more='false', :show='true')
+        c-loadmore(:loading='false', :no-data='true', :has-more='true', :show='true')
+        c-loadmore(:loading='true', :no-data='false', :has-more='true', :show='true')
+            
+block script
+    script.
+        new Vue({
+        el: '#app',
+            data () {
+                return {
+                }
+            }
+        })

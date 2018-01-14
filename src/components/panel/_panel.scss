@@ -26,16 +26,40 @@
         @include setBottomLine($cLineColorLight);
         left: 15px;
     }
+
+    > a {
+        color: $cTextColorGray;
+        margin: -14px -15px -10px;
+        padding: 14px 15px 10px;
+
+        & {
+            // :after {
+            //     content: " ";
+            //     @include setArrow(right, 6px, #C8C8CD, 2px);
+            //     position: absolute;
+            //     top: 50%;
+            //     margin-top: -4px;
+            //     right: 18px;
+            // }
+
+            .c-cell{
+                &:last-child {
+                    &:after {
+                        display: none;
+                    }
+                }
+
+            }
+
+        }
+    }
 }
 
 .c-panel__bd {
+
     >:first-child {
         &::before {
             display: none;
         }
     }
 }
-
-
-
-

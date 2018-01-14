@@ -124,7 +124,7 @@ var CInput = Vue.extend({
         
         if (me.hasError) {
 
-            $input.push( hx('div.c-cell__ft', {}, [hx('i.c-icon-warn + ion-ios-information')]) )
+            $input.push( hx('div.c-cell__ft', {}, [hx('i.c-icon-error + ion-ios-information')]) )
         } else {
             if (me.$slots['right']) {
                 $input.push( hx('div.c-cell__ft + c-vcode-img', {}, [this.$slots['right']]) )

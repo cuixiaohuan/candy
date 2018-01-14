@@ -1,0 +1,37 @@
+extends ./layout
+
+block title 
+    | Search
+
+block content
+    c-panel(title='搜索栏')
+        c-searchbar(placeholder='搜索内容', v-model='aaa')
+            div(v-show='show')
+                c-list(title='sfsdag', href='#saa')
+                c-list(title='asgasbfsgas', href='#saa')
+                c-list(title='rewtergdsb', href='#saa')
+                c-list(title='bxvcbcv', href='#saa')
+                c-list(title='dfsfbsf', href='#saa')
+                c-list(title='dsfsdfh', href='#saa')
+
+            
+block script
+    script.
+        new Vue({
+        el: '#app',
+            data () {
+                return {
+                    aaa: '',
+                    show: false
+                }
+            },
+            watch : {
+                aaa(){
+                    if(this.aaa){
+                        this.show = true
+                    } else {
+                        this.show = false
+                    }
+                }
+            }
+        })

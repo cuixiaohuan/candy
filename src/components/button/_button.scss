@@ -199,9 +199,9 @@ button, input {
         color:$cBtnPlainPrimaryActiveColor;
         border-color: $cBtnPlainPrimaryActiveBorderColor;
     }
-    &:after {
-        border-width: 0;
-    }
+    // &:after {
+    //     border-width: 0;
+    // }
 }
 
 .c-btn_plain-default {
@@ -211,9 +211,9 @@ button, input {
         color:$cBtnPlainDefaultActiveColor;
         border-color: $cBtnPlainDefaultActiveBorderColor;
     }
-    &:after {
-        border-width: 0;
-    }
+    // &:after {
+    //     border-width: 0;
+    // }
 }
 
 .c-btn_plain-warn {
@@ -223,9 +223,9 @@ button, input {
         color:$cBtnPlainWarnActiveColor;
         border-color: $cBtnPlainWarnActiveBorderColor;
     }
-    &:after {
-        border-width: 0;
-    }
+    // &:after {
+    //     border-width: 0;
+    // }
 }
 .c-btn_plain-danger {
     color: $cBtnPlainDangerColor;
@@ -234,9 +234,9 @@ button, input {
         color:$cBtnPlainDangerActiveColor;
         border-color: $cBtnPlainDangerActiveBorderColor;
     }
-    &:after {
-        border-width: 0;
-    }
+    // &:after {
+    //     border-width: 0;
+    // }
 }
 
 //btn_disabled
@@ -255,9 +255,10 @@ button, input {
     &.c-btn_warn {
         background-color: $cBtnWarnDisabledBg;
     }
-    &.c-btn_plain-disabled{
+    &.c-btn_plain-primary,&.c-btn_plain-default,&.c-btn_plain-danger,&.c-btn_plain-warn,&.c-btn_plain-disabled{
         color: $cBtnPlainDisabledFontColor;
         border-color:$cBtnPlainDisabledBorderColor;
+    
     }
 }
 

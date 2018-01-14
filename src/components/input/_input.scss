@@ -1,5 +1,4 @@
 @import './../../common/_common';
-@import './../../common/_icon';
 
 $cDialogLinkColor: #3CC51F;
 
@@ -37,11 +36,12 @@ $cDialogLinkColor: #3CC51F;
     outline: 0;
 }
 
-.c-textarea-counter{
-    color: $cTextColorTips;
-    text-align: right;
-    .c-cell_warn &{
-        color: $cTextColorWarn;
+.c-cell_warn {
+    .c-cell__hd {
+        color: $cTextColorTitle;            
+    }
+    .c-cell__bd {
+        color: $cTextColorWarn;            
     }
 }
 
@@ -78,6 +78,9 @@ $cDialogLinkColor: #3CC51F;
 .c-cell_warn{
     color:$cTextColorWarn;
     .c-icon-warn {
+        display: inline-block;
+    }
+    .c-icon-error {
         display: inline-block;
     }
 }

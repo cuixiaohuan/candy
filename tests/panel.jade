@@ -6,10 +6,18 @@ block title
 block content
     .margin-10
 
-        c-panel(title='panel标题')
-            template(slot='default')
-                c-list(title='文字标题', legend='说明文字3', icon='ion-ios-alarm-outline')
-                c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
+        c-panel(title='panel标题', link='#aa', legend='more', icon='ion-person')
+            c-list(title='文字标题', legend='说明文字3', icon='ion-ios-alarm-outline')
+            c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
+
+
+        c-panel(title='panel标题', icon='ion-person')
+            c-list(title='文字标题', legend='说明文字3')
+            c-list(title='文字标题', legend='说明文字3', href='javascript:;')
+
+        c-panel(title='panel标题', link='#aa', legend='更多')
+            c-list(title='文字标题', legend='说明文字3', icon='ion-ios-alarm-outline')
+            c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
 
 
             
