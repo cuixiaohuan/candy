@@ -78,13 +78,22 @@ var CPanel = Vue.extend({
 
         }
 
-
+        var $bd
         if (me.$slots['default']) {
-            var $bd = hx('div.c-panel__bd')
+            $bd = hx('div.c-panel__bd')
 
             $bd.push(me.$slots['default'])
 
             $panel.push($bd)
+        }
+
+        if (me.$slots['footer']) {
+
+            var $ft = hx('div.c-panel__ft')
+
+            $ft.push(me.$slots['footer'])
+
+            $panel.push($ft)
         }
 
         return $panel.resolve(h)

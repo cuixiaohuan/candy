@@ -20,7 +20,7 @@ var CList = Vue.extend({
             $list
         
         if ( this.href ){
-            $list = hx('a.c-cell + c-cell_access', {
+            $list = hx('a.c-cell + c-cell_access + c-cell_link', {
                 attrs: {
                     href: me.href
                 }

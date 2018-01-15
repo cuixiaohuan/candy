@@ -1,0 +1,56 @@
+extends ./layout
+
+block title
+  | Dialog
+
+block content
+    c-panel(title='对话框', link='/candy/tests/menu.html', legend='back menu')
+      c-button(type='warn', @click='show1 =! show1') {{show1?'隐藏':'显示'}}对话框
+      c-button(type='primary', @click='show2 =! show2') {{show2?'隐藏':'显示'}}对话框
+      c-button(type='danger', @click='show3 =! show3') {{show3?'隐藏':'显示'}}对话框
+      c-dialog(
+        title='标题：对话框',
+        message='请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作请选择操作', 
+        confirm-message='确定',
+        cancel-message='取消',
+        @cancel='cancel',
+        @confirm='confirm',
+        v-model='show1')
+      
+      c-dialog(
+        message='请选择操作请选择操作请选择操作请选择操作', 
+        confirm-message='确定',
+        cancel-message='我再看看',
+        @cancel='show2 =! show2',
+        :mask-closeable='false',
+        @confirm='confirm',
+        v-model='show2')
+      
+      c-dialog(
+        title='标题：对话框',
+        message='请选择操作请选择操作请选择操作请选择操作', 
+        confirm-message='确定',
+        @cancel='show3=!show3',
+        @confirm='confirm',
+        v-model='show3')
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          show1: false,
+          show2: false,
+          show3: false,
+        }
+      },
+      methods: {
+        confirm(){
+          alert('confirm')
+        },
+        cancel(){
+          alert('cancel')
+        }
+      }
+    })

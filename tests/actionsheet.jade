@@ -1,0 +1,30 @@
+extends ./layout
+
+block title
+  | Actionsheet
+
+block content
+    c-panel(title='弹出式菜单', link='/candy/tests/menu.html', legend='back menu')
+      c-button(@click=' showIos=!showIos ', size='mini', type='primary') {{showIos?'隐藏':'显示'}}IOS菜单
+      c-button(@click=' showAndroid=!showAndroid ', size='mini', type='primary') {{showAndroid?'隐藏':'显示'}}Android菜单
+      c-actionsheet(v-model='showIos', :is-ios='true', :menu-list='list', title='标题(描述bjandjajdasfa)')
+      c-actionsheet(v-model='showAndroid', :is-ios='false', :menu-list='list', title='标题(描述bjandjajdasfa)')
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          showIos: false,
+          showAndroid: false,
+          list: [{
+            name: '示例11', href: "#a1"
+          },{
+            name: '示例22', href: "#a2"
+          },{
+            name: '示例33', href: "#a3"
+          }]
+        }
+      }
+    })

@@ -117,7 +117,7 @@ $cUploaderBorderWidth: 1px;
     }
 }
 .c-cell_link{
-    color: $cLinkColorDefault;
+    // color: $cLinkColorDefault;
     font-size: 14px;
 
     // 由于c-cell:first-child的:before为隐藏，所以这里要重新显示出来

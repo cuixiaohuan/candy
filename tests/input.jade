@@ -8,7 +8,7 @@ block content
   div.margin-10
 
     form()
-      c-panel(title='输入框')
+      c-panel(title='输入框', link='/candy/tests/menu.html', legend='back menu')
         c-input(label='报错：', title='请输入数字', label-width='70px', :has-error='true')
         c-input(type='text', @input='input', @change='triggerChange',  label='控制输入：', :trim='true', title='请输入数字', label-width='70px', v-model='phone1', :has-error='haserror')
         c-input(type='text', pattern='[a-z]*', label='姓名：', title='请输入小写英文', label-width='70px')
@@ -38,7 +38,6 @@ block content
 
       c-flex(justify-content='flex-end', style='margin: 20px 0;')
           c-button(type="primary inline", size='mini', html-type='submit') 提交
-      input(type='text')
 
 block script
   script.

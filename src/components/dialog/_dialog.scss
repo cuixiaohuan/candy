@@ -1,0 +1,141 @@
+
+
+$cDialogBackgroundColor: #FFFFFF;
+$cDialogLineColor: #D5D5D6;
+$cDialogLinkColor: #3CC51F;
+$cDialogLinkActiveBc: #EEEEEE;
+$cDialogGapWidth: 1.6em;
+
+.c-dialog {
+    position: fixed;
+    z-index: 5000;
+    width: 80%;
+    max-width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: $cDialogBackgroundColor;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.c-dialog__hd {
+    padding: 1.3em $cDialogGapWidth .5em;
+}
+.c-dialog__title {
+    font-weight: 400;
+    font-size: 18px;
+}
+.c-dialog__bd {
+    padding: 0 $cDialogGapWidth .8em;
+    min-height: 40px;
+    max-height: 180px;
+    overflow-y: scroll;
+    font-size: 15px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: $cTextColorGray;
+    &:first-child{
+        padding:2.7em 20px 1.7em;
+        color:#353535;
+    }
+}
+.c-dialog__ft {
+    position: relative;
+    line-height: 48px;
+    font-size: 18px;
+    display: flex;
+    &:after {
+        content: " ";
+        @include setTopLine($cDialogLineColor);
+    }
+}
+.c-dialog__btn {
+    display: block;
+    flex: 1;
+    color: $cDialogLinkColor;
+    text-decoration: none;
+    @include setTapColor();
+    &:active {
+        background-color: $cDialogLinkActiveBc;
+    }
+
+    position: relative;
+    &:after {
+        content: " ";
+        @include setLeftLine($cDialogLineColor);
+    }
+    &:first-child {
+        &:after {
+            display: none;
+        }
+    }
+}
+.c-dialog__btn_default {
+    color: #353535;
+}
+.c-dialog__btn_primary {
+    color: #0BB20C;
+}
+
+.c-skin_android{
+    .c-dialog {
+        text-align: left;
+        box-shadow: 0 6px 30px 0 rgba(0, 0, 0, .1);
+    }
+    .c-dialog__title{
+        font-size: 21px;
+    }
+    .c-dialog__hd{
+        text-align: left;
+    }
+    .c-dialog__bd{
+        color:$cTextColorGray;
+        padding:.25em $cDialogGapWidth 2em;
+        font-size: 17px;
+        text-align: left;
+        &:first-child{
+            padding:1.6em $cDialogGapWidth 2em;
+            color:#353535;
+        }
+    }
+    .c-dialog__ft{
+        display: block;
+        text-align: right;
+        line-height: 42px;
+        font-size: 16px;
+        padding:0 $cDialogGapWidth .7em;
+        &:after{
+            display: none;
+        }
+    }
+    .c-dialog__btn{
+        display: inline-block;
+        vertical-align: top;
+        padding:0 .8em;
+        &:after{
+            display: none;
+        }
+
+        &:active{
+            background-color: rgba(0,0,0,.06);
+        }
+        &:visited{
+            background-color: rgba(0,0,0,.06);
+        }
+        &:last-child{
+            margin-right: -.8em;
+        }
+    }
+    .c-dialog__btn_default {
+        color: #808080;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .c-dialog {
+        width: 35%;
+    }
+}
