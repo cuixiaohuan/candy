@@ -1,0 +1,166 @@
+
+$pickerItemHeight: 34px;
+.c-picker {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 5000;
+    backface-visibility: hidden;
+    transform: translate(0, 100%);
+    //slide up animation
+    transition: transform .3s;
+}
+
+.c-picker__hd {
+    display: flex;
+    padding: 9px 15px;
+    background-color: #fff;
+    position: relative;
+    text-align: center;
+    font-size: 17px;
+    &:after {
+        @include setBottomLine($cLineColorLight);
+    }
+}
+
+.c-picker__action {
+    display: block;
+    flex: 1;
+    color: $cColorPrimary;
+
+    &:first-child {
+        text-align: left;
+        color: #888;
+    }
+    &:last-child {
+        text-align: right;
+    }
+}
+
+.c-picker__bd {
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    height: 238px;
+    overflow: hidden;
+}
+
+.c-picker__group {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    //-webkit-mask-box-image: -webkit-linear-gradient(bottom,transparent,transparent 5%,#fff 50%,#fff 50%,transparent 95%,transparent);
+}
+
+.c-picker__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    z-index: 3;
+    background: linear-gradient(180deg, hsla(0, 0%, 100%, .95), hsla(0, 0%, 100%, .6)), linear-gradient(0deg, hsla(0, 0%, 100%, .95), hsla(0, 0%, 100%, .6));
+    background-position: top, bottom;
+    background-size: 100% 102px;
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+}
+
+.c-picker__indicator {
+    width: 100%;
+    height: $pickerItemHeight;
+    position: absolute;
+    left: 0;
+    top: 102px;
+    z-index: 3;
+    &:before {
+        @include setTopLine($cLineColorLight);
+    }
+    &:after {
+        @include setBottomLine($cLineColorLight);
+    }
+}
+
+.c-picker__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.c-picker__item {
+    padding: 0;
+    height: $pickerItemHeight;
+    line-height: $pickerItemHeight;
+    text-align: center;
+    color: #000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.c-picker__item_disabled {
+    color: $cTextColorGray;
+}
+
+.c-picker__mask-hide {
+    display: none;
+}
+
+// animation
+
+@keyframes slideUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.c-animate-slide-up {
+    animation: slideUp ease .3s forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+.c-animate-slide-down {
+    animation: slideDown ease .3s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.c-animate-fade-in {
+    animation: fadeIn ease .3s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.c-animate-fade-out {
+    animation: fadeOut ease .3s forwards;
+}

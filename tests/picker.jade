@@ -1,0 +1,445 @@
+extends ./layout
+
+block title
+  | Picker
+
+block content
+    c-panel(title='选择器', link='/candy/tests/menu.html', legend='back menu')
+      c-button(@click='showPicker =! showPicker', type='primary', size='mini') 显示一列picker
+      c-button(@click='showPicker2 =! showPicker2', type='primary', size='mini') 显示两列picker
+      c-button(@click='showPicker3 =! showPicker3', type='primary', size='mini') 显示三列picker
+
+      c-picker(:list='list1', default-value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list2', default-value='3', v-model='showPicker2', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list3', default-value='3', v-model='showPicker3', @cancel='cancel', @confirm='confirm')
+        
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          showPicker: false,
+          showPicker2: false,
+          showPicker3: false,
+          list1 : [
+              {
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              }],
+          list2: [[
+              {
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              }],[
+              {
+                  label: '汽车票',
+                  value: 3
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              },{
+                  label: '飞机票',
+                  value: 0,
+                  disabled: true // 不可用
+              },
+              {
+                  label: '火车票',
+                  value: 1
+              },
+              {
+                  label: '汽车票',
+                  value: 3
+              },
+              {
+                  label: '公车票',
+                  value: 4,
+              }]],
+          list3: [
+          {
+              label: '飞机票',
+              value: 0,
+              children: [
+                  {
+                      label: '经济舱',
+                      value: 1
+                  },
+                  {
+                      label: '商务舱',
+                      value: 2
+                  }
+              ]
+          },
+          {
+              label: '火车票',
+              value: 1,
+              children: [
+                  {
+                      label: '卧铺',
+                      value: 1,
+                      disabled: true // 不可用
+                  },
+                  {
+                      label: '坐票',
+                      value: 2
+                  },
+                  {
+                      label: '站票',
+                      value: 3
+                  }
+              ]
+          },
+          {
+              label: '汽车票',
+              value: 3,
+              children: [
+                  {
+                      label: '快班',
+                      value: 1
+                  },
+                  {
+                      label: '普通',
+                      value: 2
+                  }
+              ]
+          }
+          ]
+        }
+      },
+      methods: {
+        clickBtn () {
+          this.showPicker = !this.showPicker
+        },
+        cancel () {
+          alert('cancel')
+        },
+        confirm(info){
+          alert(info)
+          this.clickBtn()
+        }
+      }
+    })

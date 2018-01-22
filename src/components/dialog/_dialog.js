@@ -15,6 +15,7 @@ var CDialog = Vue.extend({
     message: String, //提示内容
     confirmMessage: String, // 确定按钮
     cancelMessage: String, // 取消按钮
+    minHeight: String,
     value: { 
       type: Boolean,
       default: false
@@ -79,6 +80,9 @@ var CDialog = Vue.extend({
       var $bd = hx('div.c-dialog__bd', {
         domProps: {
           innerHTML: me.message
+        },
+        style: {
+          minHeight:  me.minHeight || 'auto'
         }
       })
 

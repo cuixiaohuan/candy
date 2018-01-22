@@ -11,3 +11,4 @@ import './components/search/_search';
 import './components/loading/_loading';
 import './components/actionsheet/_actionsheet'
 import './components/dialog/_dialog';
+import "./components/picker/_picker";

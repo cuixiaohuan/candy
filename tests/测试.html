@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			ul {
+				border: 1px solid #eee;
+				/* position: absolute; */
+				position: relative;
+			}
+
+			li {
+				display: block;
+				width: 200px;
+				height: 200px;
+				line-height: 200px;
+				background-color: pink;
+				/* padding: 30px; */
+				/* margin: 10px; */
+			}
+			.content {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				height: 200px;
+				width: 200px;
+				/* transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); 
+				transition-duration: 0ms; 
+				transform: translate(0px, 0px) translateZ(0px);
+				 */
+				overflow: hidden;
+			}
+			body:nth-last-child(0) {
+				left: 210px;
+			}
+		</style>
+		<script src="http://lab.cubiq.org/iscroll5/build/iscroll.js"></script>
+
+		<title>Document</title>
+
+	</head>
+	<body onload="loaded">
+			<div class="content">
+				<ul class="food-nav">
+					<li>11</li>
+					<li>22</li>
+					<li>33</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+				</ul>
+			</div>
+			<div class="content1" style="top: 210px;">
+				<ul class="food-nav">
+					<li>11</li>
+					<li>22</li>
+					<li>33</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+					<li>44</li>
+				</ul>
+			</div>
+	</body>
+</html> 
+
+<script>
+
+	var myScroll;
+	function loaded() {
+		myScroll = new IScroll('.content', {
+
+			scrollbars: false
+		});
+		myScroll = new IScroll('.content1', {
+
+			scrollbars: false
+		});
+	}
+
+	window.onload = loaded
+</script>

@@ -7,7 +7,7 @@ var CActionsheet = Vue.extend({
   },
   data(){
     return {
-      isShow: this.show
+      isShow: this.value
     }
   },
   props: {
@@ -17,9 +17,9 @@ var CActionsheet = Vue.extend({
       type: Boolean,
       default: false
     },
-    isIos: {
-      type: Boolean,
-      default: true
+    styleSheet: {
+      type: String,
+      default: 'IOS'
     }
     
   },
@@ -45,7 +45,7 @@ var CActionsheet = Vue.extend({
     },
     maskStyle () {
       var maskStyle = {}
-      if (!this.isIos) return maskStyle
+      if ( this.styleSheet == 'Android' || this.styleSheet == 'android') return maskStyle
       if ( this.isShow ){
         maskStyle = {
           opacity: 1
@@ -62,7 +62,7 @@ var CActionsheet = Vue.extend({
     sheetStyle () {
       var sheetStyle = {}
 
-      if (this.isIos) return sheetStyle
+      if ( this.styleSheet == 'IOS' || this.styleSheet == 'ios' ) return sheetStyle
       if ( this.isShow ){
         sheetStyle = {
           opacity: 1
@@ -139,7 +139,7 @@ var CActionsheet = Vue.extend({
     ])
 
     var domName = 'div'
-    if ( !this.isIos ){
+    if ( me.styleSheet == 'Android' || me.styleSheet == 'android' ){
       domName = 'div.c-skin_android'
     }
 

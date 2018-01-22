@@ -18,18 +18,10 @@ var CPanel = Vue.extend({
 
         $panel = hx('div.c-panel')
             
-        if (!!me.title) {
+        if (!!me.title || !!this.link) {
             $hd = hx('div.c-panel__hd', {})
 
             if (!!me.link){
-                // $hd.push(hx('a', {
-                //     attrs: {
-                //         href: me.link
-                //     },
-                //     domProps: {
-                //         innerHTML: me.title
-                //     }
-                // }))
                 var $header
 
                 $header = hx('a.c-cell + c-cell_access', {

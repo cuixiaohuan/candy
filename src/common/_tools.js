@@ -1,8 +1,17 @@
-export function isArray (o){
+// 获取对象深度
+export const depthOf = (o) => {
+  let depth = 1;
+  if (o.children && o.children[0]) {
+      depth = depthOf(o.children[0]) + 1;
+  }
+  return depth;
+};
+
+export const isArray = (o) => {
   return Object.prototype.toString.call(o) === '[object Array]'
 }
 
-export function isObject (o) {
+export const isObject = (o) => {
   return Object.prototype.toString.call(o) === '[object Object]'
 }
 

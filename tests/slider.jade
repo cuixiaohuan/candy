@@ -1,14 +1,27 @@
 extends ./layout
 
-
-
 block title
   | Slider
 
 block content
   div.margin-10
-    c-panel(link='/candy/tests/menu.html', legend='back menu')
-        c-slider( v-model='code')
+    c-panel(link='/candy/tests/menu.html',title=' slider', legend='back menu')
+      c-flex
+        c-item(:flex='10')
+          c-slider( v-model='code0') 
+        c-item {{code0}}
+    
+    c-panel()
+      c-flex
+        c-item(:flex='10')
+          c-slider( v-model='code1')
+        c-item {{code1}}
+          
+    c-panel()
+      c-flex
+        c-item(:flex='10')
+          c-slider( v-model='code2', :step='20')
+        c-item(:flex='1') {{code2}}
 
 
 block script
@@ -17,7 +30,9 @@ block script
       el: '#app',
       data () {
         return {
-          code: 30
+          code0: 0,
+          code1: 30,
+          code2: 100,
         }
       }
     })
