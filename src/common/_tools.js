@@ -1,5 +1,5 @@
 // 获取对象深度
-export const depthOf = (o) => {
+const depthOf = (o) => {
   let depth = 1;
   if (o.children && o.children[0]) {
       depth = depthOf(o.children[0]) + 1;
@@ -7,11 +7,13 @@ export const depthOf = (o) => {
   return depth;
 };
 
-export const isArray = (o) => {
+
+const isArray = (o) => {
   return Object.prototype.toString.call(o) === '[object Array]'
 }
 
-export const isObject = (o) => {
+
+const isObject = (o) => {
   return Object.prototype.toString.call(o) === '[object Object]'
 }
 
@@ -23,12 +25,11 @@ export const isObject = (o) => {
 //   return isArray(obj) && obj.length > 0
 // }
 
-export function inArray(obj, objList){
+function inArray(obj, objList){
   return objList.indexOf(obj) !== -1
 }
 
-
-export function hx(tag, props={}, children=[]){
+function hx(tag, props={}, children=[]){
   if (tag.indexOf('.') !== -1){
     var [realTag, className] = tag.split('.')
     tag = realTag
@@ -78,4 +79,70 @@ class VVNode{
     })
     return h(this.tag, this.props, children)
   }
+}
+
+
+
+function deepClone(obj) {
+  if (obj === undefined){
+    return undefined
+  }
+  return JSON.parse(JSON.stringify(obj))
+}
+
+
+
+function globalClick(exclude, callback){
+  var func = _=>{
+    var $$target = _.target
+    
+    while ($$target.parentNode != null){
+      $$target = $$target.parentNode
+
+      if ($$target === exclude){
+        return false
+      }
+    }
+
+    try{
+      callback()
+    }
+    catch (ex){}
+  }
+
+  // pc 端
+  window.addEventListener('click', _=>{
+    func(_)
+  })
+
+  // 移动端
+  window.addEventListener('touchstart', _=>{
+    func(_)
+  }, false)
+}
+
+function isdef(o){
+  return o !== undefined
+}
+
+function getChildren(instance, Ctor) {
+  while (instance = instance.$parent) {
+    if (instance instanceof Ctor) {
+      return instance
+    }
+  }
+
+  return null
+}
+
+export {
+  depthOf,
+  isArray,
+  isObject,
+  inArray,
+  hx,
+  deepClone,
+  globalClick,
+  isdef,
+  getChildren
 }

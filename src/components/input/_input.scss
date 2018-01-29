@@ -4,10 +4,17 @@ $cDialogLinkColor: #3CC51F;
 
 // form-common
 .c-label{
-    display:block;
-    width:$cCellLabelWidth;
+    // display:block;
+    display: inline-block;
+    // width: $cCellLabelWidth;
+    width: auto;
     @include text_wrap;
 }
+.c-label + .c-label {
+    width: auto;
+    padding-left: 10px;
+}
+
 .c-input {
     width: 100%;
     border: 0;
@@ -38,7 +45,9 @@ $cDialogLinkColor: #3CC51F;
 
 .c-cell_warn {
     .c-cell__hd {
-        color: $cTextColorTitle;            
+        // color: $cTextColorTitle;    
+        color: $cTextColorWarn;            
+        
     }
     .c-cell__bd {
         color: $cTextColorWarn;            
@@ -46,7 +55,7 @@ $cDialogLinkColor: #3CC51F;
 }
 
 .c-toptips {
-    display:none;
+    display: block;
     position: fixed;
     transform: translateZ(0);
     top: 0;

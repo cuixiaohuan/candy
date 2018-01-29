@@ -7,16 +7,15 @@ block title
 block content
   div.margin-10
 
-    form()
-      c-panel(title='输入框', link='/candy/tests/menu.html', legend='back menu')
-        c-input(label='报错：', title='请输入数字', label-width='70px', :has-error='true')
-        c-input(type='text', @input='input', @change='triggerChange',  label='控制输入：', :trim='true', title='请输入数字', label-width='70px', v-model='phone1', :has-error='haserror')
-        c-input(type='text', pattern='[a-z]*', label='姓名：', title='请输入小写英文', label-width='70px')
+    form(novalidate)
+      c-panel(title='输入框', link='/candy/tests/index.html', legend='back menu')
+        c-input(type='text', @input='input', @change='triggerChange',  label='邮箱', :trim='true',label-width='70px', v-model='phone1', :rules="{type: 'email', trigger: 'input blur change'}")
+        c-input(type='text', label='姓名：',v-model="name", :rules="{pattern: \/^[a-z]+$\/, message:'请输入小写字母', trigger: 'input'}", label-width='70px')
         c-input(type='password', label='密码:', label-width='70px')
-        c-input(type='phone', label='电话：', placeholder='请输入正确的电话号码', label-width='70px')
+        c-input(label='验证码:', label-width='70px')
           template(slot='right')
-            img(src="./vcode2.png", alt="")
-        c-input(label='验证码:', title='请输入正确的电话号码', label-width='70px')
+            img(src="./img/vcode2.png", alt="")
+        c-input(label='电话:',v-model="phone1", placeholder='请输入正确的电话号码', label-width='70px', :rules="{type:'phone', trigger: 'blur'}")
           template(slot='right')
             c-button(type='vcode' style='height: 100%;') 获取验证码
          
@@ -28,10 +27,11 @@ block content
         c-input(type='textarea',label='备注：', placeholder='请输入备注信息', :rows='2', label-width='70px')
       
       c-panel(title='左侧图标')        
-        c-input(placeholder='请输入姓名', label-icon='ion-person', label-width='70px')
+        c-input(label='姓名', label-icon='ion-person', label-width='70px')
+        c-input(label='密码',v-model='pwd',type='password', label-icon='ion-locked', label-width='70px', :rules="{min:6, message: '请输入至少6位的密码', trigger: 'blur'}")
 
       c-panel(title='右侧图标')
-        c-input(placeholder='请输入密码' type='password')
+        c-input(placeholder='请输入密码', label='密码:', type='password',)
           template(slot='right')
             div(style='padding-right:30px;')
               c-icon(icon='ion-locked' type='success')
@@ -47,7 +47,9 @@ block script
         return {
           xb: [1111],
           haserror: false,
-          phone1: ''
+          phone1: '',
+          name:'',
+          pwd: ''
         }
       },
       watch: {

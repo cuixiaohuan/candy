@@ -4,14 +4,18 @@ block title
   | Picker
 
 block content
-    c-panel(title='选择器', link='/candy/tests/menu.html', legend='back menu')
-      c-button(@click='showPicker =! showPicker', type='primary', size='mini') 显示一列picker
-      c-button(@click='showPicker2 =! showPicker2', type='primary', size='mini') 显示两列picker
-      c-button(@click='showPicker3 =! showPicker3', type='primary', size='mini') 显示三列picker
+    c-panel(title='选择器', link='/candy/tests/index.html', legend='back menu')
+      c-button(@click='showPicker =! showPicker', type='primary', size='mini') 一列picker
+      c-button(@click='showPicker2 =! showPicker2', type='primary', size='mini') 多列picker
+      c-button(@click='showPicker3 =! showPicker3', type='primary', size='mini') 级联picker
+      c-button(@click='showPicker4 =! showPicker4', type='primary', size='mini') 两列级联picker
 
-      c-picker(:list='list1', default-value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
-      c-picker(:list='list2', default-value='3', v-model='showPicker2', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list1', :value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
+        template(slot='confirm')
+            a 好的
+      c-picker(:list='list2', :value='3', v-model='showPicker2', @cancel='cancel', @confirm='confirm')
       c-picker(:list='list3', default-value='3', v-model='showPicker3', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list4', default-value='3', v-model='showPicker4', @cancel='cancel', @confirm='confirm')
         
 
 block script
@@ -23,423 +27,249 @@ block script
           showPicker: false,
           showPicker2: false,
           showPicker3: false,
+          showPicker4: false,
           list1 : [
               {
                   label: '飞机票',
-                  value: 0,
+                  value: 9,
                   disabled: true // 不可用
               },
               {
                   label: '火车票',
-                  value: 1
+                  value: 8
               },
               {
                   label: '汽车票',
-                  value: 3
+                  value: 7
               },
               {
                   label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
+                  value: 6
               }],
           list2: [[
               {
                   label: '飞机票',
-                  value: 0,
+                  value: 11,
                   disabled: true // 不可用
               },
               {
                   label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
+                  value: 12
               }],[
               {
                   label: '汽车票',
-                  value: 3
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
+                  value: 21
               },
               {
                   label: '公车票',
-                  value: 4,
+                  value: 22
               },{
                   label: '飞机票',
-                  value: 0,
+                  value: 23,
                   disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
+              }],[
               {
                   label: '汽车票',
-                  value: 3
+                  value: 31
               },
               {
                   label: '公车票',
-                  value: 4,
+                  value: 32
               },{
                   label: '飞机票',
-                  value: 0,
+                  value: 33,
                   disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
+              }],[
               {
                   label: '汽车票',
-                  value: 3
+                  value: 41
               },
               {
                   label: '公车票',
-                  value: 4,
+                  value: 42
               },{
                   label: '飞机票',
-                  value: 0,
+                  value: 43,
                   disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
-              },{
-                  label: '飞机票',
-                  value: 0,
-                  disabled: true // 不可用
-              },
-              {
-                  label: '火车票',
-                  value: 1
-              },
-              {
-                  label: '汽车票',
-                  value: 3
-              },
-              {
-                  label: '公车票',
-                  value: 4,
               }]],
           list3: [
           {
-              label: '飞机票',
-              value: 0,
-              children: [
-                  {
-                      label: '经济舱',
-                      value: 1
-                  },
-                  {
-                      label: '商务舱',
-                      value: 2
-                  }
-              ]
-          },
-          {
-              label: '火车票',
+              label: '河北省',
               value: 1,
               children: [
                   {
-                      label: '卧铺',
-                      value: 1,
-                      disabled: true // 不可用
+                        label: '保定市',
+                        value: 11,
+                        children: [
+                            {
+                                label: '北市区',
+                                value: 111
+                            },
+                            {
+                                label: '新市区',
+                                value: 112
+                            },
+                            {
+                                label: '南市区',
+                                value: 113
+                            }
+                        ]
+                      
                   },
                   {
-                      label: '坐票',
-                      value: 2
-                  },
-                  {
-                      label: '站票',
-                      value: 3
+                        label: '唐山市',
+                        value: 12,
+                        children: [
+                            {
+                                label: 'A区',
+                                value: 121
+                            },
+                            {
+                                label: 'B区',
+                                value: 122
+                            },
+                            {
+                                label: 'C区',
+                                value: 123
+                            }
+                        ]
                   }
               ]
           },
           {
-              label: '汽车票',
-              value: 3,
+              label: '北京市',
+              value: 2,
               children: [
                   {
-                      label: '快班',
-                      value: 1
-                  },
-                  {
-                      label: '普通',
-                      value: 2
+                        label: '北京市',
+                        value: 21,
+                        children: [
+                            {
+                                label: '海淀区',
+                                value: 211
+                            },
+                            {
+                                label: '朝阳区',
+                                value: 212
+                            },
+                            {
+                                label: '通州区',
+                                value: 213
+                            },
+                            {
+                                label: '昌平',
+                                value: 214
+                            },
+                            {
+                                label: '顺义',
+                                value: 215
+                            }
+                        ]
+                  }
+              ]
+          },
+          {
+              label: '云南省',
+              value: 3,
+              children: [
+                    {
+                        label: '昆明市',
+                        value: 31,
+                        children: [
+                            {
+                                label: '五华区',
+                                value: 311
+                            },{
+                                label: '西山区',
+                                value: 312
+                            },{
+                                label: '东川区',
+                                value: 313
+                            },{
+                                label: '西盟佤族自治区',
+                                value: 314
+                            }
+                        ]
+                    },
+                    {
+                        label: '丽江市',
+                        value: 32,
+                        children: [
+                            {
+                                label: '古城区',
+                                value: 321
+                            },{
+                                label: '永胜县',
+                                value: 322
+                            },{
+                                label: '华坪县',
+                                value: 323
+                            }
+                        ]
+                    },
+                    {
+                        label: '普洱市',
+                        value: 33,
+                        children: [
+                            {
+                                label: '思茅区',
+                                value: 331
+                            },{
+                                label: '景谷傣族彝族自治县',
+                                value: 332
+                            },{
+                                label: '江城哈尼族彝族自治县',
+                                value: 333
+                            },{
+                                label: '西盟佤族自治区',
+                                value: 334
+                            }
+                        ]
                   }
               ]
           }
-          ]
+          ],
+          list4: [
+          {
+              label: '河北省',
+              value: 1,
+              children: [
+                  {
+                        label: '保定市',
+                        value: 11
+                  },
+                  {
+                        label: '唐山市',
+                        value: 12
+                  }
+              ]
+          },{
+              label: '河北省2',
+              value: 1,
+              children: [
+                  {
+                        label: '保定市2',
+                        value: 11
+                      
+                  },
+                  {
+                        label: '唐山市2',
+                        value: 12
+                  }
+              ]
+          }]
         }
       },
       methods: {
-        clickBtn () {
-          this.showPicker = !this.showPicker
-        },
+
         cancel () {
           alert('cancel')
         },
         confirm(info){
-          alert(info)
-          this.clickBtn()
+            //- alert(info)
+            console.log(info)
+            alert(info.join(','))
         }
+
       }
     })

@@ -1,0 +1,32 @@
+.c-tab {
+    position: relative;
+    height: 100%;
+}
+
+.c-tab__panel {
+    box-sizing: border-box;
+    height: 100%;
+    padding-bottom: 50px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.c-tab__content{
+    display: none;
+}
+
+.c-badge {
+    display: inline-block;
+    padding: .15em .4em;
+    min-width: 8px;
+    border-radius: 18px;
+    background-color: #F43530;
+    color: #FFFFFF;
+    line-height: 1.2;
+    text-align: center;
+    font-size: 12px;
+    vertical-align: middle;
+}
+.c-badge_dot {
+    padding: .4em;
+    min-width: 0;
+}

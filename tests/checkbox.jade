@@ -5,21 +5,23 @@ block title
 
 block content
   div.margin-10
-    c-panel(title='复选框', link='/candy/tests/menu.html', legend='back menu')
+    c-panel(title='复选框', link='/candy/tests/index.html', legend='back menu')
         c-checkbox(v-model="xb", :value="1111") checkbox1
         c-checkbox(v-model="xb", :value="2222") checkbox2
 
     c-panel(title='复选框group')
-        c-checkbox-group(v-model='xb')
+        c-checkbox-group(v-model='p1')
             c-checkbox(:value="333") checkbox3
             c-checkbox(:value="444") checkbox4
+        p {{p1}}
 block script
   script.
     new Vue({
       el: '#app',
       data () {
         return {
-          xb: [1111]
+          xb: [1111],
+          p1: []
         }
       }
     })

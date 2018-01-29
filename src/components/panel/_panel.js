@@ -42,8 +42,9 @@ var CPanel = Vue.extend({
                         innerHTML: me.title
                     }
                 }
+
                 $header.push( hx('div.c-cell__bd', {},[ hx('p', params_p)]) )
-        
+                
                 if ( !!me.legend ){
                     var params_ft = {
                         domProps: {
@@ -72,6 +73,7 @@ var CPanel = Vue.extend({
 
         var $bd
         if (me.$slots['default']) {
+
             $bd = hx('div.c-panel__bd')
 
             $bd.push(me.$slots['default'])

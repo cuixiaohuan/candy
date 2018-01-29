@@ -37,8 +37,8 @@ $cBtnPlainPrimaryBorderColor:rgba(26,173,25,1);
 $cBtnPlainPrimaryActiveColor:rgba(26,173,25,.6);
 $cBtnPlainPrimaryActiveBorderColor:rgba(26,173,25,.6);
 
-$cBtnPlainDefaultColor:rgba(53,53,53,1);
-$cBtnPlainDefaultBorderColor:rgba(53,53,53,1);
+$cBtnPlainDefaultColor:rgba(53, 53, 53, 0.7);
+$cBtnPlainDefaultBorderColor:rgba(53,53,53,0.7);
 $cBtnPlainDefaultActiveColor:rgba(53,53,53,.6);
 $cBtnPlainDefaultActiveBorderColor:rgba(53,53,53,.6);
 
@@ -98,7 +98,7 @@ button, input {
         position: absolute;
         top: 0;
         left: 0;
-        border: 1px solid rgba(0, 0, 0, .2);
+        border: 2px solid rgba(0, 0, 0, .2);
         transform: scale(.5);
         transform-origin: 0 0;
         box-sizing: border-box;

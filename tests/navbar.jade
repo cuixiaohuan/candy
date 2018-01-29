@@ -1,0 +1,26 @@
+extends ./layout
+
+block title
+  | Navbar
+
+block content
+      c-nav(v-model='nav', height="350px")
+        c-nav-item(tab="nav-1", value='11')
+        c-nav-item(tab="nav-2", value='22')
+        c-nav-item(tab="nav-3", value='33')
+        c-nav-item(tab="nav-4", value='44')
+        c-nav-item(tab="nav-5", value='55')
+
+        p 当前选中的是： nav-{{nav}}
+  
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          nav: '11'
+        }
+      }
+    })

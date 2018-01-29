@@ -4,19 +4,20 @@ block title
   | Button
 
 block content
-    c-panel(title='正常按钮', link='/candy/tests/menu.html', legend='back menu')
+    c-panel(title='正常按钮', link='/candy/tests/index.html', legend='back menu')
       div(style='margin: 10px;')
         c-button(type="primary inline", @click='clickBtn')| 原始按钮
         c-button(type="danger inline")| 危险按钮
+      div(style='margin: 10px;')        
         c-button(type="warn inline")| 警告按钮
         c-button(type="default inline")| 默认按钮
 
-    c-panel(title='plain按钮')
-      div(style='margin: 10px;')
-        c-button(type="plain-primary inline")| 原始按钮
-        c-button(type="plain-danger inline")| 危险按钮
-        c-button(type="plain-warn inline")| 警告按钮
-        c-button(type="plain-default inline")| 默认按钮
+    //- c-panel(title='plain按钮')
+    //-   div(style='margin: 10px;')
+    //-     c-button(type="plain-primary inline")| 原始按钮
+    //-     c-button(type="plain-danger inline")| 危险按钮
+    //-     c-button(type="plain-warn inline")| 警告按钮
+    //-     c-button(type="plain-default inline")| 默认按钮
 
     c-panel(title='禁用按钮')
       div(style='margin: 10px;')
@@ -31,13 +32,14 @@ block content
       div(style='margin: 10px;')
         c-button(size="mini",type="primary inline")| 原始按钮
         c-button(size="mini",type="danger inline")| 危险按钮
+      div(style='margin: 10px;')        
         c-button(size="mini",type="warn inline")| 警告按钮
         c-button(size="mini",type="default inline")| 默认按钮
   
     c-panel(title='带icon/loading的按钮')
       div(style='margin: 10px;')
         c-button(size="mini",type="plain-primary inline", :loading='true')| 原始按钮
-        c-button(size="mini",type="plain-danger inline", icon='ion-ios-settings-strong')| 危险按钮
+        //- c-button(size="mini",type="plain-danger inline", icon='ion-ios-settings-strong')| 危险按钮
         c-button(type="danger inline", size="mini",  icon='ion-star')| 危险按钮
   
 block script

@@ -1,0 +1,50 @@
+extends ./layout
+
+block title
+  | Tabbar
+
+block content
+      c-tab(v-model='tab', height="350px")
+        c-tab-item(tab="tab-11", :value='11', :badge="badge", background-img='ion-pie-graph')
+        c-tab-item(tab="tab-22", :value='22', :dot='hasDot', @click='hasDot=false', background-img="ion-chatboxes")
+        c-tab-item(tab="导航栏", :value='33', background-img="./img/icon.png")
+        c-tab-item(tab="tab-44", :value='44', background-img="ion-ios-alarm")
+        c-tab-item(tab="tab-55", :value='55')
+            c-icon(type='success' icon='ion-images', slot='icon')
+        
+        c-nav(v-model='nav', height="350px", slot="panel", v-show="tab === 33")
+            c-nav-item(tab="nav-1", value='11')
+            c-nav-item(tab="nav-2", value='22')
+            c-nav-item(tab="nav-3", value='33')
+            c-nav-item(tab="nav-4", value='44')
+            c-nav-item(tab="nav-5", value='55')
+            p() 当前的选中的是 nav-{{nav}}
+
+        p(slot="panel") 当前选中的是： tab-{{tab}}
+  
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+            hasDot: true,
+            tab: '11',
+            badge: 8,
+            nav: 11
+        }
+      },
+      watch: {
+          tab (val){
+                if(val === 22) {
+                    this.hasDot = false
+                } else {
+                    this.hasDot = true
+                } 
+                if (val === 11 && this.badge > 0){
+                    this.badge --
+                }
+          }
+      }
+    })

@@ -1,8 +1,6 @@
 import { hx } from "../../common/_tools";
 
 var CList = Vue.extend({
-    model: {
-    },
     props: {
         legend: String,
         title: String,
