@@ -19,12 +19,17 @@
     padding: .15em .4em;
     min-width: 8px;
     border-radius: 18px;
-    background-color: #F43530;
+    background-color: rgba($color: #F43530, $alpha: 1);    
     color: #FFFFFF;
     line-height: 1.2;
     text-align: center;
     font-size: 12px;
     vertical-align: middle;
+
+    &.active {
+        background-color: #F43530;
+    
+    }
 }
 .c-badge_dot {
     padding: .4em;
