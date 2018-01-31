@@ -280,7 +280,7 @@ var CPicker = Vue.extend({
 
                     obj = JSON.parse(JSON.stringify(this.info))
                     
-                    rest.push([{value: obj[index].value}, {label: obj[index].label}])
+                    rest.push([{value: obj[index].value,label: obj[index].label}])
                     
                     obj = obj[index].children
 
@@ -288,7 +288,7 @@ var CPicker = Vue.extend({
 
                         let _index = me.scroll[i].getSelectedIndex()
 
-                        rest.push([{value: obj[_index].value}, {label: obj[_index].label}])
+                        rest.push([{value: obj[_index].value,label: obj[_index].label}])
 
                         obj = obj[_index].children
 
