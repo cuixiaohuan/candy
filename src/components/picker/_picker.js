@@ -16,7 +16,7 @@ var CPicker = Vue.extend({
             default: "取消"
         },
         defaultValueIndex: [Array],  // 默认选中值索引
-        // defaultValue: [Array],  // 默认选中值
+        defaultValue: [Array],  // 默认选中值
         list: Array, // 数据列表
         
     },
@@ -50,27 +50,32 @@ var CPicker = Vue.extend({
             deep: true
         },
         "ListObj": {
-
             handler (val) {
-                console.log("listObj变化了")
             },
             deep: true
         }
 
     },
     created () {
-        if (!this.defaultValueIndex) {
+        if (!this.defaultValueIndex && !this.defaultValue) {
             for (let i = 0; i< this.depth; i++){
                 this.pickerSelectedIndex[i] = 0
                 this.indexObj[i] = 0
                 
             }
 
-        } else {
+        } else if (this.defaultValueIndex) {
             this.pickerSelectedIndex = this.defaultValueIndex.splice(0)
             this.defaultValueIndex.forEach( (v,i) => {
                 this.indexObj[i] = v
             })
+        } else if (this.defaultValue) {
+            this.getListObj()
+            debugger
+            for (var i = 0; i< this.defaultValue.length; i ++) {
+                this.pickerSelectedIndex[i] = this.ListObj[i].indexOf(this.defaultValue[i])
+                this.indexObj[i] = this.ListObj[i].indexOf(this.defaultValue[i])
+            }
         }
     },
     mounted () {
@@ -194,7 +199,7 @@ var CPicker = Vue.extend({
 
             let flag = this.scroll.every((o) => {
                 return !o.isInTransition
-            })
+            }) // 判断滚动是否停止
 
             if (flag) {
                 this.isShow = false
@@ -204,17 +209,17 @@ var CPicker = Vue.extend({
 
         },
         getListObj (column) { // 更新了column列的数据
-            // debugger
+
             if (this.cascade){
 
-                let i = 1
+                let i = 0
                 obj = JSON.parse(JSON.stringify(this.info))
                 
-                this.ListObj[0] = obj
+                // this.ListObj[0] = obj
                 
-                var index = this.scroll[0] && this.scroll[0].getSelectedIndex() || 0
+                // var index = this.scroll[0] && this.scroll[0].getSelectedIndex() || 0
 
-                obj = obj[index].children
+                // obj = obj[index].children
 
                 while (i < this.depth) {
                     if (!column && column!=0){
@@ -246,6 +251,8 @@ var CPicker = Vue.extend({
                         }
                     }
                 }
+                
+            } else {
                 
             }
         },

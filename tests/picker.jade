@@ -13,7 +13,8 @@ block content
       c-picker(comfirm-text='YES', cancel-text='NO', :list='list1', :value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
 
       c-picker(:list='list2', :value='3', v-model='showPicker2', @cancel='cancel', @confirm='confirm')
-      c-picker(:list='list3', default-value='3', v-model='showPicker3', @cancel='cancel', @confirm='confirm')
+      //- c-picker(:list='list3',  :default-value='[3,32,321]' , v-model='showPicker3', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list3', :default-value-index='[0,0,2]', v-model='showPicker3', @cancel='cancel', @confirm='confirm')
     //-   c-picker(:list='list4', default-value='3', v-model='showPicker4', @cancel='cancel', @confirm='confirm')
         
 
