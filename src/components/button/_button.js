@@ -68,7 +68,11 @@ var CButton = Vue.extend({
     var $children = []
 
     if(me.loading) {
-      var $loading = hx('i.c-loading')
+      var $loading = hx('c-loading', {
+        props: {
+          size: me.size === 'mini'? 17: 20
+        }
+      })
       $children.push($loading)
     }
 

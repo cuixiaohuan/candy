@@ -1,9 +1,5 @@
 import { hx } from "../../common/_tools";
 var CSlider = Vue.extend({
-    model: {
-        prop: 'value',
-        event: 'input',
-    },
     data() {
         return {
             sliderLength: '',

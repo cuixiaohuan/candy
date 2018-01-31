@@ -8,14 +8,13 @@ block content
       c-button(@click='showPicker =! showPicker', type='primary', size='mini') 一列picker
       c-button(@click='showPicker2 =! showPicker2', type='primary', size='mini') 多列picker
       c-button(@click='showPicker3 =! showPicker3', type='primary', size='mini') 级联picker
-      c-button(@click='showPicker4 =! showPicker4', type='primary', size='mini') 两列级联picker
+        //- c-button(@click='showPicker4 =! showPicker4', type='primary', size='mini') 两列级联picker
 
-      c-picker(:list='list1', :value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
-        template(slot='confirm')
-            a 好的
+      c-picker(comfirm-text='YES', cancel-text='NO', :list='list1', :value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
+
       c-picker(:list='list2', :value='3', v-model='showPicker2', @cancel='cancel', @confirm='confirm')
       c-picker(:list='list3', default-value='3', v-model='showPicker3', @cancel='cancel', @confirm='confirm')
-      c-picker(:list='list4', default-value='3', v-model='showPicker4', @cancel='cancel', @confirm='confirm')
+    //-   c-picker(:list='list4', default-value='3', v-model='showPicker4', @cancel='cancel', @confirm='confirm')
         
 
 block script
@@ -30,68 +29,89 @@ block script
           showPicker4: false,
           list1 : [
               {
-                  label: '飞机票',
-                  value: 9,
+                  label: '1111',
+                  value: 1,
                   disabled: true // 不可用
               },
               {
-                  label: '火车票',
-                  value: 8
+                  label: '2222',
+                  value: 2
               },
               {
-                  label: '汽车票',
+                  label: '33333',
+                  value: 3
+              },
+              {
+                  label: '444444',
+                  value: 4
+              },
+              {
+                  label: '55555',
+                  value: 5
+              },
+              {
+                  label: '66666',
+                  value: 6
+              },
+              {
+                  label: '77777',
                   value: 7
               },
               {
-                  label: '公车票',
-                  value: 6
+                  label: '8888888',
+                  value: 8
+              },
+              {
+                  label: '999999',
+                  value: 9
               }],
           list2: [[
               {
-                  label: '飞机票',
+                  label: 'A1111',
                   value: 11,
                   disabled: true // 不可用
               },
               {
-                  label: '火车票',
+                  label: 'A2222',
                   value: 12
               }],[
               {
-                  label: '汽车票',
+                  label: 'B111',
                   value: 21
               },
               {
-                  label: '公车票',
+                  label: 'B2222',
                   value: 22
               },{
-                  label: '飞机票',
+                  label: 'B333',
                   value: 23,
                   disabled: true // 不可用
               }],[
               {
-                  label: '汽车票',
+                  label: 'C111',
                   value: 31
               },
               {
-                  label: '公车票',
+                  label: 'C222',
                   value: 32
               },{
-                  label: '飞机票',
+                  label: 'C333',
                   value: 33,
                   disabled: true // 不可用
               }],[
               {
-                  label: '汽车票',
+                  label: 'D1111',
                   value: 41
               },
               {
-                  label: '公车票',
+                  label: 'D2222',
                   value: 42
               },{
-                  label: '飞机票',
+                  label: 'D333',
                   value: 43,
                   disabled: true // 不可用
               }]],
+
           list3: [
           {
               label: '河北省',
@@ -229,35 +249,6 @@ block script
               ]
           }
           ],
-          list4: [
-          {
-              label: '河北省',
-              value: 1,
-              children: [
-                  {
-                        label: '保定市',
-                        value: 11
-                  },
-                  {
-                        label: '唐山市',
-                        value: 12
-                  }
-              ]
-          },{
-              label: '河北省2',
-              value: 1,
-              children: [
-                  {
-                        label: '保定市2',
-                        value: 11
-                      
-                  },
-                  {
-                        label: '唐山市2',
-                        value: 12
-                  }
-              ]
-          }]
         }
       },
       methods: {
@@ -265,10 +256,11 @@ block script
         cancel () {
           alert('cancel')
         },
-        confirm(info){
+        confirm(value){
             //- alert(info)
-            console.log(info)
-            alert(info.join(','))
+            console.log("value:", JSON.stringify(value))
+
+            alert("value : "+JSON.stringify(value))
         }
 
       }

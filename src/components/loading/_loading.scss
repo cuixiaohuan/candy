@@ -1,0 +1,112 @@
+.c-loadmore{
+    width: 65%;
+    margin:1.5em auto;
+    line-height: 1.6em;
+    font-size:14px;
+    text-align: center;
+}
+.c-loadmore__tips{
+    display: inline-block;
+    vertical-align: middle;
+    color:$cTextColorGray;
+    
+}
+
+.c-loadmore_line{
+    border-top:1px solid $cLineColorLight;
+    margin-top:2.4em;
+    .c-loadmore__tips{
+        position: relative;
+        top:-.9em;
+        padding:0 .55em;
+        background-color: #FFFFFF;
+    }
+}
+.c-loadmore_dot{
+    .c-loadmore__tips{
+        padding:0 .16em;
+        &:before{
+            content: " ";
+            width:4px;
+            height:4px;
+            border-radius:50%;
+            background-color: $cLineColorLight;
+            display: inline-block;
+            position: relative;
+            vertical-align: 0;
+            top:-.16em;
+        }
+    }
+}
+
+
+// loading
+.c-loading-effext{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.c-loading-effext span{
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #929292;
+    position: absolute;
+    -webkit-animation: load 1.04s ease infinite;
+}
+@-webkit-keyframes load{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.2;
+    }
+}
+.c-loading-effext span:nth-child(1){
+    left: 0;
+    top: 50%;
+    margin-top:-2px;
+    -webkit-animation-delay:0.13s;
+}
+.c-loading-effext span:nth-child(2){
+    left: 12%;
+    top: 12%;
+    -webkit-animation-delay:0.26s;
+}
+.c-loading-effext span:nth-child(3){
+    left: 50%;
+    top: 0;
+    margin-left: -2px;
+    -webkit-animation-delay:0.39s;
+}
+.c-loading-effext span:nth-child(4){
+    top: 12%;
+    right:12%;
+    -webkit-animation-delay:0.52s;
+}
+.c-loading-effext span:nth-child(5){
+    right: 0;
+    top: 50%;
+    margin-top: -2px;
+    -webkit-animation-delay:0.65s;
+}
+.c-loading-effext span:nth-child(6){
+    right: 12%;
+    bottom:12%;
+    -webkit-animation-delay:0.78s;
+}
+.c-loading-effext span:nth-child(7){
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    -webkit-animation-delay:0.91s;
+}
+.c-loading-effext span:nth-child(8){
+    bottom: 12%;
+    left: 12%;
+    -webkit-animation-delay:1.04s;
+}

@@ -1,11 +1,6 @@
 import { hx } from "../../common/_tools";
 
 var CNav = Vue.extend({
-
-    model: {
-        prop: 'value',
-        event: 'input',
-    },
     props: {
         value: [Number, String],
         height: String

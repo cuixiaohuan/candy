@@ -1,11 +1,6 @@
 import { hx } from "../../common/_tools";
 
 var CTab = Vue.extend({
-
-    model: {
-        prop: 'value',
-        event: 'input',
-    },
     props: {
         value: [Number, String]
     },
@@ -37,6 +32,7 @@ var CTab = Vue.extend({
     created () {
     },
     render (h) {
+
 
         var me = this
 
@@ -134,13 +130,14 @@ var CTabItem = Vue.extend({
         getBadge () {
             var me = this
             if (this.badge && !this.dot){
+
                 return hx("span.c-badge", {
                     style: {
                         position: "absolute",
                         top: "-2px",
-                        right: "-13px"
+                        left: "20px"
                     }
-                }, [me.badge])
+                }, [me.badge < 100 ? me.badge: "99+"])
             } else {
                 return null
             }

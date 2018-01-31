@@ -8,9 +8,10 @@ import './components/icon/_icon';
 import './components/flex/_flex';
 import './components/panel/_panel';
 import './components/search/_search';
-// import './components/loading/_loading';
+import './components/loading/_loading';
 import './components/actionsheet/_actionsheet'
 import './components/dialog/_dialog';
-// import "./components/picker/_picker";
+import "./components/picker/_picker";
 import "./components/navbar/_navbar";
 import "./components/tabbar/_tabbar";
+
