@@ -18,7 +18,9 @@ var CSlider = Vue.extend({
         step: {  // 每次移动的百分比
             type: Number,
             default: 1
-        }
+        },
+        max: Number,
+        min: Number
     },
     computed: {
         cls () {
@@ -36,6 +38,8 @@ var CSlider = Vue.extend({
     beforeMount () {
     },
     mounted () {
+        if (this.disabled) return 
+        
         let $handler = this.$el.querySelector('.c-slider__handler')
         let $inner = this.$el.querySelector('.c-slider__inner')
         let $track = this.$el.querySelector('.c-slider__track')
@@ -50,7 +54,6 @@ var CSlider = Vue.extend({
             dx, // handler的起始偏移量
             mx, // 鼠标的移动量
             tw; // $track 的长度
-
 
         $handler.addEventListener('mousedown', (e) => {
 
@@ -67,6 +70,7 @@ var CSlider = Vue.extend({
 
         })
         window.addEventListener('mousemove', (e) => {
+            
             if (flag) {
                 mx = e.clientX - x; //记录鼠标在x轴移动的数据
                 
@@ -77,7 +81,22 @@ var CSlider = Vue.extend({
                 }
 
                 var value = Math.round(tw / this.sliderLength * 100)
-                value = value > 100 ? 100 : value < 0 ? 0 : value
+                
+                if ( (this.max || this.max != 0)|| (this.min || this.min != 0) ){
+                    if (this.max || this.max != 0){
+                        value = value > this.max ? this.max : value < 0 ? 0 : value
+                        
+                    } 
+                    if (this.min || this.min != 0){
+                        value = value > 100 ? 100 : value < this.min ? this.min : value
+                        
+                    }
+                }
+                else {
+                    value = value > 100 ? 100 : value < 0 ? 0 : value
+                    
+                }
+
 
                 this.$emit('input', value)
                 
@@ -101,7 +120,21 @@ var CSlider = Vue.extend({
 
                 var value = Math.round(tw / this.sliderLength * 100)
 
-                value = value > 100 ? 100 : value < 0 ? 0 : value
+                if ( (this.max || this.max != 0)|| (this.min || this.min != 0) ){
+                    if (this.max || this.max != 0){
+                        value = value > this.max ? this.max : value < 0 ? 0 : value
+                        
+                    } 
+                    if (this.min || this.min != 0){
+                        value = value > 100 ? 100 : value < this.min ? this.min : value
+                        
+                    }
+                }
+                else {
+                    value = value > 100 ? 100 : value < 0 ? 0 : value
+                    
+                }
+                // value = value > 100 ? 100 : value < 0 ? 0 : value
 
                 this.$emit('input', value)
                 
@@ -140,19 +173,24 @@ var CSlider = Vue.extend({
                 width: 100 + "%"
             },
         })
-        var $sliderTrack = hx('div.c-slider__track', {
-            style: {
-                width: me.value + "%"
-            },
-        })
 
         var $sliderHandler = hx('div.c-slider__handler', {
             style: {
                 left: me.value + "%"
             },
         })
-
-        $inner.push([$sliderTrack, $sliderHandler])
+        if(me.disabled){
+            $inner.push([$sliderHandler])
+            
+        } else {
+            var $sliderTrack = hx('div.c-slider__track', {
+                style: {
+                    width: me.value + "%"
+                },
+            })
+            $inner.push([$sliderTrack, $sliderHandler])
+            
+        }
 
         var $slider = hx('div.c-slider').push(
             $inner

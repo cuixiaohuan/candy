@@ -20,6 +20,12 @@ block content
     c-panel()
       c-flex
         c-item(:flex='10')
+          c-slider( v-model='code3', :disabled="true")
+        c-item {{code3}}
+          
+    c-panel()
+      c-flex
+        c-item(:flex='10')
           c-slider( v-model='code2', :step='20')
         c-item(:flex='1') {{code2}}
 
@@ -33,6 +39,7 @@ block script
           code0: 0,
           code1: 30,
           code2: 100,
+          code3: 60,
         }
       }
     })
