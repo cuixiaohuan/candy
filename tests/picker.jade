@@ -10,11 +10,11 @@ block content
       c-button(@click='showPicker3 =! showPicker3', type='primary', size='mini') 级联picker
         //- c-button(@click='showPicker4 =! showPicker4', type='primary', size='mini') 两列级联picker
 
-      c-picker(comfirm-text='YES', cancel-text='NO', :list='list1', :value='3', v-model='showPicker', @cancel='cancel', @confirm='confirm')
+      c-picker(:mask-closeable="false", comfirm-text='YES', cancel-text='NO', :list='list1', v-model='showPicker', @cancel='cancel', @confirm='confirm')
 
-      c-picker(:list='list2', :value='3', v-model='showPicker2', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list2', :value='3',:default-value-index="[1,2,1,0]", v-model='showPicker2', @cancel='cancel', @confirm='confirm')
       //- c-picker(:list='list3',  :default-value='[3,32,321]' , v-model='showPicker3', @cancel='cancel', @confirm='confirm')
-      c-picker(:list='list3', :default-value-index='[0,0,2]', v-model='showPicker3', @cancel='cancel', @confirm='confirm')
+      c-picker(:list='list3', :default-value-index='[0,0,2]', v-model='showPicker3', @cancel='cancel', @confirm='confirm', @change="change")
     //-   c-picker(:list='list4', default-value='3', v-model='showPicker4', @cancel='cancel', @confirm='confirm')
         
 
@@ -258,10 +258,13 @@ block script
           alert('cancel')
         },
         confirm(value){
-            //- alert(info)
-            console.log("value:", JSON.stringify(value))
 
-            alert("value : "+JSON.stringify(value))
+            alert("confirm : "+JSON.stringify(value))
+
+            console.log("confirm : ", value)
+        },
+        change () {
+            alert("value has been changed!")
         }
 
       }

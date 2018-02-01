@@ -1,4 +1,4 @@
-import { hx, isArray, isObject, depthOf } from "../../common/_tools";
+import { hx, isArray, isObject, depthOf, getObjResult } from "../../common/_tools";
 
 // 事件： cancel  confirm
 var CPicker = Vue.extend({
@@ -18,6 +18,10 @@ var CPicker = Vue.extend({
         defaultValueIndex: [Array],  // 默认选中值索引
         defaultValue: [Array],  // 默认选中值
         list: Array, // 数据列表
+        maskCloseable: {
+            type: Boolean,
+            default: true
+        }
         
     },
     data () {
@@ -28,7 +32,7 @@ var CPicker = Vue.extend({
             // unitHeight: '',
             indexObj: {
             },
-            ListObj: {
+            listObj: {
             },
             scroll: [], // bscroll实例
             pickerSelectedIndex: [], // 选中值的索引
@@ -49,7 +53,7 @@ var CPicker = Vue.extend({
             },
             deep: true
         },
-        "ListObj": {
+        "listObj": {
             handler (val) {
             },
             deep: true
@@ -63,7 +67,6 @@ var CPicker = Vue.extend({
                 this.indexObj[i] = 0
                 
             }
-
         } else if (this.defaultValueIndex) {
             this.pickerSelectedIndex = this.defaultValueIndex.splice(0)
             this.defaultValueIndex.forEach( (v,i) => {
@@ -71,10 +74,10 @@ var CPicker = Vue.extend({
             })
         } else if (this.defaultValue) {
             this.getListObj()
-            debugger
+
             for (var i = 0; i< this.defaultValue.length; i ++) {
-                this.pickerSelectedIndex[i] = this.ListObj[i].indexOf(this.defaultValue[i])
-                this.indexObj[i] = this.ListObj[i].indexOf(this.defaultValue[i])
+                this.pickerSelectedIndex[i] = this.listObj[i].indexOf(this.defaultValue[i])
+                this.indexObj[i] = this.listObj[i].indexOf(this.defaultValue[i])
             }
         }
     },
@@ -95,7 +98,7 @@ var CPicker = Vue.extend({
                         swipeTime: 1000, // 动画市场
                         wheel:{
                             // selectedIndex: 0,
-                            selectedIndex: this.pickerSelectedIndex[i],
+                            selectedIndex: this.pickerSelectedIndex[i] || 0,
                             rotate: 10, 
                             adjustTime: 400, 
                             wheelWrapperClass: 'c-picker__group', 
@@ -117,6 +120,13 @@ var CPicker = Vue.extend({
                 })
 
             })            
+        } else {
+            // 刷新
+            this.$nextTick(() => {
+                this.scroll.forEach((o, index) => {
+                    o.refresh()
+                })
+            })
         }
 
     },
@@ -151,17 +161,6 @@ var CPicker = Vue.extend({
             let list = this.list.slice(0) // 拷贝 传入的list
             return list
         },
-        tmpInfo: { // picker数据
-            
-            get: function () {
-                let list = this.list.slice(0)
-                return list
-            },
-            // setter
-            set: function (newValue) {
-                this.tmpInfo = newValue
-            }
-        },
         depth (){
 
             let dateLength = this.list.length
@@ -194,17 +193,40 @@ var CPicker = Vue.extend({
 
     },
     methods: {
+        disableScroll () {
 
+            for (let i = 0; i < this.scroll.length; i++) {
+                this.scroll[i].disable()
+            }
+        },
+        gettPickerSelectedIndex(){
+            this.scroll.forEach((o, i) => {
+                this.pickerSelectedIndex[i] = o.getSelectedIndex()
+            })
+        },
         clickComfirm(){
 
-            let flag = this.scroll.every((o) => {
+            let status = this.scroll.every((o) => {
+
                 return !o.isInTransition
             }) // 判断滚动是否停止
 
-            if (flag) {
+            if (status) {
                 this.isShow = false
-                this.$emit('confirm', this.getValue(this))
-            
+                this.$emit('confirm', this.getValue())
+            }
+
+            let _pickerSelectedIndex = this.pickerSelectedIndex.slice(0)
+
+            this.gettPickerSelectedIndex()
+
+            let hasChange = _pickerSelectedIndex.some((o, i) => {
+                return o != this.pickerSelectedIndex[i]
+            })
+
+            if (hasChange){
+                this.$emit('change', this.getValue())
+                
             }
 
         },
@@ -215,15 +237,9 @@ var CPicker = Vue.extend({
                 let i = 0
                 obj = JSON.parse(JSON.stringify(this.info))
                 
-                // this.ListObj[0] = obj
-                
-                // var index = this.scroll[0] && this.scroll[0].getSelectedIndex() || 0
-
-                // obj = obj[index].children
-
                 while (i < this.depth) {
                     if (!column && column!=0){
-                        this.ListObj[i] = obj
+                        this.listObj[i] = obj
 
                         // if (this.scroll[i]){
                         //     this.scroll[i].refresh()
@@ -235,8 +251,8 @@ var CPicker = Vue.extend({
                         i++;
                     } else {
 
-                        this.ListObj[i] = obj
-                        // debugger
+                        this.listObj[i] = obj
+                        
                         if (i<=column){
                             let _index = this.scroll[i] && this.scroll[i].getSelectedIndex() || 0
                         
@@ -257,46 +273,40 @@ var CPicker = Vue.extend({
             }
         },
         getValue (me) {
-            let rest, tag;
+            let rest = [], tag;
+            me = me || this
 
             if (me.depth === 1) {
-                // 返回字符串或者字符类型
-                rest = ''
                 
                 let index = me.scroll[0].getSelectedIndex()
 
-                rest = [this.info[index]]
+                rest = [ getObjResult(this.info[index]) ]
 
             } else {
-                // 返回数组
-                rest = []
 
                 if (!this.cascade){
                     
                     for (let o = 0; o < this.depth; o++){
-                        
                         let index = me.scroll[o].getSelectedIndex()
-    
-                        rest.push(this.info[o][index])
+                        rest.push(getObjResult(this.info[o][index]))
                     }
-                } else {
+                } else { // 级联
 
-                    let i = 1, 
+                    let i = 0, 
                     
-                    index = me.scroll[0].getSelectedIndex(),
-
+                    // index = me.scroll[0].getSelectedIndex(),
                     obj = JSON.parse(JSON.stringify(this.info))
+
+                    // rest.push(getObjResult(obj[index]))
                     
-                    rest.push([{value: obj[index].value,label: obj[index].label}])
-                    
-                    obj = obj[index].children
+                    // obj = obj[index].children
 
                     while (i < this.depth) {
 
                         let _index = me.scroll[i].getSelectedIndex()
 
-                        rest.push([{value: obj[_index].value,label: obj[_index].label}])
-
+                        rest.push(getObjResult(obj[_index]))
+                        
                         obj = obj[_index].children
 
                         i++;
@@ -309,10 +319,8 @@ var CPicker = Vue.extend({
             return rest
         },
         getItem (data, index, groupId) { // 当前item的数据， 当前item的索引值， 当前item所在的group索引
-            
             if (!data){
                 return hx('div.c-picker__item', {}, ["暂无数据"])
-
             }
             return hx('div.c-picker__item', {
                 domProps: {
@@ -323,20 +331,25 @@ var CPicker = Vue.extend({
 
             })
         },
-        getItemList (data, groupId) { // 当前item的数据， 当前item的索引值， 当前item所在的group索引
-
+        getItemList (data, groupId) {
             let items = []
+            if (!data || data.length===0){
+                items.push( this.getItem() )
+                return items
+            } else {
 
-            data.forEach((ele, index) => {
-                items.push( this.getItem(ele, index, groupId) )
-            });
+                data.forEach((ele, index) => {
+                    items.push( this.getItem(ele, index, groupId) )
+                });
+                return items
+            
+            }
 
-            return items
         },
         getGroup (items, index) {
             var me = this
             let $group = hx('div.c-picker__group + c-picker__bd', {
-                ref: "group_"+index
+                // ref: "group_"+index
             }).push([
                 hx('div.c-picker__content', {
                     // ref: "c-picker__content",
@@ -389,7 +402,7 @@ var CPicker = Vue.extend({
 
             for (var d = 0; d < this.depth; d++) {
 
-                let items = me.getItemList(this.ListObj[d], 0)
+                let items = me.getItemList(this.listObj[d], 0)
                 $body.push(me.getGroup(items, 0))
                 
             }
@@ -422,9 +435,6 @@ var CPicker = Vue.extend({
 
                                     me.clickComfirm()
 
-                                    // me.isShow = false
-
-                                    // me.$emit('confirm', me.getValue(me))
                                 }
                             }
                         })
@@ -441,7 +451,10 @@ var CPicker = Vue.extend({
         var $mask = hx(`div.c-mask + ${me.maskStyle.join('+')}`, {
             on: {
                 click () {
-                    me.isShow = false
+                    if (me.maskCloseable){
+                        me.isShow = false
+                        
+                    }
                 }
             }
         })

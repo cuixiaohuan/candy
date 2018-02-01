@@ -135,6 +135,17 @@ function getChildren(instance, Ctor) {
   return null
 }
 
+class Result {
+  constructor(obj) {
+      this.value = obj.value;
+      this.label = obj.label;
+  }
+}
+
+function getObjResult (obj) {
+  return new Result(obj)
+}
+
 export {
   depthOf,
   isArray,
@@ -144,5 +155,7 @@ export {
   deepClone,
   globalClick,
   isdef,
-  getChildren
+  getChildren,
+  getObjResult
+  
 }
