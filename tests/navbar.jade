@@ -4,15 +4,38 @@ block title
   | Navbar
 
 block content
-      c-nav(v-model='nav', height="350px")
-        c-nav-item(tab="nav-1", value='11')
-        c-nav-item(tab="nav-2", value='22')
-        c-nav-item(tab="nav-3", value='33')
-        c-nav-item(tab="nav-4", value='44')
-        c-nav-item(tab="nav-5", value='55')
+      c-nav(v-model='nav', @change="change", height="100%")
+        c-nav-item(tab="标题-1", value='11')
+        c-nav-item(tab="标题-2", value='22')
+        c-nav-item(tab="标题-3", value='33')
+        c-nav-item(tab="标题-4", value='44')
+        c-nav-item(tab="标题-5", value='55')
+        c-nav-item(tab="标题-6", value='66')
+        //- c-nav-item(tab="标题-7", value='77')
 
-        p 当前选中的是： nav-{{nav}}
+        p(slot="panel") 当前选中的是： nav-{{nav}}
+
+      c-nav(v-model='nav2', @change="change", height="200px")
+        c-nav-item(tab="标题-1", value='11')
+        c-nav-item(tab="标题-2", value='22')
+        c-nav-item(tab="标题-3", value='33')
+
+        p(slot="panel") 当前选中的是： nav2-{{nav2}}
   
+
+      c-nav(v-model='nav3', @change="change", height="200px")
+        c-nav-item(tab="标题-1", value='11')
+        c-nav-item(tab="标题-2", value='22')
+        c-nav-item(tab="标题-3", value='33')
+        c-nav-item(tab="标题-4", value='44')
+        c-nav-item(tab="标题-5", value='55')
+        c-nav-item(tab="标题-6", value='66')
+        c-nav-item(tab="标题-7", value='77')
+        c-nav-item(tab="标题-8", value='88')
+        c-nav-item(tab="标题-9", value='99')
+
+        p(slot="panel") 当前选中的是： nav3-{{nav3}}
+
 
 block script
   script.
@@ -20,7 +43,14 @@ block script
       el: '#app',
       data () {
         return {
-          nav: '11'
+          nav: '11',
+          nav2: '22',
+          nav3: '33',
+        }
+      },
+      methods: {
+        change (val) {
+          console.log("change : ", val)
         }
       }
     })

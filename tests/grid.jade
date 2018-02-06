@@ -1,0 +1,40 @@
+extends ./layout
+
+block title 
+    | grid
+
+block style
+    style.
+        .c-grid {
+            background-color: #fae1e1;
+        }
+
+block content
+    c-panel(title='grid', link='/candy/tests/index.html', legend='back menu')
+    .c-grids
+        .c-grid
+            div 234d
+        .c-grid
+            div 234d
+        .c-grid
+            div 234d
+        .c-grid
+            div 234d
+        .c-grid
+        .c-grid
+            div 234d
+        .c-grid
+        .c-grid
+        .c-grid
+
+
+            
+block script
+    script.
+        new Vue({
+        el: '#app',
+            data () {
+                return {
+                }
+            }
+        })

@@ -1,21 +1,29 @@
 
 .c-navbar {
-    display: flex;
+    // display: flex;
     position: absolute;
     z-index: 500;
     top: 0;
     width: 100%;
-    background-color: #FAFAFA;
-
-    &:after {
-        @include setBottomLine(#CCCCCC);
-    }
+    overflow: hidden;
 
     & + .c-tab__panel {
         padding-top: 50px;
         padding-bottom: 0;
     }
 }
+
+.c-navbar__content {
+    position: absolute;
+    display: flex;
+    background-color: #EAEAEA;
+    // background-color: #FAFAFA;
+
+    // &:after {
+    //     @include setBottomLine(#CCCCCC);
+    // }
+}
+
 
 .c-navbar__item {
     position: relative;
@@ -31,11 +39,17 @@
     }
 
     &.c-bar__item_on {
-        background-color: #EAEAEA;
+        background-color: #FAFAFA;
+        color: $cColorPrimary;
+
+        // @include setBottomLine(#FAFAFA);
+        // background-color: #EAEAEA;
     }
 
     &:after {
         @include setRightLine(#CCCCCC);
+        @include setBottomLine(#CCCCCC);
+        
     }
 
     &:last-child {

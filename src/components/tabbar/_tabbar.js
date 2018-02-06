@@ -2,7 +2,8 @@ import { hx } from "../../common/_tools";
 
 var CTab = Vue.extend({
     props: {
-        value: [Number, String]
+        value: [Number, String],
+        height: [String]
     },
     data (){
         return {
@@ -48,10 +49,18 @@ var CTab = Vue.extend({
             }
         });
 
-        $tab = hx('div.c-tab')
+        $tab = hx('div.c-tab', {
+
+            style: {
+                height: me.height || "100%"
+            }
+        })
         
         $tab.push( hx("div.c-tab__panel", {
 
+            // style: {
+            //     height: me.height || "100%"
+            // }
         }, [this.$slots["panel"]]) )
         
         $tab.push($tabbar)

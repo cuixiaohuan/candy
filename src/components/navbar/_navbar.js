@@ -7,14 +7,21 @@ var CNav = Vue.extend({
     },
     data (){
         return {
-            list: []
+            list: [],
+            scrollEle: "",
+            needScroll: false
         }
     },
     computed :{
     },
+    watch: {
+        value (val){
+            this.$emit("change", val)
+        }
+    },
     methods: {
-        _getActiveNav () {
-            // debugger
+        _getActiveNav (el) {
+
             var children = this.$slots.default
             
             children.some((child) => {
@@ -30,111 +37,82 @@ var CNav = Vue.extend({
                 }
                     
             });
+
+            if (this.needScroll && el && el.previousElementSibling){
+                let ele = el.previousElementSibling
+                this.scrollEle.scrollToElement(ele.previousElementSibling, 1000)
+            }
+
         }
     },
     created () {
+    },
+    mounted () {
+
+        var nav = this.$refs["scrollEle"]
+        var content = this.$refs["content"]
+
+        nav.style.height = content.clientHeight + "px"
+        if (this.needScroll){
+
+            this.scrollEle = new BScroll(nav, {
+                scrollX: true,
+                scrollY: false,
+                bounce: false,
+                click: true,
+                tap: true
+            })
+        }
+
     },
     render (h) {
 
         var me = this,
             $navbar
 
+        var navbar = hx("div.c-navbar", {
+            ref: "scrollEle"
+        })
 
-        var navbar = hx("div.c-navbar", {})
-
-        // var children = this.$children
         var children = this.$slots.default
-
+        var tmp = []
         children.forEach((child) => {
             
             if ( child.componentOptions && child.componentOptions.tag === "c-nav-item"){
                 
-                navbar.push(child)
+                tmp.push(child)
             }
         });
 
+        me.needScroll = tmp.length > 5
+
+        var $_content = hx("div.c-navbar__content", {
+            ref: "content",
+            style: {
+                width: tmp.length > 5? 20*tmp.length+"%" : "100%"
+            }
+        })
+
+        $_content.push(tmp)
+
+        navbar.push($_content)
+
+
         var startX, startY, initialPos, startT, isMove,
             bodyWidth = document.body.offsetWidth;
-        $tab = hx('div.c-tab', {},
-            [
-                navbar
-            ])
+        $tab = hx('div.c-tab', {
+
+            style: {
+                height: me.height || "100%"
+            }
+        },[ navbar ])
         
         $tab.push( hx("div.c-tab__panel", {
-            style: {
-                height: me.height
-            },
-            on: {
-                touchstart(e){
-                    e.preventDefault();
-                    var touch = e.touches[0];
-                    startX = touch.pageX;
-                    startT = new Date().getTime(); //记录手指按下的开始时间
-                    // isMove = false; //是否产生滑动
-                },
-                touchmove(e){
-                    // console.log('touchmove', e);
-                    e.preventDefault();
-                    var touch = e.touches[0];
-                    var deltaX = touch.pageX - startX;
-                },
-                touchend(e){
-                    // console.log(e)
-                    var touch = e.changedTouches[0]
-                    var endX = touch.pageX
-                    
-                    var index = me.list.indexOf(me.value)
-
-
-                    var deltaT = new Date().getTime() - startT;
-                    
-                    var deltaX = touch.pageX - startX;
-                    if (deltaT < 300){
-                        if (deltaX > 0){
-                            console.log('index', index);
-                            
-                            if (index === 0) {
-                                index = me.list.length
-                            }
-                            me.$emit("input", me.list[--index])
-                        } else if (deltaX < 0) {
-
-                            if (index === me.list.length - 1) {
-                                index = -1
-                            }
-                            me.$emit("input", me.list[++index])
-                            console.log('index', index);
-                            
-                        }
-                    } else {
-
-                        if (deltaX > bodyWidth * 0.5){
-                            console.log('index', index);
-                            
-                            if (index === 0) {
-                                index = me.list.length
-                            }
-                            me.$emit("input", me.list[--index])
-                        } else if (deltaX < -bodyWidth * 0.5) {
-
-                            if (index === me.list.length - 1) {
-                                index = -1
-                            }
-                            me.$emit("input", me.list[++index])
-                            console.log('index', index);
-                            
-                        }
-                    }
-                    
-                    console.log(me.list.join("--"))
-                    
-                        
-                    me._getActiveNav()
-                }
-            }
-        }, [this.$slots["default"]]) )
+            // style: {
+            //     height: me.height || "100%"
+            // }
+        }, [this.$slots["panel"]]) )
         
-
         return $tab.resolve(h)
     }
 })
@@ -173,9 +151,11 @@ var CNavItem = Vue.extend({
     },
     render (h) {
         var $item, 
-            me = this
+            me = this,
+            round = parseInt(Math.random()*1000)
         
         $item = hx(`div.c-navbar__item`, {
+            ref: "item"+round,
             "class": {
                 "c-bar__item_on": me.active
             },
@@ -190,6 +170,20 @@ var CNavItem = Vue.extend({
 
                         me.$nextTick(rse=>{
                             parent._getActiveNav()
+                            
+                        })
+                    }
+                },
+                tap () {
+
+                    var parent = me.$parent
+                    
+                    if (parent.$options && parent.$options._componentTag === "c-nav"){
+
+                        parent.$emit("input", me.value)
+
+                        me.$nextTick(rse=>{
+                            parent._getActiveNav(me.$refs["item"+round])
                             
                         })
                     }

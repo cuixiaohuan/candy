@@ -1,0 +1,20 @@
+
+.c-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    background:#fff;
+    transform: translateX(-100%);
+
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+
+
+}
+.c-sidebar__show {
+    transform: translateX(0);
+
+}
