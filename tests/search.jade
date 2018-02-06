@@ -6,13 +6,8 @@ block title
 block content
     c-panel(title='搜索栏', link='/candy/tests/index.html', legend='back menu')
         c-searchbar(placeholder='搜索内容', v-model='aaa')
-            div(v-show='show')
-                c-list(title='sfsdag', href='#saa')
-                c-list(title='asgasbfsgas', href='#saa')
-                c-list(title='rewtergdsb', href='#saa')
-                c-list(title='bxvcbcv', href='#saa')
-                c-list(title='dfsfbsf', href='#saa')
-                c-list(title='dsfsdfh', href='#saa')
+            div(v-show='show', slot="result")
+                c-list(:title='item.label', href='#', v-for="item in resList")
 
             
 block script
@@ -22,16 +17,21 @@ block script
             data () {
                 return {
                     aaa: '',
+                    list: [{label: "1234qw"},{label: "1134"},{label: "1224"},{label: "1224341"}],
+                    resList: [],
                     show: false
                 }
             },
             watch : {
-                aaa(){
+                aaa(val){
                     if(this.aaa){
                         this.show = true
                     } else {
                         this.show = false
                     }
+                    this.resList = this.list.filter(o => {
+                        return o.label.indexOf(val) > -1
+                    })
                 }
             }
         })

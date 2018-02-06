@@ -17,3 +17,12 @@
         color: #09BB07;
     }
 }
+
+.c-checkbox-group {
+
+    >.c-cell:first-child {
+        &::before {
+            display: none
+        }
+    }
+}

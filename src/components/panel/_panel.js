@@ -1,26 +1,128 @@
-import { hx } from "../../common/_tools";
+import { hx, getRect } from "../../common/_tools";
+
+const pullDownRefreshTxt = "刷新成功"
+const pullUpLoadTxt = "加载更多"
 
 var CPanel = Vue.extend({
     props: {
+        value: Array,
         title: String,
         link: String,
         icon: String,
         legend: String,
+        height: String,
 
+        pullDownRefresh: {
+            type: null,
+            default: false
+        },
+        pullUpLoad: {
+            type: null,
+            default: false
+        }
+
+    },
+    data () {
+        return {
+            pullingEle: "",
+
+            beforePullDown: true,
+            isPullingDown: false,
+
+            // beforeUpLoad: false,
+            isPullUpLoad: false,
+
+            hasMore: true
+
+        }
     },
     computed: {
+        pullDownRefreshTxt () {
 
+            return this.pullDownRefresh && this.pullDownRefresh.msg || pullDownRefreshTxt
+        },
+        pullUpLoadTxt () {
+
+            return this.pullUpLoad && this.pullUpLoad.msg || pullUpLoadTxt
+        }
     },
-    render (h) {
-        var $panel,
-            $hd,
-            me = this 
+    watch: {
+        value: {
+            handler(val){
+                this.forceUpdate()
+            },
+            deep:true
+        }
+    },
+    methods: {
 
-        $panel = hx('div.c-panel')
+        refresh() {
+
+            this.pullingEle && this.pullingEle.refresh()
+        },
+        initPullDownRefresh () {
+            this.pullingEle.on('pullingDown', () => {
+                this.beforePullDown = false
+                this.isPullingDown = true
+                
+                this.$emit('pulling-down')
+            })
+          
+        },
+        initPullUpLoad () {
+
+            this.pullingEle.on("pullingUp", () => {
+
+                this.isPullUpLoad = true;
+                
+                this.$emit('pulling-up')
+                // this.refresh()
+                // this.forceUpdate()
+
+            })
+        },
+
+        forceUpdate(dirty) {
+            if (this.pullDownRefresh && this.isPullingDown) {
+                this.isPullingDown = false
+                this._reboundPullDown().then(() => {
+                    this._afterPullDown()
+                })
+            } else if (this.pullUpLoad && this.isPullUpLoad) {
+                this.isPullUpLoad = false
+                this.pullingEle.finishPullUp()
+                // this.pullUpDirty = dirty
+                this.refresh()
+
+            } else {
+                this.refresh()
+            }
+        },
+
+        _reboundPullDown() {
+            const {stopTime = 600} = this.pullingEle.options.pullDownRefresh
+            return new Promise((resolve) => {
+                setTimeout(() => {
+
+                    // this.isRebounding = true
+                    this.pullingEle.finishPullDown()
+                    resolve()
+                }, stopTime)
+            })
+        },
+
+        _afterPullDown() {
+            setTimeout(() => {
+                this.beforePullDown = true
+                // this.isRebounding = false
+                this.refresh()
+            },  this.pullingEle.options.bounceTime)
+        },
+
+        _getHeader () {
+            var me = this
+            var $hd = hx('div.c-panel__hd', {})
             
-        if (!!me.title || !!this.link) {
-            $hd = hx('div.c-panel__hd', {})
-
             if (!!me.link){
                 var $header
 
@@ -37,21 +139,11 @@ var CPanel = Vue.extend({
                         [ hx(`i.c-btn_icon+${me.icon}`) ])
                     )
                 }
-                var params_p = {
-                    domProps: {
-                        innerHTML: me.title
-                    }
-                }
 
-                $header.push( hx('div.c-cell__bd', {},[ hx('p', params_p)]) )
+                $header.push( hx('div.c-cell__bd', {},[ hx('p',{}, [me.title])]) )
                 
                 if ( !!me.legend ){
-                    var params_ft = {
-                        domProps: {
-                            innerHTML: me.legend
-                        }
-                    }
-                    $header.push( hx('div.c-cell__ft', params_ft) )
+                    $header.push( hx('div.c-cell__ft', {}, [me.legend]) )
                 } else {
                     $header.push( hx('div.c-cell__ft') )
                     
@@ -60,24 +152,152 @@ var CPanel = Vue.extend({
 
 
             } else {
-                $hd.push(hx('span', {
-                    domProps: {
-                        innerHTML: me.title
-                    }
-                }))
+                $hd.push(hx('span', {}, [me.title]))
             }
 
-            $panel.push($hd)
+            return $hd
+        },
+        _getPullUpTag ($bd) {
+            var me = this
+
+            var $content = hx("div.c-pullUp", {
+            })
+
+            $content.push( hx("span", {
+                style: {
+                    display: this.pullUpLoad && !this.isPullUpLoad?"block":"none",
+                }
+            }, [this.pullUpLoadTxt]) )
+
+            $content.push( hx("c-loading", {
+                style: {
+                    display: this.pullUpLoad && this.isPullUpLoad?"block":"none",
+                }
+            }))
+
+            $bd.push($content)
+
+        },
+        _getPullDownTag ($bd) {
+            var $cPulldown = hx("div.c-pulldown")
+
+            $cPulldown.push(hx("c-loading", {
+                style: {
+                    // position: "absolute",
+                    // top: "-24px",
+                    // marginTop: "6px",
+                    // left: "50%",
+                    // transform: "translateX(-50%)",
+                    display: this.isPullingDown && !this.beforePullDown ? "block" : "none"
+                }
+            }))
+            $cPulldown.push(hx("p", {
+                style: {
+                    // position: "absolute",
+                    // top: "-24px",
+                    // left: "50%",
+                    // marginTop: "6px",
+                    // transform: "translateX(-50%)",
+                    display: !this.isPullingDown && !this.beforePullDown ? "block" : "none"
+                }
+            },
+            [this.pullDownRefreshTxt]))
+
+            $bd.push($cPulldown)
 
         }
 
-        var $bd
+    },
+    mounted(){
+
+        if ( this.pullDownRefresh || this.pullUpLoad){
+
+            var $scroll = this.$refs["pulling-wrap"]
+            var $scrollContent = this.$refs["pulling-content"]
+            
+            $scroll.style.height = this.height || `${getRect($scrollContent).height}px` 
+            $scrollContent.style.minHeight = `${getRect($scroll).height + 50}px` 
+
+            this.$nextTick(_ => {
+                this.pullingEle = new BScroll($scroll, {
+                    bounceTime: 700,
+                    probeType: 1,
+                    maxScrollY: "-2000px",
+                    pullDownRefresh: {
+                        threshold: 50,
+                        stop: 20,
+                        stopTime: 600
+                    },
+                    pullUpLoad: {
+                        threshold: 50
+                    }
+                })
+
+                if ( this.pullUpLoad){
+                    this.initPullUpLoad()
+                }
+
+                if (this.pullDownRefresh){
+                    this.initPullDownRefresh()
+                }
+
+            })
+          
+
+        }
+
+
+    },
+    render (h) {
+        var $panel,
+            me = this 
+
+        $panel = hx('div.c-panel', {
+            style: {
+                height: me.height || "auto"
+                // height: (me.pullDownRefresh || me.pullUpLoad)? "100%": "auto"
+            }
+        })
+            
+        if (!!me.title || !!this.link) {
+            $panel.push( me._getHeader())
+        }
+
+        
         if (me.$slots['default']) {
 
-            $bd = hx('div.c-panel__bd')
+            var $bd = hx('div.c-panel__bd', {
+                ref: "pulling-wrap",
+                style: {
+                    overflow: (me.pullDownRefresh || me.pullUpLoad) ? "hidden" : "auto"
+                },
+            })
 
-            $bd.push(me.$slots['default'])
+            if (me.pullDownRefresh || me.pullUpLoad){
 
+                var _tmp = hx("div.c-pulling", {
+                    ref: "pulling-content",
+                    style: {
+
+                        paddingBottom: this.pullUpLoad? "38px": "0"
+                    }
+                }, [me.$slots['default']])
+                
+                if (me.pullDownRefresh ){
+                    // pulldown的样式
+                    me._getPullDownTag(_tmp)
+                }
+                if (me.pullDownRefresh ){
+                    
+                    // pullup的样式
+                    me._getPullUpTag(_tmp)
+                }                
+                $bd.push(_tmp)
+
+            } else {
+                $bd.push(me.$slots['default'])
+            }
+            
             $panel.push($bd)
         }
 

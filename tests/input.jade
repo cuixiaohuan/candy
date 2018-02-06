@@ -12,6 +12,9 @@ block content
         c-input(type='text', @input='input', @change='triggerChange',  label='邮箱', :trim='true',label-width='70px', v-model='phone1', :rules="{type: 'email', trigger: 'input blur change'}")
         c-input(type='text', label='姓名：',v-model="name", :rules="{pattern: \/^[a-z]+$\/, message:'请输入小写字母', trigger: 'input'}", label-width='70px')
         c-input(type='password', label='密码:', label-width='70px')
+        c-input(label='开关:', label-width='70px')
+          template(slot='right')
+            c-toggle(v-model="toggle")
         c-input(label='验证码:', label-width='70px')
           template(slot='right')
             img(src="./img/vcode2.png", alt="")
@@ -45,6 +48,7 @@ block script
       el: '#app',
       data () {
         return {
+          toggle: true,
           xb: [1111],
           haserror: false,
           phone1: '',

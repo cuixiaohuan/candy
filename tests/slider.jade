@@ -6,28 +6,25 @@ block title
 block content
   div.margin-10
     c-panel(link='/candy/tests/index.html',title=' slider', legend='back menu')
-      c-flex
-        c-item(:flex='10')
-          c-slider( v-model='code0') 
-        c-item {{code0}}
-    
-    c-panel()
-      c-flex
-        c-item(:flex='10')
-          c-slider( v-model='code1')
-        c-item {{code1}}
-          
-    c-panel()
-      c-flex
-        c-item(:flex='10')
-          c-slider( v-model='code3', :disabled="true")
-        c-item {{code3}}
-          
-    c-panel()
-      c-flex
-        c-item(:flex='10')
-          c-slider( v-model='code2', :step='20')
-        c-item(:flex='1') {{code2}}
+        c-flex(style="margin: 20px 0")
+          c-item(:flex='10')
+            c-slider( v-model='code0') 
+          c-item {{code0}}
+      
+        c-flex(style="margin: 20px 0")
+          c-item(:flex='10')
+            c-slider( v-model='code1')
+          c-item {{code1}}
+            
+        c-flex(style="margin: 20px 0")
+          c-item(:flex='10')
+            c-slider( v-model='code3', :disabled="true")
+          c-item {{code3}}
+            
+        c-flex(style="margin: 20px 0")
+          c-item(:flex='10')
+            c-slider( v-model='code2', :step='20')
+          c-item(:flex='1') {{code2}}
 
 
 block script

@@ -109,8 +109,20 @@ $cDialogLinkColor: #3CC51F;
     
     vertical-align: middle;
 
+    display: flex;
+
     img {
         height: 100%;
+    }
+
+    .c-switch-cp { // toggle
+        margin-right: 15px;
+
+        display: flex;
+        justify-content: center;
+        vertical-align: middle;
+        align-content: center;
+        flex-direction: column;
     }
 }
 

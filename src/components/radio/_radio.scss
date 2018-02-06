@@ -17,5 +17,10 @@
 }
 
 .c-radio-group {
-
+    
+    >.c-cell:first-child {
+        &::before {
+            display: none
+        }
+    }
 }

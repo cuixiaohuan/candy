@@ -14,4 +14,5 @@ import './components/dialog/_dialog';
 import "./components/picker/_picker";
 import "./components/navbar/_navbar";
 import "./components/tabbar/_tabbar";
+import "./components/toggle/_toggle";
 

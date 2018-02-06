@@ -4,31 +4,77 @@ block title
     | Panel
 
 block content
-    .margin-10
 
-        c-panel(title='panel标题', link='/candy/tests/index.html', legend='back menu', icon='ion-person')
+        c-panel(title='panel标题', link='/candy/tests/index.html', legend='back menu', icon='ion-person', @pulling-up="pullingUp", @pulling-down="pullingDown")
             c-list(title='文字标题', legend='说明文字3', icon='ion-ios-alarm-outline')
             c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
             template(slot='footer')
                 c-list(title='查看更多', href='javascript:;')
             
 
-        c-panel(title='panel标题', icon='ion-person')
-            c-list(title='文字标题', legend='说明文字3')
-            c-list(title='文字标题', legend='说明文字3', href='javascript:;')
+        //- c-panel(v-model="list", title='panel标题', icon='ion-person',:pull-down-refresh="true", :pull-up-load="true", @pulling-up="pullingUp", @pulling-down="pullingDown")
+            //- c-list(:title="'new item'+item", legend='pullingDown', v-for="item in up")            
+            c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")
+            //- c-list(:title="'new item'+item", legend='pullingUp', v-for="item in down")
+            //- c-list(title='文字标题', legend='说明文字3', href='javascript:;')
 
-        c-panel(title='panel标题', link='#aa', legend='更多')
-            c-list(title='文字标题', legend='说明文字3', icon='ion-ios-alarm-outline')
-            c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
+        c-panel( title='panel标题', icon='ion-person', height="400px", v-model="list",:pull-down-refresh="{msg: '已经是最新了'}", :pull-up-load="true", @pulling-up="pullingUp", @pulling-down="pullingDown")
+            //- c-list(:title="'new item'+item", legend='pullingDown', v-for="item in up")            
+            c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")
+            //- c-list(:title="'new item'+item", legend='pullingUp', v-for="item in down")
+            //- c-list(title='文字标题', legend='说明文字3', href='javascript:;')
 
-
-            
 block script
     script.
         new Vue({
         el: '#app',
             data () {
                 return {
+                    list: [
+                        {title: "native", legend: "item"},
+                        {title: "native", legend: "item"},
+                        {title: "native", legend: "item"},
+                        {title: "native", legend: "item"},
+                        {title: "native", legend: "item"},
+                        {title: "native", legend: "item"}
+                    ],
+                    down: [],
+                    dowmCount: 1,
+                    upCount: 1,
+                    up: []
+
+                }
+            },
+            methods: {
+                pullingUp () {
+                    setTimeout(_ => {
+
+                        if (this.list.length >= 20) {
+                            this.list = this.list.slice(0)
+                            return
+                        }
+                        
+                        for(var i=0;i<5;i++){
+                            this.list.push({title: "up"+ this.upCount++, legend: "up"})
+                        }
+                    }, 2000)
+                    console.log("pullingUp:")
+                },
+                pullingDown () {
+
+                    setTimeout(_ => {
+
+                        if (this.list.length >= 20) {
+                            this.list = this.list.slice(0)
+                            return
+                        }
+
+                        for(var i=0;i<5;i++){
+                            this.list.unshift({title: "down"+ this.dowmCount++, legend: "down"})
+                        }
+                    }, 2000)
+                    console.log("pullingDown:")
+                    
                 }
             }
         })

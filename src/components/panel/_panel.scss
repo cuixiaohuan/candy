@@ -56,20 +56,35 @@
 }
 
 .c-panel__bd {
-    padding: 14px 15px 10px;
+    // padding: 14px 15px 10px;
+    // padding: 14px 15px 0;
+    padding: 0 15px;
     font-size: $cCellTipsFontSize;
+    position: relative;
+    // margin-bottom: 28px;
 
+    >.c-pulling {
+        // margin-top: -14px;
+        margin-left: -15px;
+        margin-right: -15px; 
+        position: relative;
+        
+        >:first-child {
+            &::before {
+                display: none;
+            }
+        }
+    }
     >.c-cell { 
-
         margin-left: -15px;
         margin-right: -15px; 
     }
     >.c-cell:first-child {
-        margin-top: -14px;
+        // margin-top: -14px;
     }
 
     >.c-cell:last-child {
-        margin-bottom: -10px;
+        // margin-bottom: -10px;
     }
 
     >:first-child {
@@ -77,6 +92,37 @@
             display: none;
         }
     }
+
+    .c-pullUp {
+        width: 100%;
+        // height: 38px;
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 16px;
+    }
+
+    .c-pulldown {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: -24px;
+        margin-top: 6px;
+    }
+
+    
+    .c-checkbox-group {
+        margin: 0 -15px;
+    }
+
+    .c-radio-group {
+        margin: 0 -15px;
+    }
+
 }
 
 .c-panel__ft {

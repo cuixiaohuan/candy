@@ -95,7 +95,7 @@ var CPicker = Vue.extend({
                 scrollList.forEach((o, i) => {
                     this.scroll[i] = new BScroll(o, {
                         observeDOM: true,
-                        swipeTime: 1000, // 动画市场
+                        swipeTime: 1000, // 动画时长
                         wheel:{
                             // selectedIndex: 0,
                             selectedIndex: this.pickerSelectedIndex[i] || 0,

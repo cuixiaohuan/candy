@@ -50,6 +50,9 @@
     width: 100%;
     box-sizing: border-box;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+
     .c-search-bar__input {
         padding: 4px 0;
         width: 100%;

@@ -1,0 +1,21 @@
+extends ./layout
+
+block title
+  | toggle
+
+block content
+  div.margin-10
+    c-panel(link='/candy/tests/index.html',title=' toggle', legend='back menu')
+      c-toggle(v-model='code')
+
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          code: true
+        }
+      }
+    })

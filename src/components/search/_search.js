@@ -99,8 +99,8 @@ var CSearchbar = Vue.extend({
         $searchbar = hx(`div.c-search-bar + ${me.cls}`)
 
         $searchbar.push([hx('div.c-search-bar__form').push( [$box, $label] ), $btn])
-        if (me.$slots['default']){
-            $searchbar = hx('div.searchbar-result', {}, [$searchbar, ...me.$slots['default']])
+        if (me.$slots['result']){
+            $searchbar = hx('div.searchbar-result', {}, [$searchbar, ...me.$slots['result']])
         }
         return $searchbar.resolve(h)
     }
