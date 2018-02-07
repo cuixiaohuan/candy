@@ -5,27 +5,46 @@ block title
 
 block style
     style.
-        .c-grid {
-            background-color: #fae1e1;
-        }
 
 block content
     c-panel(title='grid', link='/candy/tests/index.html', legend='back menu')
-    .c-grids
-        .c-grid
+    c-grid(:no-border="true")
+        c-grid-item
             div 234d
-        .c-grid
+        c-grid-item
             div 234d
-        .c-grid
+        c-grid-item
             div 234d
-        .c-grid
+        c-grid-item
             div 234d
-        .c-grid
-        .c-grid
+        c-grid-item
+        c-grid-item
             div 234d
-        .c-grid
-        .c-grid
-        .c-grid
+        c-grid-item
+        c-grid-item
+        c-grid-item
+
+    c-grid(:cols='5')
+        c-grid-item
+            div 11
+        c-grid-item
+            div 22
+        c-grid-item
+            div 33
+            div 33
+            div 33
+            div 33
+        c-grid-item
+            div 44
+        c-grid-item
+        c-grid-item
+            div 66
+        c-grid-item
+            div 77
+        c-grid-item
+            div 88
+        c-grid-item
+            div 99
 
 
             

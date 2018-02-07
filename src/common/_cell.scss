@@ -76,7 +76,7 @@ $cUploaderBorderWidth: 1px;
     
     &:before {
         @include setTopLine($cCellBorderColor);
-        left: $cCellGapH;
+        // left: $cCellGapH;
         z-index: 2;
     }
     &:last-child {

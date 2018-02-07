@@ -9,11 +9,36 @@ $cGridColumnCount: 4;
     position: relative;
     overflow: hidden;
 
+    &.c-noborder {
+        // background-color: red;
+            
+        &:before {
+            display: none;
+        }
+        &:after {
+            display: none;
+        }
+    }
+
     &:before {
         @include setTopLine($cGridBorderColor);
     }
     &:after {
         @include setLeftLine($cGridBorderColor);
+    }
+}
+
+.c-noborder {
+    .c-grid {
+        &:before {
+            display: none;
+        }
+        &:after {
+            display: none;
+        }
+        &:active {
+            background-color: $cBgColorActive;
+        }
     }
 }
 

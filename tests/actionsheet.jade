@@ -1,30 +1,102 @@
 extends ./layout
 
 block title
-  | Actionsheet
+    | Actionsheet
+
+
+block style
+    style.
+        .panel {
+            text-align: center;
+            margin: -10px -10px;
+        }
+
+        p {
+            color: #888;
+            font-size: 8px;
+        }
 
 block content
     c-panel(title='弹出式菜单', link='/candy/tests/index.html', legend='back menu')
-      c-button(@click=' showIos=!showIos ', size='mini', type='primary') {{showIos?'隐藏':'显示'}}IOS菜单
-      c-button(@click=' showAndroid=!showAndroid ', size='mini', type='primary') {{showAndroid?'隐藏':'显示'}}Android菜单
-      c-actionsheet(v-model='showIos', style-sheet='ios', :menu-list='list', title='标题(描述bjandjajdasfa)')
-      c-actionsheet(v-model='showAndroid', style-sheet='android', :menu-list='list', title='标题(描述bjandjajdasfa)')
+        p {{oper}}
+        c-button(@click=' showIos=!showIos ', size='mini', type='primary') {{showIos?'隐藏':'显示'}}菜单1
+        c-button(@click=' showIos2=!showIos2 ', size='mini', type='primary') {{showIos2?'隐藏':'显示'}}菜单2
+        c-button(@click=' showIos3=!showIos3 ', size='mini', type='primary') {{showIos3?'隐藏':'显示'}}菜单3
+        c-button(@click=' showAndroid=!showAndroid ', size='mini', type='primary') {{showAndroid?'隐藏':'显示'}}菜单4
+        
+        c-actionsheet(v-model='showIos', @click="clickBtn" style-sheet='ios', :menu-list='list', :no-close="false", title='标题(描述bjandjajdasfa)')
+
+        c-actionsheet(v-model='showIos2', style-sheet='ios', :menu-list='list', :mask-closeable="false")
+        c-actionsheet(v-model='showIos3', title='标题(actionsheet结合grid使用)', style-sheet='ios', :menu-list='list', :mask-closeable="true")
+            template(slot="content")
+                c-grid(:cols='5', :no-border="true", style="padding: 5px 0;")
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-whatsapp-outline')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-twitter')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-chrome')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-whatsapp-outline')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-twitter')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-tux')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-github')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-chrome')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-octocat')
+                            p 微信分享
+                    c-grid-item
+                        .panel
+                            c-icon(type='success' icon='ion-social-chrome')
+                            p 微信分享
+
+
+        c-actionsheet(v-model='showAndroid', style-sheet='android', :menu-list='list', title='标题(描述bjandjajdasfa)')
 
 block script
-  script.
-    new Vue({
-      el: '#app',
-      data () {
-        return {
-          showIos: false,
-          showAndroid: false,
-          list: [{
-            name: '示例11', href: "#a1"
-          },{
-            name: '示例22', href: "#a2"
-          },{
-            name: '示例33', href: "#a3"
-          }]
-        }
-      }
-    })
+    script.
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                showIos: false,
+                showIos2: false,
+                showIos3: false,
+                showAndroid: false,
+                oper: '',
+                list: [{
+                    name: '示例11', href: "#a1", id: 1
+                },{
+                    name: '示例22', href: "#a2", id: 2
+                },{
+                    name: '示例33', href: "#a3", id: 3
+                },]
+                }
+            },
+            methods: {
+                clickBtn (val) {
+                this.oper = val
+                }
+            }
+        })

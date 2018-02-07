@@ -16,4 +16,5 @@ import "./components/navbar/_navbar";
 import "./components/tabbar/_tabbar";
 import "./components/toggle/_toggle";
 import "./components/grid/_grid";
+import "./components/pull/_pull";
 

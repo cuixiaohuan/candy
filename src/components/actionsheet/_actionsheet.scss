@@ -26,6 +26,9 @@ $cActionSheetAndroidBorderRadius: 2px;
     font-size: 14px;
     color: #888;
     background: #FCFCFD;
+
+    border-radius: 10px;
+    
     &:before {
         @include setBottomLine($cCellBorderColor);
     }
@@ -35,10 +38,17 @@ $cActionSheetAndroidBorderRadius: 2px;
 }
 .c-actionsheet__menu{
     background-color: #FCFCFD;
+
+    border-radius: 10px;
+    overflow: hidden;
+    
 }
 .c-actionsheet__action {
     margin-top: 6px;
     background-color: #FCFCFD;;
+
+    border-radius: 10px;
+    
 }
 .c-actionsheet__cell {
     display: block;
@@ -106,4 +116,7 @@ $cActionSheetAndroidBorderRadius: 2px;
 //actionSheet aniamtion
 .c-actionsheet_toggle{
     transform: translate(0, 0);
+    box-sizing: border-box;
+    padding: 4px;
+    background-color: transparent;
 }
