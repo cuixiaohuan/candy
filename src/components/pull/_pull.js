@@ -5,6 +5,7 @@ const pullUpLoadTxt = "加载更多"
 
 var CPull = Vue.extend({
     props: {
+        value: Array,
         height: String,
 
         pullDownRefresh: {
@@ -168,17 +169,18 @@ var CPull = Vue.extend({
 
         if ( this.pullDownRefresh || this.pullUpLoad){
 
+            var $pull = this.$refs["c-pull"]
             var $scroll = this.$refs["pulling-wrap"]
             var $scrollContent = this.$refs["pulling-content"]
             
-            $scroll.style.height = this.height || `${getRect($scrollContent).height}px` 
-            $scrollContent.style.minHeight = `${getRect($scroll).height + 50}px` 
+            $scroll.style.height = `${getRect($pull).height}px` 
+            $scrollContent.style.minHeight = `${getRect($scroll).height + 1}px` 
 
             this.$nextTick(_ => {
                 this.pullingEle = new BScroll($scroll, {
                     bounceTime: 700,
                     probeType: 1,
-                    maxScrollY: "-2000px",
+                    // maxScrollY: "-2000px",
                     pullDownRefresh: {
                         threshold: 50,
                         stop: 20,
@@ -209,7 +211,8 @@ var CPull = Vue.extend({
             me = this 
 
         $pull = hx('div.c-pull', {
-            ref: "pulling-wrap",
+            ref: "c-pull",
+            
             style: {
                 height: me.height || "auto"
                 // height: (me.pullDownRefresh || me.pullUpLoad)? "100%": "auto"
@@ -218,7 +221,9 @@ var CPull = Vue.extend({
 
         
         if (me.$slots['default']) {
-            var $bd = hx("div")
+            var $bd = hx("div", {
+                ref: "pulling-wrap",
+            })
 
             // var $bd = hx('div.c-panel__bd', {
             //     ref: "pulling-wrap",
@@ -233,7 +238,7 @@ var CPull = Vue.extend({
                     ref: "pulling-content",
                     style: {
 
-                        paddingBottom: this.pullUpLoad? "38px": "0"
+                        // paddingBottom: this.pullUpLoad? "38px": "0"
                     }
                 }, [me.$slots['default']])
                 

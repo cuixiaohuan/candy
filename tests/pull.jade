@@ -3,27 +3,47 @@ extends ./layout
 block title 
     | Pull
 
+block style
+    style.
+        .panel {
+            text-align: center;
+            margin: -10px -10px;
+        }
+
+        .biaoti {
+            color: #888;
+            font-size: 8px;
+        }
+
 block content
 
         c-panel(title='panel标题', link='/candy/tests/index.html', legend='back menu', icon='ion-person')
-            c-pull(:pull-down-refresh="{msg: '已经是最新了'}", :pull-up-load="true", @pulling-up="pullingUp", @pulling-down="pullingDown")
+            c-pull(:pull-down-refresh="{msg: '已经是最新了'}",height="100%", v-model="list", :pull-up-load="true", @pulling-up="pullingUp", @pulling-down="pullingDown", style="margin: 0 -15px")
                 c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")
-            template(slot='footer')
+
+
+        c-panel(title='panel标题', link='/candy/tests/index.html')
+            c-pull(:pull-down-refresh="{msg: '已经是最新啦'}",height="500px", v-model="list2", :pull-up-load="true", @pulling-up="pullingUp2", @pulling-down="pullingDown2", style="margin: 0 -15px")
+                c-grid(:cols='5', :no-border="true", style="padding: 5px 0;")
+                    c-grid-item(v-for="item in list2")
+                        .panel
+                            c-icon(type='success' ,:icon='item.icon')
+                            p.biaoti {{item.label}}
+
+
 
 block script
     script.
+        let icons = ["ion-social-whatsapp-outline", "ion-social-twitter", "ion-social-chrome"]
         new Vue({
         el: '#app',
             data () {
                 return {
                     list: [
                         {title: "native", legend: "item"},
-                        {title: "native", legend: "item"},
-                        {title: "native", legend: "item"},
-                        {title: "native", legend: "item"},
-                        {title: "native", legend: "item"},
-                        {title: "native", legend: "item"}
                     ],
+                    list2: [{label:"微信分享", icon: icons[0]}],
+                    
                     down: [],
                     dowmCount: 1,
                     upCount: 1,
@@ -31,11 +51,20 @@ block script
 
                 }
             },
+            created(){
+                debugger
+                for(var i = 0; i<15; i++){
+                    this.list2.push({label:"微信分享", icon: icons[Math.floor(Math.random()*3)]})
+                }
+                for(var i = 0; i<8; i++){
+                    this.list.push({title: "native", legend: "item"})
+                }
+            },
             methods: {
                 pullingUp () {
                     setTimeout(_ => {
 
-                        if (this.list.length >= 20) {
+                        if (this.list.length >= 60) {
                             this.list = this.list.slice(0)
                             return
                         }
@@ -50,13 +79,43 @@ block script
 
                     setTimeout(_ => {
 
-                        if (this.list.length >= 20) {
+                        if (this.list.length >= 60) {
                             this.list = this.list.slice(0)
                             return
                         }
 
                         for(var i=0;i<5;i++){
                             this.list.unshift({title: "down"+ this.dowmCount++, legend: "down"})
+                        }
+                    }, 2000)
+                    console.log("pullingDown:")
+                    
+                },
+                pullingUp2 () {
+                    setTimeout(_ => {
+
+                        if (this.list2.length >= 60) {
+                            this.list2 = this.list2.slice(0)
+                            return
+                        }
+                        
+                        for(var i=0;i<5;i++){
+                            this.list2.push({label:"pullingUp", icon: icons[Math.floor(Math.random()*3)]})
+                        }
+                    }, 2000)
+                    console.log("pullingUp:")
+                },
+                pullingDown2 () {
+
+                    setTimeout(_ => {
+
+                        if (this.list2.length >= 60) {
+                            this.list2 = this.list2.slice(0)
+                            return
+                        }
+
+                        for(var i=0;i<5;i++){
+                            this.list2.unshift({label:"pullingDown", icon: icons[Math.floor(Math.random()*3)]})
                         }
                     }, 2000)
                     console.log("pullingDown:")
