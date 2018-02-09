@@ -103,7 +103,9 @@ var CItem = Vue.extend({
         alignSelf: {
           type: String,
           default: ''
-        }
+        },
+        offset: [String, Number],
+        span: [Number, String]
     },
     computed: {
         styleList () {
@@ -140,15 +142,26 @@ var CItem = Vue.extend({
             if (this.alignSelf) {
               style['align-self'] = this.alignSelf
             }
-      
+
+            if (this.span) {
+                style["flex-grow"] = this.span
+            }
+
             return style
+        },
+        clsObj () {
+            var clsObj = ["c-flex__item"]
+            if(this.offset){
+                clsObj.push("c-flex__item-offset_"+this.offset)
+            }
+            return clsObj
         }
     },
     render (h) {
         var $item, 
             me = this
         
-        $item = hx('div.c-flex__item', {
+        $item = hx(`div.${this.clsObj.join("+")}`, {
             style: me.styleList
             
         }, [me.$slots['default']])

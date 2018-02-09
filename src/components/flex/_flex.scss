@@ -6,3 +6,9 @@
 .c-flex__item{
     flex: 1;
 }
+
+@for $i from 1 through 12 {
+    .c-flex__item-offset_#{$i} {
+         margin-left: 100% / 12 * $i
+    } 
+}

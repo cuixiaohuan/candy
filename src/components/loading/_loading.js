@@ -19,10 +19,19 @@ var CLoading = Vue.extend({
                     width: me.size + "px",
                     height: me.size + "px"
                 }
-            }, [
-                hx("span"),hx("span"),hx("span"),hx("span"),hx("span"),hx("span"),hx("span"),hx("span")
-            ])
+            })
         
+            var span = hx("span", {
+                style: {
+                    width: me.size / 5 + "px",
+                    height: me.size / 5 + "px"
+                }
+            })
+            for (var i=0;i<8;i++){
+                $loading.push(span)
+                
+            }
+
         return $loading.resolve(h)
     }
 })

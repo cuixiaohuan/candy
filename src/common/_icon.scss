@@ -1,3 +1,39 @@
+@font-face {
+    font-family: 'cico';
+    src:  url('/libs/cfonts/cico.eot');
+    src:  url('/libs/cfonts/cico.eot') format('embedded-opentype'),
+        url('/libs/cfonts/cico.ttf') format('truetype'),
+        url('/libs/cfonts/cico.woff') format('woff'),
+        url('/libs/cfonts/cico.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+[class^="c-native-icon-"]:before, [class*=" c-native-icon-"]:before {
+    margin: 0;
+
+    font-size: 48px;
+    line-height: 1;
+}
+
+[class^="c-native-icon-"], [class*=" c-native-icon-"] {
+    font-family: 'cico';
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.c-native-icon-error:before {
+    content: "\ea0f";
+}
+.c-native-icon-success:before {
+    content: "\ea10";
+}
+
+
+
 
 [class^="c-icon-"]:before, [class*=" c-icon-"]:before {
     margin: 0;

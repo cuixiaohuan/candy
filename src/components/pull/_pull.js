@@ -2,6 +2,7 @@ import { hx, getRect } from "../../common/_tools";
 
 const pullDownRefreshTxt = "刷新成功"
 const pullUpLoadTxt = "加载更多"
+const pullUpLoadNoMoreTxt = "没有更多啦"
 
 var CPull = Vue.extend({
     props: {
@@ -25,7 +26,6 @@ var CPull = Vue.extend({
             beforePullDown: true,
             isPullingDown: false,
 
-            // beforeUpLoad: false,
             isPullUpLoad: false,
 
             hasMore: true
@@ -35,11 +35,18 @@ var CPull = Vue.extend({
     computed: {
         pullDownRefreshTxt () {
 
-            return this.pullDownRefresh && this.pullDownRefresh.msg || pullDownRefreshTxt
+            return this.pullDownRefresh && this.pullDownRefresh.txt || pullDownRefreshTxt
         },
         pullUpLoadTxt () {
-
-            return this.pullUpLoad && this.pullUpLoad.msg || pullUpLoadTxt
+            if ( this.pullUpLoad ){
+                if (this.value.length >= this.pullUpLoad.total){
+                    return this.pullUpLoad.txt && this.pullUpLoad.txt.noMore || pullUpLoadNoMoreTxt
+                } else {
+                    return this.pullUpLoad.txt && this.pullUpLoad.txt.more || pullUpLoadTxt
+                }
+                
+            }
+            // return this.pullUpLoad && (this.value.length < this.pullUpLoad.total) && this.pullUpLoad.message || pullUpLoadTxt
         }
     },
     watch: {
@@ -117,8 +124,8 @@ var CPull = Vue.extend({
         _getPullUpTag ($bd) {
             var me = this
 
-            var $content = hx("div.c-pullUp", {
-            })
+            // 底部加载
+            var $content = hx("div.c-pullUp")
 
             $content.push( hx("span", {
                 style: {
@@ -140,21 +147,11 @@ var CPull = Vue.extend({
 
             $cPulldown.push(hx("c-loading", {
                 style: {
-                    // position: "absolute",
-                    // top: "-24px",
-                    // marginTop: "6px",
-                    // left: "50%",
-                    // transform: "translateX(-50%)",
                     display: this.isPullingDown && !this.beforePullDown ? "block" : "none"
                 }
             }))
             $cPulldown.push(hx("p", {
                 style: {
-                    // position: "absolute",
-                    // top: "-24px",
-                    // left: "50%",
-                    // marginTop: "6px",
-                    // transform: "translateX(-50%)",
                     display: !this.isPullingDown && !this.beforePullDown ? "block" : "none"
                 }
             },
@@ -178,16 +175,16 @@ var CPull = Vue.extend({
 
             this.$nextTick(_ => {
                 this.pullingEle = new BScroll($scroll, {
-                    bounceTime: 700,
-                    probeType: 1,
-                    // maxScrollY: "-2000px",
+                    bounceTime: 700, // 默认值
+                    probeType: 1, // 非实时（屏幕滑动超过一定时间后）派发scroll 事件
+                    listenScroll: true,
                     pullDownRefresh: {
-                        threshold: 50,
-                        stop: 20,
+                        threshold: this.pullDownRefresh.threshold || 50,
+                        stop: 30,
                         stopTime: 600
                     },
                     pullUpLoad: {
-                        threshold: 50
+                        threshold: -this.pullUpLoad.threshold || -30
                     }
                 })
 
@@ -200,11 +197,7 @@ var CPull = Vue.extend({
                 }
 
             })
-          
-
         }
-
-
     },
     render (h) {
         var $pull,

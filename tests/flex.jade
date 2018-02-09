@@ -10,48 +10,41 @@ block style
             height: 40px;
             line-height: 40px;
             text-align: center;
-        }
-
-        .item10 {
-            background: #bcf0bb;
-            height: 40px;
-            line-height: 40px;
-            width: 30px;
-        }
+        } 
 
 block content
     c-panel(title='flex布局', link='/candy/tests/index.html', legend='back menu')
-        c-flex(:gutter='10')
+        c-flex(:gutter='2')
             c-item
                 div.item 1
-        c-flex(:gutter='10')
-            c-item
-                div.item 1
-            c-item
-                div.item 2
-        c-flex(:gutter='10')
+        c-flex(:gutter='2')
             c-item
                 div.item 1
             c-item
                 div.item 2
+        c-flex(:gutter='2')
             c-item
-                div.item 3
-        c-flex(:gutter='10')
-            c-item(:offset='2')
                 div.item 1
             c-item
                 div.item 2
             c-item
                 div.item 3
-            c-item
+        c-flex(:gutter='2')
+            c-item(:span="2")
+                div.item 1
+            c-item(:span="2")
+                div.item 2
+            c-item(:offset='4', :span="2")
+                div.item 3
+            c-item(:span="2")
                 div.item 4
-        c-flex(:gutter='10', justify-content='flex-end')
+        c-flex(:gutter='2', justify-content='flex-end')
+            c-item(:span="1")
+                div.item 1
             c-item()
-                div.item10 1
-            c-item()
-                div.item10 2
+                div.item 2
             c-item
-                div.item10 3
+                div.item 3
 
 
             

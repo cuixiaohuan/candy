@@ -17,13 +17,9 @@ block style
 
 block content
 
-        c-panel(title='panel标题', link='/candy/tests/index.html', legend='back menu', icon='ion-person')
-            c-pull(:pull-down-refresh="{msg: '已经是最新了'}",height="100%", v-model="list", :pull-up-load="true", @pulling-up="pullingUp", @pulling-down="pullingDown", style="margin: 0 -15px")
-                c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")
 
-
-        c-panel(title='panel标题', link='/candy/tests/index.html')
-            c-pull(:pull-down-refresh="{msg: '已经是最新啦'}",height="500px", v-model="list2", :pull-up-load="true", @pulling-up="pullingUp2", @pulling-down="pullingDown2", style="margin: 0 -15px")
+        //- c-panel(title='panel标题', link='/candy/tests/index.html')
+            c-pull(:pull-down-refresh="{msg: '已经是最新啦'}",  :pull-up-load="{msg: 'get more'}", height="500px", v-model="list2", @pulling-up="pullingUp2", @pulling-down="pullingDown2", style="margin: 0 -15px")
                 c-grid(:cols='5', :no-border="true", style="padding: 5px 0;")
                     c-grid-item(v-for="item in list2")
                         .panel
@@ -32,6 +28,10 @@ block content
 
 
 
+        c-panel(title='panel标题', link='/candy/tests/index.html', legend='back menu', icon='ion-person')
+            c-pull(:pull-down-refresh="{txt: '已经是最新了'+ nowtime(), threshold: 30}", height="500px", v-model="list", :pull-up-load="{total: 40, txt:{more:'-加载更多-',noMore:'没有更多的数据啦'}, threshold: 30}", @pulling-up="pullingUp", @pulling-down="pullingDown", style="margin: 0 -15px")
+                c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")
+
 block script
     script.
         let icons = ["ion-social-whatsapp-outline", "ion-social-twitter", "ion-social-chrome"]
@@ -39,6 +39,10 @@ block script
         el: '#app',
             data () {
                 return {
+                    hasDot: true,
+                    tab: '11',
+                    badge: 100,
+                    nav: "11",
                     list: [
                         {title: "native", legend: "item"},
                     ],
@@ -52,7 +56,6 @@ block script
                 }
             },
             created(){
-                debugger
                 for(var i = 0; i<15; i++){
                     this.list2.push({label:"微信分享", icon: icons[Math.floor(Math.random()*3)]})
                 }
@@ -61,15 +64,24 @@ block script
                 }
             },
             methods: {
+                nowtime (d){
+                    if(!d && d!=0){
+                        d = new Date()
+                    }
+                    var hour = ('0' + (d.getHours())).slice(-2);
+                    var minutes = ('0' + (d.getMinutes())).slice(-2);
+                    var seconds = ('0' + (d.getSeconds())).slice(-2);
+                    return hour + ":" + minutes + ":" + seconds;
+                },
                 pullingUp () {
                     setTimeout(_ => {
 
-                        if (this.list.length >= 60) {
+                        if (this.list.length >= 40) {
                             this.list = this.list.slice(0)
                             return
                         }
                         
-                        for(var i=0;i<5;i++){
+                        for(var i=0;i<8;i++){
                             this.list.push({title: "up"+ this.upCount++, legend: "up"})
                         }
                     }, 2000)
@@ -79,7 +91,7 @@ block script
 
                     setTimeout(_ => {
 
-                        if (this.list.length >= 60) {
+                        if (this.list.length >= 40) {
                             this.list = this.list.slice(0)
                             return
                         }
