@@ -46,6 +46,7 @@ $cDialogGapWidth: 1.6em;
     position: relative;
     line-height: 48px;
     font-size: 18px;
+    display: -webkit-flex;
     display: flex;
     &:after {
         content: " ";

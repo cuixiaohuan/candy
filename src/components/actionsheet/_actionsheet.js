@@ -1,10 +1,6 @@
 import { hx } from '../../common/_tools.js'
 
 var CActionsheet = Vue.extend({
-    model: {
-        prop: 'value',
-        event: 'input',
-    },
     data() {
         return {
             isShow: this.value

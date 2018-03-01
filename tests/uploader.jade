@@ -1,0 +1,23 @@
+extends ./layout
+
+block title
+  | uploader
+
+block content
+    div.margin-10
+        c-panel(link='/candy/tests/index.html',title='uploader', legend='back menu')
+            //- ul(class="c-uploader__files")
+                li(class="c-uploader__file" style="background-image:url(./img/icon.png")
+            //- div(class="c-uploader__input-box")
+                input(id="uploaderInput" class="c-uploader__input" type="file" accept="image/*" multiple)
+            c-uploader()
+block script
+  script.
+
+    new Vue({
+        el: '#app',
+        data () {
+            return {
+            }
+        }
+    })

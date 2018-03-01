@@ -68,7 +68,7 @@ var CToast = Vue.extend({
             if(me.type === "loading"){
                 tmp.push( hx("c-loading", {
                     props: {
-                        size: 48
+                        size: 52
                     }
                 }))
             }

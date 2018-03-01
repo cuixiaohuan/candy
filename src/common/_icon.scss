@@ -11,16 +11,13 @@
   
 [class^="c-native-icon-"]:before, [class*=" c-native-icon-"]:before {
     margin: 0;
-
     font-size: 48px;
-    line-height: 1;
+    // line-height: 1;
 }
 
 [class^="c-native-icon-"], [class*=" c-native-icon-"] {
     font-family: 'cico';
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
+    // line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -31,8 +28,45 @@
 .c-native-icon-success:before {
     content: "\ea10";
 }
-
-
+.c-native-icon-warning:before {
+    content: "\ea07";
+}
+.c-native-icon-notification:before {
+    content: "\ea08";
+}
+.c-native-icon-plus:before {
+    content: "\ea0a";
+}
+.c-native-icon-minus:before {
+    content: "\ea0b";
+}
+.c-native-icon-cancel-circle:before {
+    content: "\ea0d";
+}
+.c-native-icon-blocked:before {
+    content: "\ea0e";
+}
+.c-native-icon-error:before {
+    content: "\ea0f";
+}
+.c-native-icon-success:before {
+    content: "\ea10";
+}
+.c-native-icon-checkmark2:before {
+    content: "\ea11";
+}
+.c-native-icon-arrow-left:before {
+    content: "\ea38";
+}
+.c-native-icon-arrow-right:before {
+    content: "\ea34";
+}
+.c-native-icon-circle-left:before {
+    content: "\ea44";
+}
+.c-native-icon-circle-right:before {
+    content: "\ea42";
+}
 
 
 [class^="c-icon-"]:before, [class*=" c-icon-"]:before {

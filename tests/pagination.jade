@@ -1,0 +1,51 @@
+extends ./layout
+
+block title
+  | Pagination
+
+block content
+  c-panel(title='Pagination', link='/candy/tests/index.html', legend='back menu')
+    br
+    c-pagination(@change="change", 
+                :page-num="pageNum",
+                :total="total",
+                :page-size="pageSize",
+                prev="prev",
+                next="next")
+    br
+    c-pagination(@change="change", 
+                :page-num="pageNum", 
+                :total="total", 
+                :page-size="pageSize",
+                prev-icon="c-native-icon-circle-left",
+                next-icon="c-native-icon-circle-right")
+    br
+    c-pagination(@change="change", 
+                :page-num="pageNum", 
+                :total="total", 
+                :page-size="pageSize",
+                prev-icon="c-native-icon-circle-left",
+                next-icon="c-native-icon-circle-right",
+                prev="上一项",
+                next="下一项")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+            total: 22,
+            pageSize: 5,
+            pageNum: 1
+        }
+      },
+      methods: {
+        pullingUp () {
+          
+        },
+        change(num){
+            this.pageNum = num
+        }
+      }
+    })

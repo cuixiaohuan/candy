@@ -24,7 +24,7 @@
     position: relative;
     &:after {
         @include setBottomLine($cLineColorLight);
-        left: 15px;
+        // left: 15px;
     }
 
     > a {
@@ -67,19 +67,6 @@
         margin-left: -15px;
         margin-right: -15px; 
     }
-    >.c-cell:first-child {
-        // margin-top: -14px;
-    }
-
-    >.c-cell:last-child {
-        // margin-bottom: -10px;
-    }
-
-    >:first-child {
-        &::before {
-            display: none;
-        }
-    }
 
     .c-checkbox-group {
         margin: 0 -15px;
@@ -88,6 +75,20 @@
     .c-radio-group {
         margin: 0 -15px;
     }
+
+    // >.c-cell:first-child {
+    //     margin-top: -14px;
+    // }
+
+    // >.c-cell:last-child {
+    //     margin-bottom: -10px;
+    // }
+
+    // >:first-child {
+    //     &::before {
+    //         // display: none;
+    //     }
+    // }
 
 }
 

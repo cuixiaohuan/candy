@@ -29,7 +29,7 @@ block content
 
 
         c-panel(title='panel标题', link='/candy/tests/index.html', legend='back menu', icon='ion-person')
-            c-pull(:pull-down-refresh="{txt: '已经是最新了'+ nowtime(), threshold: 30}", height="500px", v-model="list", :pull-up-load="{total: 40, txt:{more:'-加载更多-',noMore:'没有更多的数据啦'}, threshold: 30}", @pulling-up="pullingUp", @pulling-down="pullingDown", style="margin: 0 -15px")
+            c-pull(:pull-down-refresh="{txt: '已经是最新了'+ nowtime(), threshold: 30}", height="370px", v-model="list", :pull-up-load="{total: 40, txt:{more:'-加载更多-',noMore:'没有更多的数据啦'}, threshold: 30}", @pulling-up="pullingUp", @pulling-down="pullingDown", style="margin: 0 -15px")
                 c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")
 
 block script
@@ -51,7 +51,11 @@ block script
                     down: [],
                     dowmCount: 1,
                     upCount: 1,
-                    up: []
+                    up: [],
+
+                    total: 22,
+                    pageSize: 5,
+                    pageNum: 1
 
                 }
             },
@@ -84,8 +88,10 @@ block script
                         for(var i=0;i<8;i++){
                             this.list.push({title: "up"+ this.upCount++, legend: "up"})
                         }
+                        
+                        console.log("pullingUp:")
+                    
                     }, 2000)
-                    console.log("pullingUp:")
                 },
                 pullingDown () {
 

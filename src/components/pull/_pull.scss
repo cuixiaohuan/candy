@@ -1,4 +1,8 @@
 
+.c-pull {
+    overflow: hidden;
+    
+}
 .c-pulling {
     // margin-top: -14px;
     // margin-left: -15px;
@@ -14,11 +18,10 @@
 
 
 .c-pullUp {
-
     padding: 16px 0;
 
-
     width: 100%;
+    display: -webkit-flex;
     display: flex;
     position: relative;
     justify-content: center;

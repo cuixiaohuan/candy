@@ -5,7 +5,6 @@
 $cCellFontSize:17px;
 $cCellsMarginTop:unit(20 / $cCellFontSize);
 
-
 // 引入组件
 @import 'components/button/_button';
 @import 'components/slider/_slider';
@@ -24,4 +23,6 @@ $cCellsMarginTop:unit(20 / $cCellFontSize);
 @import 'components/toggle/_toggle';
 @import 'components/grid/_grid';
 @import 'components/pull/_pull';
-@import 'components/toast/_toast'
+@import 'components/toast/_toast';
+@import 'components/uploader/_uploader';
+@import 'components/pagination/_pagination';

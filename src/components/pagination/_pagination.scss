@@ -1,0 +1,41 @@
+.c-pagination {
+    width: 100%;
+    align-items: center;
+
+    button {
+        width: auto;
+        margin: 0;
+    }
+    
+    [class^="c-native-icon-"]:before, [class*=" c-native-icon-"]:before {
+        font-size: 18px;
+    }
+
+    .c-pagination-prev {
+
+        button {
+            margin-right: auto;
+        }
+    }
+    .c-pagination-number {
+        text-align: center;
+        span {
+            // position: absolute;
+            // top: 0;
+            // bottom: 0;
+            // margin: auto;
+            min-height: 10px;
+            font-size: 18px;
+
+        }
+
+        .realPageNum {
+            color: $cColorPrimary;
+        }
+    }
+    .c-pagination-next {
+        button {
+            margin-left: auto;
+        }
+    }
+}

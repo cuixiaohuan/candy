@@ -13,6 +13,7 @@ $pickerItemHeight: 34px;
 }
 
 .c-picker__hd {
+    display: -webkit-flex;
     display: flex;
     padding: 9px 15px;
     background-color: #fff;

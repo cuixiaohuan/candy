@@ -31,6 +31,11 @@ $cDialogLinkColor: #3CC51F;
         -webkit-appearance: none;
         margin: 0;
     }
+
+    // &[type=password] {
+        // font-weight: 700;
+        // letter-spacing: 1px;
+    // }
 }
 .c-textarea {
     display: block;
@@ -109,6 +114,7 @@ $cDialogLinkColor: #3CC51F;
     
     vertical-align: middle;
 
+    display: -webkit-flex;
     display: flex;
 
     img {

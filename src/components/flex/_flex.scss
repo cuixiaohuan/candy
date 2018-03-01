@@ -1,6 +1,7 @@
 @import '../../common/_common';
 
 .c-flex {
+    display: -webkit-flex;
     display: flex;
 }
 .c-flex__item{

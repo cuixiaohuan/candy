@@ -19,6 +19,8 @@ $cActionSheetAndroidBorderRadius: 2px;
     height: 65px;
     padding: 0 20px;
     line-height: 1.4;
+    
+    display: -webkit-flex;
     display: flex;
     justify-content: center;
     flex-direction: column;

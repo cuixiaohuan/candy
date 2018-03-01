@@ -69,7 +69,8 @@ $cUploaderBorderWidth: 1px;
 
 .c-cell {
     padding: $cCellGapV $cCellGapH;
-    position: relative; //这个是为了兼容cells容器onepx方案被before挡住而做的
+    position: relative; // 这个是为了兼容cells容器onepx方案被before挡住而做的
+    display: -webkit-flex;
     display: flex;
     align-items: center;
     background-color: $cCellBg;

@@ -56,22 +56,26 @@ $cBtnPlainDisabledBorderColor:rgba(255,255,255,.6);
 $cBtnPlainDisabledFontColor:rgba(0,0,0,.3);
 
 button, input {
-  &.c-btn {
-      width: 100%;
-      border-width: 0;
-      outline: 0;
-      -webkit-appearance: none;
-      &:focus {
-          outline: 0;
-      }
-  }
-  &.c-btn_inline,&.c-btn_mini {
-      width: auto;
-  }
-  &.c-btn_plain-primary,&.c-btn_plain-default,&.c-btn_plain-danger,&.c-btn_plain-warn,&.c-btn_plain-disabled{
-      border-width: 1px;
-      background-color: $cBtnDefaultBg;
-  }
+    &.c-btn {
+        width: 100%;
+        border-width: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        &:focus {
+            outline: 0;
+        }
+
+        .c-loading-effext{
+            margin-right: 8px;
+        }
+    }
+    &.c-btn_inline,&.c-btn_mini {
+        width: auto;
+    }
+    &.c-btn_plain-primary,&.c-btn_plain-default,&.c-btn_plain-danger,&.c-btn_plain-warn,&.c-btn_plain-disabled{
+        border-width: 1px;
+        background-color: $cBtnDefaultBg;
+    }
 }
 
 // gloable
@@ -119,40 +123,41 @@ button, input {
 
 /*gap between btn*/
 .c-btn + .c-btn {
-  margin-top: $cBtnDefaultGap;
+    margin-top: $cBtnDefaultGap;
 }
 
 .c-btn.c-btn_inline + .c-btn.c-btn_inline {
-  margin-top: auto;
-  margin-left: $cBtnDefaultGap;
+    margin-top: auto;
+    margin-left: $cBtnDefaultGap;
 }
 
 .c-btn-area {
-  margin: $cCellsMarginTop $cBtnDefaultGap .3em; 
+    margin: $cCellsMarginTop $cBtnDefaultGap .3em; 
 }
 .c-btn-area_inline {
-  display: flex;
-  .c-btn {
-      margin-top: auto;
-      margin-right: $cBtnDefaultGap;
-      width: 100%;
-      flex: 1;
-      &:last-child {
-          margin-right: 0;
-      }
-  }
+    display: -webkit-flex;
+    display: flex;
+    .c-btn {
+        margin-top: auto;
+        margin-right: $cBtnDefaultGap;
+        width: 100%;
+        flex: 1;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
 //btn_primary
 .c-btn_primary {
-  background-color: $cBtnPrimaryBg;
-  &:not(.c-btn_disabled):visited {
-      color: $cBtnFontColor;
-  }
-  &:not(.c-btn_disabled):active {
-      color: $cBtnActiveFontColor;
-      background-color: $cBtnPrimaryActiveBg;
-  }
+    background-color: $cBtnPrimaryBg;
+    &:not(.c-btn_disabled):visited {
+        color: $cBtnFontColor;
+    }
+    &:not(.c-btn_disabled):active {
+        color: $cBtnActiveFontColor;
+        background-color: $cBtnPrimaryActiveBg;
+    }
 }
 
 //btn_danger
@@ -266,6 +271,13 @@ button, input {
 // .c-btn_loading{
 
 // }
-.c-btn_icon {
-	margin:-.2em .34em 0 0;
+// .c-btn_icon {
+	// margin:-.2em .34em 0 0;
+// }
+
+.c-btn_icon + span {
+    margin-left: 8px;
+}
+span + .c-btn_icon{
+    margin-left: 8px;
 }

@@ -1,0 +1,46 @@
+extends ./layout
+
+block title
+  | DatePicker
+
+block content
+    c-panel(title='时间选择DatePicker', link='/candy/tests/index.html', legend='back menu')
+
+        c-list(title='选择时间日期', :legend='res.r1', @click.native='show1 =! show1')
+        c-list(title='选择时间', :legend='res.r2', @click.native='show2 =! show2')
+        c-list(title='选择日期', :legend='res.r3', @click.native='show3 =! show3')
+
+        c-datepicker(@confirm="confirm1", type="datetime", form-date="-", v-model="show1", :default-value="res.r1")
+        c-datepicker(@confirm="confirm2", type="time", form-date="-", v-model="show2", :default-value="res.r2")
+        c-datepicker(@confirm="confirm3", type="date", form-date="-", v-model="show3", :default-value="res.r3", :mask-closeable="false")
+      
+      
+block script
+  script.
+
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          show1: false,
+          show2: false,
+          show3: false,
+          res: {r1: '2018-03-05 19:28', r2:'20:12', r3: '2018-03-02'}
+        }
+      },
+      methods: {
+        confirm1(val){
+            // confirm 方法和 default-value 变量，实现双向数据绑定
+            this.res.r1 = val
+        },
+        confirm2(val){
+            this.res.r2 = val
+        },
+        confirm3(val){
+            this.res.r3 = val            
+        },
+        cancel(){
+          alert('cancel')
+        }
+      }
+    })

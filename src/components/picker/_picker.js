@@ -3,6 +3,7 @@ import { hx, isArray, isObject, depthOf, getObjResult } from "../../common/_tool
 // 事件： cancel  confirm
 var CPicker = Vue.extend({
     props: {
+        type: String, // date, 表示时间选择器
         value: { // 隐藏显示
             type: Boolean,
             default: false
@@ -16,13 +17,12 @@ var CPicker = Vue.extend({
             default: "取消"
         },
         defaultValueIndex: [Array],  // 默认选中值索引
-        defaultValue: [Array],  // 默认选中值
+        // defaultValue: [Array],  // 默认选中值
         list: Array, // 数据列表
         maskCloseable: {
             type: Boolean,
             default: true
         }
-        
     },
     data () {
         return {
@@ -72,13 +72,14 @@ var CPicker = Vue.extend({
             this.defaultValueIndex.forEach( (v,i) => {
                 this.indexObj[i] = v
             })
-        } else if (this.defaultValue) {
-            this.getListObj()
+        // } else if (this.defaultValue) {
+        //     this.getListObj()
+        //     debugger
+        //     for (var i = 0; i< this.defaultValue.length; i ++) {
 
-            for (var i = 0; i< this.defaultValue.length; i ++) {
-                this.pickerSelectedIndex[i] = this.listObj[i].indexOf(this.defaultValue[i])
-                this.indexObj[i] = this.listObj[i].indexOf(this.defaultValue[i])
-            }
+        //         this.pickerSelectedIndex[i] = this.listObj[i].indexOf(this.defaultValue[i])
+        //         this.indexObj[i] = this.listObj[i].indexOf(this.defaultValue[i])
+        //     }
         }
     },
     mounted () {
@@ -115,6 +116,8 @@ var CPicker = Vue.extend({
                         this.indexObj = _tmp
 
                         this.getListObj(i)
+                        this.getValue()
+
                         
                     })
                 })
@@ -316,6 +319,10 @@ var CPicker = Vue.extend({
                 }
             }
             
+            if(this.type === "date"){
+
+                this.$emit('confirm', rest)
+            }
             return rest
         },
         getItem (data, index, groupId) { // 当前item的数据， 当前item的索引值， 当前item所在的group索引
@@ -349,7 +356,6 @@ var CPicker = Vue.extend({
         getGroup (items, index) {
             var me = this
             let $group = hx('div.c-picker__group + c-picker__bd', {
-                // ref: "group_"+index
             }).push([
                 hx('div.c-picker__content', {
                     // ref: "c-picker__content",
@@ -372,8 +378,6 @@ var CPicker = Vue.extend({
         var $picker,
             me = this ,
             items = []
-            
-        console.log("render",me.indexObj)
         
         var $body = hx( 'div', {
             style: {
@@ -459,7 +463,9 @@ var CPicker = Vue.extend({
             }
         })
 
-        var $container = hx('div').push([$mask, $picker])
+        var $container = hx('div', {
+            ref: "cpicker"
+        }).push([$mask, $picker])
     
 
         return $container.resolve(h)

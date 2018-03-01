@@ -2,31 +2,23 @@ import {hx} from '../../common/_tools.js'
 
 var CInput = Vue.extend({
     props: {
-        value: [String, Number],
+        value: [String, Number, Boolean],
         type: {
             type: String,
             default: 'text', // password, textarea, 
         },
 
-        // pattern: RegExp, // 正则
         rules: {
             type: Object,
             default: function () {
                 return {}
             }
         },
-        // trigger: {
-        //     type: String,
-        //     default: "input"
-        // },
-
         labelWidth: String,
         labelIcon: String,
         label: '',  
 
         placeholder: '',
-        
-        // message: String,  // 错误提示
         
         rows: Number,
 
@@ -34,6 +26,14 @@ var CInput = Vue.extend({
             type: Boolean,
             default: false
         },
+        readonly: {
+            type: Boolean,
+            default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        }
     },
     data(){
         return {
@@ -78,7 +78,7 @@ var CInput = Vue.extend({
     },
     watch: {
         isshowToptip(val){
-            console.log("this.timer:", this.timer)
+
             if (!val){
                 clearTimeout(this.timer)
             }
@@ -104,7 +104,6 @@ var CInput = Vue.extend({
             clearTimeout(this.timer)            
 
             this.timer = setTimeout(() => {
-                console.log('触发timeout')
 
                 this.isshowToptip = false
                 
@@ -119,6 +118,7 @@ var CInput = Vue.extend({
                 domProps: {
                     placeholder: this.placeholder || '',
                     // message: this.message || '',
+                    innerHTML: this.type=="date"? this.value:"",
                     value: this.value
                 },
                 attrs: {
@@ -126,6 +126,10 @@ var CInput = Vue.extend({
                     disabled: this.disabled || false
                 },
                 on: {
+                    click (e) {
+                        // e.preventDefault()
+                        me.$emit("click")
+                    },
                     input (e) {
                         if (me.rules && me.rules.trigger &&  me.rules.trigger.indexOf("input") >-1 ){
                             me.validDate(me, e.target.value)
@@ -160,18 +164,9 @@ var CInput = Vue.extend({
                 }
             }
 
-
-            // if(this.type === 'phone'){
-            //     params.domProps.pattern = /^1\d{10}$/
-            //     params.domProps.type = this.type
-
-                
-            // } 
-            // else 
             if (this.type === 'textarea'){
                 params.attrs.rows = this.rows
             } else {
-
                 params.domProps.type = this.type
             }
             // if (!!this.pattern) {
@@ -233,7 +228,10 @@ var CInput = Vue.extend({
         if (me.type === 'textarea'){
 
             $inputs = hx(`textarea.c-textarea`, params)
-        } else {
+        } else if (me.type === 'date') {
+            $inputs = hx(`div.c-input`, params)
+            
+        }else {
             
             $inputs = hx('input.c-input', params)
         }

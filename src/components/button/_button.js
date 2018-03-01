@@ -13,6 +13,10 @@ var CButton = Vue.extend({
     },
     disabled: Boolean,
     icon: String,
+    iconPosition: {
+        type: String,
+        default: "left"
+    },
     loading: {
       type: Boolean,
       default: false
@@ -63,7 +67,10 @@ var CButton = Vue.extend({
     }
     
     var $btn = hx(`button.c-btn + ${me.cls.join('+')}`, params)
-    var $btnTxt = hx('span', {}, [me.$slots.default])
+    var $btnTxt = null
+    if(me.$slots.default) {
+        $btnTxt = hx('span', {}, [me.$slots.default])        
+    }
 
     var $children = []
 
@@ -77,13 +84,20 @@ var CButton = Vue.extend({
     }
 
           
-    if (!!me.icon){
-      var $icon = hx(`i.c-btn_icon+${me.icon}`)
-      $children.push($icon)
-    }
+    if(!!me.icon) {
+        var $icon = hx(`i.c-btn_icon+${me.icon}`)
 
-    $children.push($btnTxt)
-    
+        if(me.iconPosition === "left") {
+            $children.push($icon)
+            $children.push($btnTxt)
+
+        } else if(me.iconPosition === "right") {
+            $children.push($btnTxt)
+            $children.push($icon)
+        }
+    } else {
+        $children.push($btnTxt)
+    }
 
     $btn.push($children)
     return $btn.resolve(h)

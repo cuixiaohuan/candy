@@ -47,8 +47,9 @@
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    margin-right: 8px;
+    // margin-right: 8px;
 }
+
 .c-loading-effext span{
     display: inline-block;
     width: 4px;
@@ -57,7 +58,15 @@
     background: #929292;
     position: absolute;
     -webkit-animation: load 1.04s ease infinite;
+    animation: load 1.04s ease infinite;
 }
+
+.c-toast {
+    .c-loading-effext {
+        margin: 5px 0 10px;
+    }
+}
+
 @-webkit-keyframes load{
     0%{
         opacity: 1;
@@ -69,44 +78,61 @@
 .c-loading-effext span:nth-child(1){
     left: 0;
     top: 50%;
-    margin-top:-2px;
+    transform: translate(0, -50%);
+
     -webkit-animation-delay:0.13s;
+    animation-delay:0.13s;
 }
 .c-loading-effext span:nth-child(2){
-    left: 12%;
-    top: 12%;
+    left: 14.6%;
+    top: 14.6%;
+    // transform: translate(-50%, -50%);
     -webkit-animation-delay:0.26s;
+    animation-delay:0.26s;
 }
 .c-loading-effext span:nth-child(3){
     left: 50%;
-    top: 0;
-    margin-left: -2px;
+    transform: translate(-50%, 0); 
+    top: 0; 
+
     -webkit-animation-delay:0.39s;
+    animation-delay:0.39s;
 }
 .c-loading-effext span:nth-child(4){
-    top: 12%;
-    right:12%;
+    top: 14.6%;
+    right:14.6%;
+    // transform: translate(50%, 0);
     -webkit-animation-delay:0.52s;
+    animation-delay:0.52s;
 }
 .c-loading-effext span:nth-child(5){
     right: 0;
-    top: 50%;
-    margin-top: -2px;
+    top: 50%; 
+    transform: translate(0, -50%);
+     
     -webkit-animation-delay:0.65s;
+    animation-delay:0.65s;
 }
 .c-loading-effext span:nth-child(6){
-    right: 12%;
-    bottom:12%;
+    right: 14.6%;
+    bottom:14.6%;
+    // transform: translate(50%, 50%);
+    
     -webkit-animation-delay:0.78s;
+    animation-delay:0.78s;
 }
 .c-loading-effext span:nth-child(7){
     bottom: 0;
     left: 50%;
-    margin-left: -2px;
+    transform: translate(-50%, 0);
     -webkit-animation-delay:0.91s;
+    animation-delay:0.91s;
 }
 .c-loading-effext span:nth-child(8){
-    bottom: 12%;
-    left: 12%;
+    bottom: 14.6%;
+    left: 14.6%;
+    // transform: translate(-50%, 50%);
+    
     -webkit-animation-delay:1.04s;
+    animation-delay:1.04s;
 }

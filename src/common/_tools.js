@@ -81,16 +81,12 @@ class VVNode{
   }
 }
 
-
-
 function deepClone(obj) {
   if (obj === undefined){
     return undefined
   }
   return JSON.parse(JSON.stringify(obj))
 }
-
-
 
 function globalClick(exclude, callback){
   var func = _=>{
@@ -177,6 +173,6 @@ export {
   isdef,
   getChildren,
   getObjResult,
-  getRect
+  getRect,
   
 }

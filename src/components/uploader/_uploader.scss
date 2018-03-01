@@ -1,0 +1,100 @@
+
+.c-uploader__hd{
+    display: -webkit-flex;
+    display: flex;
+    padding-bottom: $cCellGapV;
+    align-items: center;
+}
+.c-uploader__title{
+    flex: 1;
+}
+.c-uploader__info{
+    color: $cTextColorTips;
+}
+
+.c-uploader__bd{
+    margin-bottom: $cCellGapH - ($cCellGapV + $cUploaderFileSpacing);
+    margin-right: -$cUploaderFileSpacing;
+    overflow: hidden;
+}
+.c-uploader__files{
+    list-style: none;
+}
+.c-uploader__file{
+    float: left;
+    margin-right: $cUploaderFileSpacing;
+    margin-bottom: $cUploaderFileSpacing;
+    width: $cUploaderSize;
+    height: $cUploaderSize;
+    background: no-repeat center center;
+    background-size: cover;
+
+    border: 1px #eee solid;
+}
+.c-uploader__file_status{
+    position: relative;
+    &:before{
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, .5);
+    }
+    .c-uploader__file-content{
+        display: block;
+    }
+}
+.c-uploader__file-content{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    c-icon-warn{
+        display: inline-block;
+    }
+}
+.c-uploader__input-box{
+    float:left;
+    position: relative;
+    margin-right: $cUploaderFileSpacing;
+    margin-bottom: $cUploaderFileSpacing;
+    width: $cUploaderSize - $cUploaderBorderWidth * 2;
+    height: $cUploaderSize - $cUploaderBorderWidth * 2;
+    border: $cUploaderBorderWidth solid $cUploaderBorderColor;
+    &:before, &:after{
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $cUploaderBorderColor;
+    }
+    &:before{
+        width: $cUploaderBorderWidth + 1;
+        height: $cUploaderSize / 2;
+    }
+    &:after{
+        width: $cUploaderSize / 2;
+        height: $cUploaderBorderWidth + 1;
+    }
+    &:active{
+        border-color: $cUploaderActiveBorderColor;
+        &:before, &:after{
+            background-color: $cUploaderActiveBorderColor;
+        }
+    }
+}
+.c-uploader__input{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    @include setTapColor();
+}
