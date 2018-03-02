@@ -49,6 +49,17 @@ var CUploader = Vue.extend({
             })
         },
         imgList () {
+            // <ul class="c-uploader__files" id="uploaderFiles">
+            //     <li class="c-uploader__file c-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+            //         <div class="c-uploader__file-content">
+            //             <i class="c-icon-warn"></i>
+            //         </div>
+            //     </li>
+            //     <li class="c-uploader__file c-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+            //         <div class="c-uploader__file-content">50%</div>
+            //     </li>
+            // </ul>
+
             let ul = hx("ul.c-uploader__files", {
             
             }, [])

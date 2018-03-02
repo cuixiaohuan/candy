@@ -22,18 +22,18 @@ var CPicker = Vue.extend({
         maskCloseable: {
             type: Boolean,
             default: true
+        },
+        disable: {
+            type: Function,
+            default: function () { }
         }
     },
     data () {
         return {
             isShow: this.value,
-            // depth: 1, // 数据深度
             cascade: false, // 是否是级联
-            // unitHeight: '',
-            indexObj: {
-            },
-            listObj: {
-            },
+            indexObj: {},
+            listObj: {},
             scroll: [], // bscroll实例
             pickerSelectedIndex: [], // 选中值的索引
         }
@@ -53,7 +53,7 @@ var CPicker = Vue.extend({
             },
             deep: true
         },
-        "listObj": {
+        listObj: {
             handler (val) {
             },
             deep: true
@@ -117,8 +117,6 @@ var CPicker = Vue.extend({
 
                         this.getListObj(i)
                         this.getValue()
-
-                        
                     })
                 })
 
@@ -131,7 +129,6 @@ var CPicker = Vue.extend({
                 })
             })
         }
-
     },
     computed: {
         maskStyle () {
@@ -314,8 +311,6 @@ var CPicker = Vue.extend({
 
                         i++;
                     }
-
-                    
                 }
             }
             
@@ -376,14 +371,14 @@ var CPicker = Vue.extend({
     render (h) {
         
         var $picker,
-            me = this ,
+            me = this,
             items = []
         
-        var $body = hx( 'div', {
+        var $body = hx('div', {
             style: {
                 display: "flex"
             }
-        } )
+        })
 
         if ( !this.isMulti ){ // 单列
 
@@ -392,15 +387,14 @@ var CPicker = Vue.extend({
 
         } else if( !this.cascade ){ // 多列 不级联
 
-            this.info.forEach( (ele, groupId)=>{
-                if (isArray(ele)) {
+            this.info.forEach((ele, groupId)=>{
+                if (isArray(ele)){
 
                     let items = me.getItemList(ele, groupId)
-                    $body.push (me.getGroup(items, groupId))
+                    $body.push(me.getGroup(items, groupId))
                     
                 }
             })
-
         } else { // 级联
             this.getListObj()
 
@@ -408,9 +402,7 @@ var CPicker = Vue.extend({
 
                 let items = me.getItemList(this.listObj[d], 0)
                 $body.push(me.getGroup(items, 0))
-                
             }
-
         }
 
         var $head =  hx('div.c-picker__hd', {}, [hx('a.c-picker__action', {
