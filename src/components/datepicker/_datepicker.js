@@ -108,11 +108,11 @@ var CDatepicker = Vue.extend({
             
             var d = new Date(defaultValue);
             var year = d.getFullYear();
-            var month = ('0' + (d.getMonth() + 1)).slice(-2);
-            var day = ('0' + (d.getDate())).slice(-2);
-            var hour = ('0' + (d.getHours())).slice(-2);
-            var minutes = ('0' + (d.getMinutes())).slice(-2);
-            var seconds = ('0' + (d.getSeconds())).slice(-2);
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var hour = d.getHours();
+            var minutes = d.getMinutes();
+            var seconds = d.getSeconds();
             return {
                 year,
                 month,
@@ -185,7 +185,7 @@ var CDatepicker = Vue.extend({
 
             let month = []
             let monthList = []
-            for(var i=1 ; i < 13 ; i++) {
+            for (var i = 1; i <= 12 ; i++) {
                 monthList.push(i)
                 month.push({
                     label: i+'月',
@@ -247,11 +247,14 @@ var CDatepicker = Vue.extend({
     render(h) {
         let me = this
         console.log('this._start', this._start);
-        
 
         var $datePicker = hx("c-picker", {
             props: {
-                type:"date",
+                type: "date",
+                config: {
+                    start: me._getDataTimeObj2(me._start),
+                    end: me._getDataTimeObj2(me._end)
+                },
                 list: me.getList().list,
                 value: me.isShow,
                 defaultValueIndex: me.getList().index,

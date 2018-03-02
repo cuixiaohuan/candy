@@ -4,6 +4,7 @@ import { hx, isArray, isObject, depthOf, getObjResult } from "../../common/_tool
 var CPicker = Vue.extend({
     props: {
         type: String, // date, 表示时间选择器
+        config: Object,
         value: { // 隐藏显示
             type: Boolean,
             default: false
@@ -290,6 +291,7 @@ var CPicker = Vue.extend({
                         let index = me.scroll[o].getSelectedIndex()
                         rest.push(getObjResult(this.info[o][index]))
                     }
+                    // config
                 } else { // 级联
 
                     let i = 0, 
@@ -324,12 +326,15 @@ var CPicker = Vue.extend({
             if (!data){
                 return hx('div.c-picker__item', {}, ["暂无数据"])
             }
-            return hx('div.c-picker__item', {
+            return hx(`div.c-picker__item + ${'unable'}`, {
                 domProps: {
                     innerHTML: data.label,
                     value: data.value
                 },
                 ref: `pickerItem_${index}_${groupId}`,
+                // style: {
+                //     color: this.config.start.month > data.value || this.config.end.month < data.value? "#eee":"#000"
+                // }
 
             })
         },

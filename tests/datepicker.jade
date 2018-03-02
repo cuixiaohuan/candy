@@ -10,7 +10,7 @@ block content
         c-list(title='选择时间', :legend='res.r2', @click.native='show2 =! show2')
         c-list(title='选择日期', :legend='res.r3', @click.native='show3 =! show3')
 
-        c-datepicker(@confirm="confirm1", start="2015-03-06 09:00", end="2019-12-15 15:30", type="datetime", form-date="-", v-model="show1", :default-value="res.r1")
+        c-datepicker(@confirm="confirm1", start="2015-04-06 09:00", end="2019-10-15 15:30", type="datetime", form-date="-", v-model="show1", :default-value="res.r1")
         c-datepicker(@confirm="confirm2", start="08:30", end="18:00", type="time", form-date="-", v-model="show2", :default-value="res.r2")
         c-datepicker(@confirm="confirm3", start="2015-03-19", end="2019-12-19", type="date", form-date="-", v-model="show3", :default-value="res.r3", :mask-closeable="false")
       
@@ -25,7 +25,7 @@ block script
           show1: false,
           show2: false,
           show3: false,
-          res: {r1: '2018-03-05 19:28', r2:'20:12', r3: '2018-03-02'}
+          res: {r1: '2018-03-09 19:28', r2:'20:12', r3: '2018-03-02'}
         }
       },
       methods: {
