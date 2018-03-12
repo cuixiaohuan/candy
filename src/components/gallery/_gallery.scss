@@ -1,0 +1,31 @@
+.c-gallery {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: rgba(9, 9, 9, 0.9);
+
+    .c-gallery_img {
+        background-size: contain;
+        position: absolute;
+        bottom: 60px;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .c-gallery_opr {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #0d0d0d;
+        color: #fff;
+        line-height: 60px;
+        text-align: center;
+    }
+}

@@ -21,4 +21,5 @@ import "./components/toast/_toast";
 import "./components/uploader/_uploader";
 import "./components/pagination/_pagination";
 import "./components/datepicker/_datepicker";
+import "./components/gallery/_gallery";
 

@@ -27,7 +27,13 @@ var CPicker = Vue.extend({
         disable: {
             type: Function,
             default: function () { }
+        },
+        usable: {
+            type: Boolean,
+            default: true
         }
+        
+
     },
     data () {
         return {
@@ -40,6 +46,13 @@ var CPicker = Vue.extend({
         }
     },
     watch: {
+        // cls() { 
+        //     if (this.disable) {
+        //         return 'unable'
+        //     } else {
+        //         return ""
+        //     }
+        // },
         value (val) {
             this.isShow = val                
         },
@@ -206,13 +219,16 @@ var CPicker = Vue.extend({
             })
         },
         clickComfirm(){
-
+            if (!this.usable) {
+                return false
+            }
             let status = this.scroll.every((o) => {
 
                 return !o.isInTransition
             }) // 判断滚动是否停止
 
             if (status) {
+                
                 this.isShow = false
                 this.$emit('confirm', this.getValue())
             }
@@ -326,7 +342,7 @@ var CPicker = Vue.extend({
             if (!data){
                 return hx('div.c-picker__item', {}, ["暂无数据"])
             }
-            return hx(`div.c-picker__item + ${'unable'}`, {
+            return hx(`div.c-picker__item`, {
                 domProps: {
                     innerHTML: data.label,
                     value: data.value
@@ -424,7 +440,10 @@ var CPicker = Vue.extend({
                                 }
                             }
                         }),
-                        hx( 'a.c-picker__action',{
+                        hx(`a.c-picker__action`, {
+                            class: {
+                                "unable-btn": !me.usable
+                            }, 
                             domProps: {
                                 innerHTML: me.comfirmText
                             },

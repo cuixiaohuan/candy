@@ -6,11 +6,19 @@ block title
 block content
     div.margin-10
         c-panel(link='/candy/tests/index.html',title='uploader', legend='back menu')
-            //- ul(class="c-uploader__files")
-                li(class="c-uploader__file" style="background-image:url(./img/icon.png")
-            //- div(class="c-uploader__input-box")
-                input(id="uploaderInput" class="c-uploader__input" type="file" accept="image/*" multiple)
-            c-uploader()
+
+            c-uploader(:limit="3", 
+                    action="http://www.actionphp.com/action.php", 
+                    :files="files",
+                    :on-success="onSuccess",
+                    :on-error="onError",
+                    :on-progress="onProgress",
+                    :on-preview="onPreview")
+
+            c-gallery(v-model="show", 
+                    :img='imgUrl',
+                    :on-click="clickBtn")
+
 block script
   script.
 
@@ -18,6 +26,37 @@ block script
         el: '#app',
         data () {
             return {
+                files: [],
+                id: 1,
+                show: false,
+                imgUrl: ''
+            }
+        },
+        methods: {
+            onSuccess(res, file){
+                this.files.push({
+                    id: res.id || this.id++,
+                    name: res.name || file.name,
+                    url: res.url
+                })
+                console.log("files",files)
+            },
+            onError(res, file){
+                //- console.log(res, file)
+            },
+            onProgress(file, o){
+                console.log("file:", file)
+            },
+            onPreview(url){
+                this.imgUrl = url
+                this.show = true
+            },
+            clickBtn(){
+                this.files = this.files.filter(o => {
+                    return o.url != this.imgUrl
+                })
+
+                this.show = false
             }
         }
     })

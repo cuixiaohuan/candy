@@ -37,6 +37,9 @@ $pickerItemHeight: 34px;
     &:last-child {
         text-align: right;
     }
+    &.unable-btn {
+        color: #888;
+    }
 }
 
 .c-picker__bd {

@@ -1,4 +1,4 @@
-import { hx } from "../../common/_tools";
+import { hx, ajax } from "../../common/_tools";
 
 var CUploader = Vue.extend({
     props: { 
@@ -21,19 +21,79 @@ var CUploader = Vue.extend({
         config: {
             type: Object
         },
-        autocommit: {
+        onProgress: {
+            type: Function,
+            default: function () { }
+        },        
+        onSuccess: {
+            type: Function,
+            default: function () { }
+        },
+        onError: { 
+            type: Function,
+            default: function () { }    
+        },
+        onPreview: { // 预览
+            type: Function,
+            default: function () { }
+        },
+        headers: {
+            type: Object,
+            default: () => { }
+        },
+        action: String,
+        withCredentials: String,
+        beforeUpload: Function,
+        // autocommit: {
+        //     type: Boolean,
+        //     default: false
+        // },
+        accept: String,
+        multiple: {
             type: Boolean,
-            default: false
-        }
+            default: true
+        },
+        name: {
+            type: String,
+            default: "file"
+        },
+        limit: {
+            type: Number,
+            default: ''
+        },
+        files: Array,
         
     },
     data () {
         return {
-            fileList: []
+            fileList: this.files,
+            progressNum: 0
+
         }
     },
     computed: {
-
+        showSelectBtn() { 
+            if (this.limit <= this.fileList.length) {
+                return false
+            }
+            return true
+        }
+    },
+    watch: {
+        files: {
+            handler(val) { 
+                this.fileList = val 
+            },
+            deep: true
+        },
+        fileList: {
+            handler() { 
+                console.log('fileList changed');
+                
+                this.imgList()
+            },
+            deep: true
+        }
     },
     methods: {
         setHeader () {
@@ -43,76 +103,146 @@ var CUploader = Vue.extend({
             return hx("input.c-uploader__input", {
                 domProps: {
                     type: "file",
-                    accept: this.config &&this.config.accept || "image/*",
-                    multiple: this.config && this.config.multiple || true
+                    accept: this.accept,
+                    multiple: this.multiple
                 }
             })
         },
         imgList () {
-            // <ul class="c-uploader__files" id="uploaderFiles">
-            //     <li class="c-uploader__file c-uploader__file_status" style="background-image:url(./images/pic_160.png)">
-            //         <div class="c-uploader__file-content">
-            //             <i class="c-icon-warn"></i>
-            //         </div>
-            //     </li>
-            //     <li class="c-uploader__file c-uploader__file_status" style="background-image:url(./images/pic_160.png)">
-            //         <div class="c-uploader__file-content">50%</div>
-            //     </li>
-            // </ul>
-
             let ul = hx("ul.c-uploader__files", {
             
             }, [])
+            let me = this
             
             this.fileList.forEach(o => {
+                // .c-uploader__file_status
                 ul.push(hx("li.c-uploader__file", {
+                    class: {
+                        "c-uploader__file_status": !!o.status && o.status < 100
+                    },
                     style: {
-                        backgroundImage: "url("+ "/candy/tests/img/icon.png"+ ")"
+                        backgroundImage: "url("+ o.url+ ")"
+                    },
+                    on: {
+                        click() { 
+                            me.onPreview(o.url)
+                        }
                     }
-                }))
+                }, [
+                        hx("div.c-uploader__file-content", {}, [o.status])    
+                    ]))
+                
+                // <i class="c-icon-warn"></i>
 
             })
             return ul
         },
-        getFileObj (file) {
+        getFileObj(file) {
             return {
                 name: file.name || "",
                 size: file.size || 0
-
             }
         },
-        commit (){
-            if(this.config && this.config.autocommit){
-                // 自动提交
-            } else {
-                this.config && this.config.onCommit()
-            }
-        }
+        // commit (){
+        //     if(this.config && this.config.autocommit){
+        //         // 自动提交
+        //     } else {
+        //         this.config && this.config.onCommit()
+        //     }
+        // },
+        clickEvent() { 
 
+        },
+        progressEvent(file, o) { 
+            file.status = o
+            this.onProgress(file, o)
+        },
+        changeEvent(e) { 
+            this.dealFile(e.target.files)
+        },
+        successEvent(res, file) { 
+            this.onSuccess(res, file)
+                
+        },
+        errorEvent() { 
+            this.onError()
+        },
+        dealFile(files) { 
+            let fileList = Array.from(files)
+
+            if (!fileList.length) {
+                return
+            }
+            fileList.forEach(file => {
+                this.upload(file)
+            })
+        },
+        upload(file) {
+            if (!this.beforeUpload) {
+                return this.post(file)
+            } else {
+
+                this.beforeUpload(file, isOk => {
+                    if (isOk) {
+                        this.post(file)
+                    }
+                })
+            }
+
+        },
+        post(file) {
+            var formData = new FormData()
+            formData.append(this.name, file)
+
+            ajax({
+                url: this.action,
+                data: formData,
+                success: (res) => {
+                    this.successEvent(res, file)
+                },
+                failed: (res) => {
+                    this.errorEvent(res, file)
+                },
+                progress: (o) => {
+                    this.progressEvent(file, o)
+                }
+            })
+            
+        },
     },
     render (h) {
         var me = this 
 
-        $content = hx("div.c-uploader__bd")
+        // +
         $addControl = hx("div.c-uploader__input-box", {
             on: {
-                change (e) {
-                    if(e.target.files.length === 0){
-                        return 
-                    }
+                change(e) {
+                    me.changeEvent(e)
 
-                    let files = e.target.files
+                    // if (e.target.files.length === 0) {
+                    //     return 
+                    // }
 
-                    let filesArray = Array.from(files)
-                    filesArray.forEach((_) => {
-                        me.fileList.push(me.getFileObj(_))
-                    });
+                    // let files = e.target.files
+
+                    // let filesArray = Array.from(files)
+                    // filesArray.forEach((_) => {
+                    //     me.fileList.push(me.getFileObj(_))
+                    // });
+                },
+                click() {
+                    me.clickEvent()
                 }
             }
         }, [me.uploader()])
-        $content.push(me.imgList())
-        $content.push($addControl)
 
+        $content = hx("div.c-uploader__bd")
+        // 列表        
+        $content.push(me.imgList())
+        // 添加按钮
+        if (this.showSelectBtn) {
+            $content.push($addControl)
+        }
 
         let $uploader = hx("div.c-uploader")
         $uploader.push($content)

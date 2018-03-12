@@ -1,0 +1,29 @@
+extends ./layout
+
+block title
+    | gallery
+
+block content
+    c-panel(title="gallery", legend="制作图片预览", link='/')
+        c-button(@click='show=!show',
+                size="mini") 显示
+        c-gallery(v-model="show", 
+                img="http://www.actionphp.com/img_temp/efbe85685e978f8e4402ba67a10f497d_18712.png",
+                :on-click="clickBtn")
+
+
+block script
+    script.
+        new Vue({
+            el: "#app",
+            data(){
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                clickBtn(){
+                    console.log('click btn')
+                }
+            }
+        })

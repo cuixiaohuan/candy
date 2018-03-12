@@ -25,6 +25,7 @@ var CDatepicker = Vue.extend({
             _end: "",
             isShow: false,
             rest: [],
+            usable: true
         }
     },
     watch: {
@@ -139,7 +140,7 @@ var CDatepicker = Vue.extend({
         },
         confirm (val) {
             this.rest = val
-            let dates = [],time = [],res=[]
+            let dates = [],time = [],res=[], result = ""
 
             this.rest.forEach((o) => {
                 res.push(o.value < 10? "0"+o.value: o.value)
@@ -152,10 +153,12 @@ var CDatepicker = Vue.extend({
                 } else if(this.formDate.indexOf("/")>-1){
                     _tmp = res.join("/")
                 }
-                this.$emit("confirm", _tmp)
+                result = _tmp
+                // this.$emit("confirm", _tmp)
                 
-            } else if (this.cols === 2){
-                this.$emit("confirm", res.join(":"))
+            } else if (this.cols === 2) {
+                result = res.join(":")
+                // this.$emit("confirm", res.join(":"))
                 
             } else if (this.cols === 5){
                 time = res.splice(3)
@@ -167,8 +170,19 @@ var CDatepicker = Vue.extend({
                     res = dates.join("/")
                 }
 
-                this.$emit("confirm", res+ " " + time.join(":"))
+                result = res + " " + time.join(":")
+                // this.$emit("confirm", res + " " + time.join(":"))
             }
+        
+            if (result > this.end || result < this.start) {
+                this.usable = false
+
+            } else {
+                this.usable = true
+                this.$emit("confirm", result)
+
+            }
+
         },
         getList() {
             let yindex, monindex, dindex, hindex, mindex
@@ -250,6 +264,7 @@ var CDatepicker = Vue.extend({
 
         var $datePicker = hx("c-picker", {
             props: {
+                usable: me.usable,
                 type: "date",
                 config: {
                     start: me._getDataTimeObj2(me._start),
