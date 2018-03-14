@@ -1,0 +1,82 @@
+extend layout
+
+block header
+    | form
+
+block style
+
+block content
+    c-panel(title="form")
+        c-form(:model="form",
+            :rules="rules",
+            @submit="login")
+
+            c-form-item(required, 
+                        prop="name", 
+                        :rules="{pattern: \/^[a-z]+$\/, message:'请输入小写字母', trigger: 'input'}"
+                        )
+                c-input(type='text', label='姓名：',v-model="form.name", label-width='70px')
+
+            c-form-item(required, 
+                        prop='password', 
+                        )
+                c-input(:type='toggle?"text":"password"', label='密码：',v-model="form.password", label-width='70px')
+                    template(slot='right')
+                        c-toggle(v-model="toggle")
+
+            c-form-item(required, 
+                        prop='vcode',
+                        :rules="valideVcode"
+                        )
+                c-input(label='验证码：',v-model="form.vcode", label-width='70px')
+                    template(slot='right')
+                        img(src="./img/vcode2.png", alt="")
+
+            c-flex(style="margin: 10px")
+                c-button(type="primary", size="mini", html-type="submit") 提交
+
+block script
+    script.
+        new Vue({
+            el: "#app",
+            data(){
+                return {
+                    form:{
+                        name: '',
+                        password: ''
+                    },
+                    toggle: false,
+                    rules: {
+                        password: {
+                            trigger: "input",
+                            valide(val, callback){
+                                if(val.length<6){
+                                    callback(false, "密码必须大于6位")
+                                } else {
+                                    callback(true)
+                                }
+                            },
+                            max: 8,
+                            message:"密码大于8位"
+                        
+                        }
+                    },
+                    rule: { },
+                    valideVcode: {
+                        trigger: 'blur',
+                        valide: function(val, callback){
+                            if(val != '1024'){
+                                callback(false, "验证码不正确")
+                            } else {
+                                callback(true)
+                            }
+                        }
+                    }
+                }
+            },
+            methods: {
+                login(){
+                    console.log(123)
+                }
+            }
+        })

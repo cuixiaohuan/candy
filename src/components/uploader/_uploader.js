@@ -1,23 +1,7 @@
 import { hx, ajax } from "../../common/_tools";
 
 var CUploader = Vue.extend({
-    props: { 
-        // config: {
-        //     url: "",
-        //     accept: "",
-        //     url :'',
-        //     beforeUpload: "",
-        //     data: "",
-        //     header: "",
-        //     onChange:ƒ default()
-        //     onError:ƒ boundFn(a)
-        //     onPreview:ƒ boundFn(a)
-        //     onProgress:ƒ default()
-        //     onRemove:ƒ boundFn(a)
-        //     onSuccess:ƒ boundFn(a)
-        //     readonly:false
-        //     withCredentials:false
-        // }
+    props: {
         config: {
             type: Object
         },
@@ -42,12 +26,8 @@ var CUploader = Vue.extend({
             default: () => { }
         },
         action: String,
-        withCredentials: String,
+        withCredentials: Boolean,
         beforeUpload: Function,
-        // autocommit: {
-        //     type: Boolean,
-        //     default: false
-        // },
         accept: String,
         multiple: {
             type: Boolean,
@@ -62,13 +42,12 @@ var CUploader = Vue.extend({
             default: ''
         },
         files: Array,
-        
+        headers: Object,
     },
     data () {
         return {
             fileList: this.files,
             progressNum: 0
-
         }
     },
     computed: {
@@ -96,9 +75,6 @@ var CUploader = Vue.extend({
         }
     },
     methods: {
-        setHeader () {
-
-        },
         uploader(){
             return hx("input.c-uploader__input", {
                 domProps: {
@@ -196,6 +172,8 @@ var CUploader = Vue.extend({
 
             ajax({
                 url: this.action,
+                headers: this.headers,
+                withCredentials: this.withCredentials,
                 data: formData,
                 success: (res) => {
                     this.successEvent(res, file)
@@ -218,17 +196,6 @@ var CUploader = Vue.extend({
             on: {
                 change(e) {
                     me.changeEvent(e)
-
-                    // if (e.target.files.length === 0) {
-                    //     return 
-                    // }
-
-                    // let files = e.target.files
-
-                    // let filesArray = Array.from(files)
-                    // filesArray.forEach((_) => {
-                    //     me.fileList.push(me.getFileObj(_))
-                    // });
                 },
                 click() {
                     me.clickEvent()

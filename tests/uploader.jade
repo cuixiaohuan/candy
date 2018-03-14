@@ -7,13 +7,16 @@ block content
     div.margin-10
         c-panel(link='/candy/tests/index.html',title='uploader', legend='back menu')
 
-            c-uploader(:limit="3", 
-                    action="http://www.actionphp.com/action.php", 
-                    :files="files",
-                    :on-success="onSuccess",
-                    :on-error="onError",
-                    :on-progress="onProgress",
-                    :on-preview="onPreview")
+            c-uploader(:limit="20", 
+                        action="http://www.actionphp.com/action.php", 
+                        :files="files",
+                        :on-success="onSuccess",
+                        :on-error="onError",
+                        :on-progress="onProgress",
+                        :on-preview="onPreview",
+                        accept="image/*",
+                        :before-upload="beforeUpload"
+                    )
 
             c-gallery(v-model="show", 
                     :img='imgUrl',
@@ -26,7 +29,10 @@ block script
         el: '#app',
         data () {
             return {
-                files: [],
+                files:[],
+                //- files: [{url:"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg"},
+                //- {url:"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg"},
+                //- {url:"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg"}],
                 id: 1,
                 show: false,
                 imgUrl: ''
@@ -57,6 +63,16 @@ block script
                 })
 
                 this.show = false
+            },
+            beforeUpload (file, callback){
+
+                if (file.name.indexOf('.jpeg') !== -1){
+                    alert('不能上传.jpeg格式的图片')
+                    callback(false)
+                }
+                else {
+                    callback(true)
+                }
             }
         }
     })

@@ -9,33 +9,62 @@ block content
 
         form(novalidate)
             c-panel(title='输入框', link='/candy/tests/index.html', legend='back menu')
-                c-input(v-model="email", type='text', :readonly="false", @input='input', @change='triggerChange',  label='邮箱', :trim='true',label-width='70px',:rules="{type: 'email', trigger: 'input blur change'}")
-                c-input(type='text', :disabled="true", label='姓名：',v-model="name", :rules="{pattern: \/^[a-z]+$\/, message:'请输入小写字母', trigger: 'input'}", label-width='70px')
-                c-input(:type='toggle?"text":"password"', v-model="pwd", label='密码:', label-width='70px')
-                c-input(label="显示密码", v-model="toggle", label-width='70px', :readonly="true")
+                c-input(v-model="email",
+                        type='text', 
+                        :readonly="false", 
+                        @input='input', 
+                        @change='triggerChange',
+                        label='邮箱', 
+                        :trim='true',
+                        label-width='70px',
+                        :rules="{type: 'email', trigger: 'input blur change'}")
+
+                c-input(type='text', 
+                        :disabled="false", 
+                        label='姓名：',
+                        v-model="name", 
+                        :rules="{pattern: \/^[a-z]+$\/, message:'请输入小写字母', trigger: 'input'}", 
+                        label-width='70px')
+
+                c-input(:type='toggle?"text":"password"', 
+                        v-model="pwd", 
+                        label='密码:', 
+                        label-width='70px',
+                        :rules="checkPassword"
+                        )
+
+                c-input(label="显示密码", 
+                        v-model="toggle", 
+                        label-width='70px', 
+                        :readonly="true")
                     template(slot='right')
                         c-toggle(v-model="toggle")
-                c-input(label='验证码:', label-width='70px')
+
+                c-input(label='验证码:', 
+                        label-width='70px')
                     template(slot='right')
                         img(src="./img/vcode2.png", alt="")
-                c-input(label='电话:',v-model="phone1", placeholder='请输入正确的电话号码', label-width='70px', :rules="{type:'phone', trigger: 'blur'}")
+
+                c-input(label='电话:',
+                        v-model="phone1", 
+                        placeholder='请输入正确的电话号码', 
+                        label-width='70px', 
+                        :rules="{type:'phone', trigger: 'input blur'}")
                     template(slot='right')
                         c-button(type='vcode' style='height: 100%;') 获取验证码
                 
-            c-panel(title='时间日期选择')
-                //- c-input(type='date', label='日期:', label-width='70px', v-model="phone1")
-                //- c-input(type='datetime-local', label='日期时间:', label-width='70px')
+            c-panel(title='时间日期选择123')
                 c-input(label='日期时间:', label-width='70px', type='date', @click='show1 =! show1', v-model="res.r1")
                 c-input(label='时间:', label-width='70px', type='date', @click='show2 =! show2', v-model="res.r2")
                 c-input(label='日期:', label-width='70px', type='date', @click='show3 =! show3', v-model="res.r3")
 
                 c-datepicker(@confirm="confirm1", type="datetime", form-date="-", v-model="show1", :default-value="res.r1")
-                c-datepicker(@confirm="confirm2", type="time", form-date="-", v-model="show2", :default-value="res.r2")
+                c-datepicker(@confirm="confirm2",  type="time", form-date="-", v-model="show2", :default-value="res.r2")
                 c-datepicker(@confirm="confirm3", type="date", form-date="-", v-model="show3", :default-value="res.r3", :mask-closeable="false")
             
             c-panel(title='textarea')
                 c-input(type='textarea',label='备注：', placeholder='请输入备注信息', :rows='2', label-width='70px')
-            
+
             c-panel(title='左侧图标')        
                 c-input(label='姓名', label-icon='ion-person', label-width='70px')
                 c-input(label='密码',v-model='pwd',type='password', label-icon='ion-locked', label-width='70px', :rules="{min:6, message: '请输入至少6位的密码', trigger: 'blur'}")
@@ -56,10 +85,10 @@ block content
                 c-list(title="label 输入框名称")
 
                 c-list(title="placeholder: 占位符")
-                
+
                 // message: String,  // 错误提示
                 c-list(title='rules: 表单验证规则,可以包括的选项有type(email, phone), max, min, pattern, trigger(input blur change focus), message: 输入错误时的提示语')
-                
+
                 c-list(title="rows: Number，type为textarea时设置输入窗口高度")
 
                 c-list(title="trim: Boolean。 默认值为 false")
@@ -70,7 +99,7 @@ block script
     script.
         new Vue({
             el: '#app',
-            data () {
+            data: function () {
                 return {
                     email: "1123@163.com",
                     toggle: true,
@@ -82,30 +111,41 @@ block script
                     show1: false,
                     show2: false,
                     show3: false,
-                    res: {r1: '2018-03-01 09:00', r2:'08:30', r3: '2018-03-01'}
+                    res: [{r1: '2018-03-01 09:00', r2:'08:30', r3: '2018-03-01'}],
+                    checkPassword: {
+                        message: '123',
+                        trigger: 'input',
+                        //- min: 4,
+                        valide: function(val, callback){
+                            //- debugger
+                            if(val.length === 3){
+                                callback(false, "changdu bu neng wei 3")
+                            }
+                        }
+                    }
                 }
             },
             watch: {
             },
             methods: {
-                input () {
+                input: function () {
                     if ( this.phone1.length > 3) {
                         this.haserror = true
                     } else {
                         this.haserror = false
                     }
                 },
-                confirm1(val){
+                confirm1: function(val){
                     // confirm 方法和 default-value 变量，实现双向数据绑定
                     this.res.r1 = val
                 },
-                confirm2(val){
+                confirm2: function(val){
                     this.res.r2 = val
                 },
-                confirm3(val){
+                confirm3: function(val){
                     this.res.r3 = val            
                 },
-                triggerChange(e){
+                triggerChange: function (e){
                     console.log(e.target.value)
                 },
             }

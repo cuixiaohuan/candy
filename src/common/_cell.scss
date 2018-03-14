@@ -66,7 +66,10 @@ $cUploaderBorderWidth: 1px;
     padding-right: $cCellGapH;
     font-size: $cCellTipsFontSize;
 }
-
+.c-cell_flex {
+    display: -webkit-flex;
+    display: flex;
+}
 .c-cell {
     padding: $cCellGapV $cCellGapH;
     position: relative; // 这个是为了兼容cells容器onepx方案被before挡住而做的

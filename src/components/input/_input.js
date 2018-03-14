@@ -45,7 +45,8 @@ var CInput = Vue.extend({
             message: "",
             trigger: "",
             timer: '',
-            isshowToptip: false
+            isshowToptip: false,
+            topTip: null
         }
     },
     mounted () {
@@ -58,6 +59,19 @@ var CInput = Vue.extend({
             this.message = "请输入正确的邮箱地址"
             
             this.pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        }
+
+        // 顶部提示框
+        this.topTip = document.querySelector(".c-toptips_warn")
+        if (!this.topTip) {
+
+            this.topTip = document.createElement("div")
+
+            this.topTip.classList.add('c-toptips_warn', "c-toptips")
+            this.topTip.style.display = "none"
+
+            document.body.appendChild(this.topTip)
+
         }
     },
     computed: {
@@ -82,23 +96,34 @@ var CInput = Vue.extend({
             if (!val){
                 clearTimeout(this.timer)
             }
+        },
+        hasError(val) { 
+            if (!val) {
+
+                
+                this.isshowToptip = false
+                this.topTip.style.display = "none"
+                
+            }
         }
     },
     methods: {
-        createTopTip () {
-            var topTip = document.querySelector(".c-toptips_warn")
-            if ( !topTip ){
+        createTopTip(message) {
+            // var topTip = document.querySelector(".c-toptips_warn")
+            // if (!this.topTip ){
     
-                topTip = document.createElement("div")
+            //     this.topTip = document.createElement("div")
 
-                topTip.classList.add('c-toptips_warn', "c-toptips")
+            //     this.topTip.classList.add('c-toptips_warn', "c-toptips")
     
-                document.body.appendChild(topTip)
+            //     document.body.appendChild(this.topTip)
 
-            }    
-            topTip.innerHTML = this.rules.message || this.message
+            // }
+            message = message || this.rules.message || this.message
+
+            this.topTip.innerHTML = message
             
-            topTip.style.display = "block"
+            this.topTip.style.display = "block"
             this.isshowToptip = true
 
             clearTimeout(this.timer)            
@@ -107,8 +132,8 @@ var CInput = Vue.extend({
 
                 this.isshowToptip = false
                 
-                topTip.style.display = "none"
-            }, 2000);
+                this.topTip.style.display = "none"
+            }, 1800);
 
         },
         getParams () {
@@ -132,20 +157,20 @@ var CInput = Vue.extend({
                     },
                     input (e) {
                         if (me.rules && me.rules.trigger &&  me.rules.trigger.indexOf("input") >-1 ){
-                            me.validDate(me, e.target.value)
+                            me.validDate(e.target.value)
                         }
                         me.$emit('input', e.target.value)
                     },
                     change (e) {
                         if (me.rules && me.rules.trigger && me.rules.trigger.indexOf("change")>-1){
-                            me.validDate(me, e.target.value)
+                            me.validDate(e.target.value)
                             
                         }
                         me.$emit('change', e)
                     },
                     focus (e) {
                         if (me.rules && me.rules.trigger && me.rules.trigger.indexOf("focus")>-1){
-                            me.validDate(me, e.target.value)
+                            me.validDate(e.target.value)
                             
                         }
                         me.$emit('focus', e)
@@ -153,7 +178,7 @@ var CInput = Vue.extend({
                     blur (e) {
                         if (me.rules && me.rules.trigger && me.rules.trigger.indexOf("blur")>-1){
                             
-                            me.validDate(me, e.target.value)
+                            me.validDate(e.target.value)
                         }
                         me.$emit('blur', e)
             
@@ -176,45 +201,53 @@ var CInput = Vue.extend({
             
             return params
         },
-        validDate (me, value) {
-            if ("max" in me.rules){
-                me.max = me.rules.max
-                if (value.length > parseInt(me.max)){
-                    me.hasError = true
-                    me.createTopTip()
+        validDate (value) {
+            if ("max" in this.rules){
+                this.max = this.rules.max
+                if (value.length > parseInt(this.max)){
+                    this.hasError = true
+                    this.createTopTip()
                     
                 } else {
-                    me.hasError = false                    
+                    this.hasError = false                    
                 }
             }
-            if ("min" in me.rules){
-                me.min = me.rules.min
+            if ("min" in this.rules){
+                this.min = this.rules.min
 
-                if (value.length < parseInt(me.min)){
-                    me.hasError = true
-                    me.createTopTip()
+                if (value.length < parseInt(this.min)){
+                    this.hasError = true
+                    this.createTopTip()
                     
                 } else {
-                    me.hasError = false
+                    this.hasError = false
                     
                 }
             }
-            if ( me.pattern || "pattern" in me.rules){
+            if ( this.pattern || "pattern" in this.rules){
 
-                me.pattern ? "" : (me.pattern = me.rules.pattern)
+                this.pattern ? "" : (this.pattern = this.rules.pattern)
                 
-                if (me.pattern.test(value)){
+                if (this.pattern.test(value)){
                     // 校验成功
-                    me.hasError = false
+                    this.hasError = false
                 } else {
                     // 校验失败
-                    me.hasError = true
+                    this.hasError = true
 
-                    me.createTopTip()
+                    this.createTopTip()
                 }
             }
-
-            
+            if ("valide" in this.rules) {
+                this.rules.valide(value, (isOk, thisssage) => {
+                    if (!isOk) {
+                        this.hasError = true
+                        this.createTopTip(thisssage)
+                    } else {
+                        this.hasError = false
+                    }
+                })
+            }
         }
     },
     render (h) {
@@ -224,12 +257,11 @@ var CInput = Vue.extend({
         
 
         var $inputs, $label
-        // debugger
         if (me.type === 'textarea'){
 
             $inputs = hx(`textarea.c-textarea`, params)
-        } else if (me.type === 'date') {
-            $inputs = hx(`div.c-input`, params)
+        // } else if (me.type === 'date') {
+        //     $inputs = hx(`input.c-input`, params)
             
         }else {
             

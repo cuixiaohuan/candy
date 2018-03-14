@@ -163,7 +163,8 @@ function getRect(el) {
 }
 
 function ajax(params) {
-    let { data, success, failed, progress, url } = params
+    let { data, success, failed, progress, url, withCredentials, headers } = params
+
     // 创建ajax对象
     var xhr = null;
     if (window.XMLHttpRequest) {
@@ -196,23 +197,15 @@ function ajax(params) {
         }
     }
 
-    //
-    xhr.upload.addEventListener('progress', (evt) => {
-        if (evt.total == 0) return;
-        const percent = Math.ceil(evt.loaded / evt.total) * 100;
-        console.log('percent:', percent);
-        
-        progress(percent);
-    }, false);
+    if (xhr.upload) {
+        xhr.upload.addEventListener('progress', (evt) => {
+            if (evt.total == 0) return;
+            const percent = Math.ceil(evt.loaded / evt.total) * 100;
+            console.log('percent:', percent);
 
-
-
-    // xhr.onprogress = (event) => {
-    //     if (event.lengthComputable) {
-    //         console.log(event.total);
-    //         console.log(event.loaded);
-    //     }
-    // };
+            progress(percent);
+        }, false);
+    }    
 
     xhr.open('POST', url, true);
 
@@ -221,10 +214,17 @@ function ajax(params) {
     // 使用ajax的时候设置Content-type不会报错，是因为在ajax内部会自动处理这些问题，
     // xhr.setRequestHeader("Content-type", "multipart/form-data");
 
-    // Object.keys(headers).forEach((key) => {
-    //     xhr.setRequestHeader(key, headers[key]);
-    // });
+    if (withCredentials && 'withCredentials' in xhr) {
+        xhr.withCredentials = true;
+    }
 
+    headers = headers || {};
+
+    Object.keys(headers).forEach((key) => {
+        xhr.setRequestHeader(key, headers[key]);
+    });
+
+    // data为uploader中传入的FormData格式
     xhr.send(data);
 }
 

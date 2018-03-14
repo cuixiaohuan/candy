@@ -28,7 +28,7 @@ var CNav = Vue.extend({
                 
                 if ( child.componentOptions && child.componentOptions.tag === "c-nav-item" && child.componentInstance){
                     this.$nextTick(_ => {
-
+                        debugger
                         child.componentInstance.active = this.value === child.componentInstance.value
                         if (this.list.indexOf( child.componentInstance.val ) == -1) {
                             this.list.push(child.componentInstance.val)                            

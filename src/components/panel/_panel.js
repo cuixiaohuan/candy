@@ -22,45 +22,38 @@ var CPanel = Vue.extend({
     watch: {
     },
     methods: {
-        _getHeader () {
+        _getHeader() {
             var me = this
             var $hd = hx('div.c-panel__hd', {})
-            
-            if (!!me.link){
-                var $header
+
+            var $header
+            if (!!me.link) {
 
                 $header = hx('a.c-cell + c-cell_access', {
                     attrs: {
                         href: me.link
                     }
                 })
-        
-                if (!!me.icon ){
-                    $header.push(
-                        hx('div.c-cell__hd',
-                        {},
-                        [ hx(`i.c-btn_icon+${me.icon}`) ])
-                    )
-                }
-
-                $header.push( hx('div.c-cell__bd', {},[ hx('p',{}, [me.title])]) )
-                
-                if ( !!me.legend ){
-                    $header.push( hx('div.c-cell__ft', {}, [me.legend]) )
-                } else {
-                    $header.push( hx('div.c-cell__ft') )
-                    
-                }
-                $hd.push($header)
-
-
             } else {
-                $hd.push(hx('span', {}, [me.title]))
+                $header = hx('span.c-cell_flex')
             }
+
+            if (!!me.icon) {
+                $header.push(
+                    hx('div.c-cell__hd',
+                        {},
+                        [hx(`i.c-btn_icon+${me.icon}`)])
+                )
+            }
+
+            $header.push(hx('div.c-cell__bd', {}, [hx('p', {}, [me.title])]))
+
+            $header.push(hx('div.c-cell__ft', {}, [me.legend || '']))
+
+            $hd.push($header)
 
             return $hd
         }
-
     },
     mounted(){
     },

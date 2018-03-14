@@ -10,7 +10,7 @@ block content
             c-list(title='文字标题', legend='说明文字3', icon='ion-ios-cog-outline', href='javascript:;')
             template(slot='footer')
                 c-list(title='查看更多', href='javascript:;')
-            
+
         c-panel( title='panel标题', icon='ion-person')
             //- c-list(:title="'new item'+item", legend='pullingDown', v-for="item in up")            
             c-list(:title="item.title", :legend="'说明文字'+item.legend", v-for="item in list")

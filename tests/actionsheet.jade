@@ -11,7 +11,7 @@ block style
             margin: -10px -10px;
         }
 
-        p {
+        .title {
             color: #888;
             font-size: 8px;
         }
@@ -33,43 +33,43 @@ block content
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-whatsapp-outline')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-twitter')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-chrome')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-whatsapp-outline')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-twitter')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-tux')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-github')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-chrome')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-octocat')
-                            p 微信分享
+                            p.title 微信分享
                     c-grid-item
                         .panel
                             c-icon(type='success' icon='ion-social-chrome')
-                            p 微信分享
+                            p.title 微信分享
 
 
         c-actionsheet(v-model='showAndroid', style-sheet='android', :menu-list='list', title='标题(描述bjandjajdasfa)')
@@ -78,25 +78,25 @@ block script
     script.
         new Vue({
             el: '#app',
-            data () {
+            data: function(){
                 return {
-                showIos: false,
-                showIos2: false,
-                showIos3: false,
-                showAndroid: false,
-                oper: '',
-                list: [{
-                    name: '示例11', href: "#a1", id: 1
-                },{
-                    name: '示例22', href: "#a2", id: 2
-                },{
-                    name: '示例33', href: "#a3", id: 3
-                },]
+                    showIos: false,
+                    showIos2: false,
+                    showIos3: false,
+                    showAndroid: false,
+                    oper: '',
+                    list: [{
+                        name: '示例11', href: "#a1", id: 1
+                    },{
+                        name: '示例22', href: "#a2", id: 2
+                    },{
+                        name: '示例33', href: "#a3", id: 3
+                    },]
                 }
             },
             methods: {
-                clickBtn (val) {
-                this.oper = val
+                clickBtn: function (val) {
+                    this.oper = val
                 }
             }
         })

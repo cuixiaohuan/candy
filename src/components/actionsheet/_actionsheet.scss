@@ -16,8 +16,9 @@ $cActionSheetAndroidBorderRadius: 2px;
 }
 .c-actionsheet__title {
     position: relative;
-    height: 65px;
-    padding: 0 20px;
+    // height: 65px;
+    height: auto;
+    padding: 15px 20px;
     line-height: 1.4;
     
     display: -webkit-flex;
@@ -36,6 +37,7 @@ $cActionSheetAndroidBorderRadius: 2px;
     }
     .c-actionsheet__title-text {
         @include ellipsisLn(2);
+        font-size: 14px;
     }
 }
 .c-actionsheet__menu{
