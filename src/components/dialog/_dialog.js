@@ -20,9 +20,9 @@ var CDialog = Vue.extend({
       type: Boolean,
       default: false
     },
-    isIos: {
-      type: Boolean,
-      default: true
+    type: {
+      type: Number,
+      default: 1
     },
     maskCloseable: {
       type: Boolean,
@@ -125,7 +125,11 @@ var CDialog = Vue.extend({
       $dialog.push($ft)
     }
   
-    var $content = hx('div', {
+    let className = ""
+    if (me.type === 2) {
+        className = "c-skin_android"
+    }  
+    var $content = hx(`div.${className}`, {
       style: me.dialogStyle
     }).push([
         hx('div.c-mask', {

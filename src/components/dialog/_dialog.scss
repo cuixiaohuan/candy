@@ -19,6 +19,8 @@ $cDialogGapWidth: 1.6em;
     text-align: center;
     border-radius: 3px;
     overflow: hidden;
+
+    transition:transform 2.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
 }
 .c-dialog__hd {
     padding: 1.3em $cDialogGapWidth .5em;
@@ -132,6 +134,15 @@ $cDialogGapWidth: 1.6em;
     }
     .c-dialog__btn_default {
         color: #808080;
+    }
+}
+
+@-webkit-keyframes toggle {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.2;
     }
 }
 

@@ -67,8 +67,6 @@ var CUploader = Vue.extend({
         },
         fileList: {
             handler() { 
-                console.log('fileList changed');
-                
                 this.imgList()
             },
             deep: true
@@ -169,7 +167,6 @@ var CUploader = Vue.extend({
         post(file) {
             var formData = new FormData()
             formData.append(this.name, file)
-
             ajax({
                 url: this.action,
                 headers: this.headers,

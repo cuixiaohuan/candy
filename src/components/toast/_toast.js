@@ -18,7 +18,6 @@ var CToast = Vue.extend({
             type: Boolean,
             default: false
         }
-
     },
     data: ()=>{
         return {
@@ -30,8 +29,11 @@ var CToast = Vue.extend({
             this.realVal = val
         },
         realVal (val) {
-            if (!val){
-                this.$emit("input", false)
+            if (!val) {
+                setTimeout(()=> {
+                    this.realVal = false
+                    this.$emit("input", false)
+                }, 16);
             } else {
                 if(this.showTime){
 
@@ -74,9 +76,7 @@ var CToast = Vue.extend({
             }
             $content.push(tmp)
 
-
-            if (me.message){
-
+            if (me.message) {
                 $content.push(hx("div.c-toast__content", {
 
                 }, [me.message]))
@@ -91,6 +91,11 @@ var CToast = Vue.extend({
         var $toast = hx("div", {
                 style: {
                     display: me.realVal ? "block" : "none"
+                },
+                on: {
+                    click() { 
+                        me.realVal = false
+                    }
                 }
             },
             [hx("div.c-mask_transparent")]

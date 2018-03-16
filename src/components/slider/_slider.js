@@ -147,9 +147,6 @@ var CSlider = Vue.extend({
         window.addEventListener('mouseup', (e) => {
             flag = false
         })
-        
-    },
-    watch: {
     },
     methods: {
         getStepLength () {

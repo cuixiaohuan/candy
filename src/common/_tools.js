@@ -172,6 +172,18 @@ function ajax(params) {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP')
     }
+
+
+    if (xhr.upload) {
+        xhr.upload.addEventListener('progress', (evt) => {
+            if (evt.total == 0) return;
+            const percent = Math.ceil(evt.loaded / evt.total) * 100;
+            console.log('percent:', percent);
+
+            progress(percent);
+        }, false);
+    }    
+    
     // 用于清除缓存
     var random = Math.random();
     
@@ -196,16 +208,6 @@ function ajax(params) {
 
         }
     }
-
-    if (xhr.upload) {
-        xhr.upload.addEventListener('progress', (evt) => {
-            if (evt.total == 0) return;
-            const percent = Math.ceil(evt.loaded / evt.total) * 100;
-            console.log('percent:', percent);
-
-            progress(percent);
-        }, false);
-    }    
 
     xhr.open('POST', url, true);
 
