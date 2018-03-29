@@ -50,6 +50,8 @@ $cGridColumnCount: 4;
     box-sizing: border-box;
     overflow: hidden;
 
+    text-align: center;
+
     &:before {
         @include setRightLine($cGridBorderColor);
     }

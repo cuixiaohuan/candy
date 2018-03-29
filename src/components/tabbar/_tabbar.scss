@@ -2,7 +2,8 @@
 .c-tabbar {
     display: -webkit-flex;
     display: flex;
-    position: absolute;
+    position: fixed;
+    // position: absolute;
     z-index: 500;
     bottom: 0;
     width: 100%;

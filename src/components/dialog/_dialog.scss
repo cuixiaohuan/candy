@@ -13,14 +13,16 @@ $cDialogGapWidth: 1.6em;
     max-width: 300px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-
+    transform:translate(-50%, -50%);
+    
     background-color: $cDialogBackgroundColor;
     text-align: center;
     border-radius: 3px;
     overflow: hidden;
-
-    transition:transform 2.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+    
+    // transition: scale 2.35s ease;
+    -webkit-animation: toggle .12s ease-in-out;
+    animation: toggle .12s ease-in-out;
 }
 .c-dialog__hd {
     padding: 1.3em $cDialogGapWidth .5em;
@@ -139,10 +141,19 @@ $cDialogGapWidth: 1.6em;
 
 @-webkit-keyframes toggle {
     0% {
-        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
     }
     100% {
-        opacity: 0.2;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes toggle {
+    0% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
@@ -151,3 +162,4 @@ $cDialogGapWidth: 1.6em;
         width: 35%;
     }
 }
+

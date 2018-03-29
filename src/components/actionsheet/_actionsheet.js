@@ -7,11 +7,11 @@ var CActionsheet = Vue.extend({
         }
     },
     props: {
-        noClose: {
+        noClose: { // 是否有取消按钮
             type: Boolean,
             default: false
         },
-        maskCloseable: {
+        maskCloseable: { // 点击背景隐藏
             type: Boolean,
             default: true
         },
@@ -23,7 +23,7 @@ var CActionsheet = Vue.extend({
         },
         styleSheet: {
             type: String,
-            default: 'IOS'
+            default: 'IOS' 
         }
 
     },
@@ -49,7 +49,7 @@ var CActionsheet = Vue.extend({
         },
         maskStyle() {
             var maskStyle = {}
-            if (this.styleSheet == 'Android' || this.styleSheet == 'android') return maskStyle
+            if (this.styleSheet == 'Android' || this.styleSheet == 'android' || this.styleSheet == 2) return maskStyle
             if (this.isShow) {
                 maskStyle = {
                     opacity: 1
@@ -66,7 +66,7 @@ var CActionsheet = Vue.extend({
         sheetStyle() {
             var sheetStyle = {}
 
-            if (this.styleSheet == 'IOS' || this.styleSheet == 'ios') return sheetStyle
+            if (this.styleSheet == 'IOS' || this.styleSheet == 'ios' || this.styleSheet == 1) return sheetStyle
             if (this.isShow) {
                 sheetStyle = {
                     opacity: 1
@@ -90,7 +90,7 @@ var CActionsheet = Vue.extend({
 
         var $menu = hx('div.c-actionsheet__menu', {})
 
-
+        // title
         if (!!this.title) {
             titleParams = {
                 domProps: {
@@ -103,13 +103,13 @@ var CActionsheet = Vue.extend({
             ])
 
             $menu.push($title)
-
         }
 
+        // content
         if (me.$slots["content"]){
             $menu.push(me.$slots["content"])
-        } else 
-        if (!!me.menuList) {
+
+        } else if (!!me.menuList) {
             me.menuList.forEach((item) => {
                 $menu.push(hx('a.c-actionsheet__cell ', {
                     domProps: {
@@ -147,7 +147,7 @@ var CActionsheet = Vue.extend({
         }
 
         var domName = 'div'
-        if (me.styleSheet == 'Android' || me.styleSheet == 'android') {
+        if (me.styleSheet == 'Android' || me.styleSheet == 'android' || me.styleSheet == 2) {
             domName = 'div.c-skin_android'
         }
 

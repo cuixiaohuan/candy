@@ -20,7 +20,7 @@ var CDialog = Vue.extend({
       type: Boolean,
       default: false
     },
-    type: {
+    styleSheet: {
       type: Number,
       default: 1
     },
@@ -126,7 +126,7 @@ var CDialog = Vue.extend({
     }
   
     let className = ""
-    if (me.type === 2) {
+    if (me.styleSheet === 2) {
         className = "c-skin_android"
     }  
     var $content = hx(`div.${className}`, {

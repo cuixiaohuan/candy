@@ -11,7 +11,7 @@
   
 [class^="c-native-icon-"]:before, [class*=" c-native-icon-"]:before {
     margin: 0;
-    font-size: 48px;
+    // font-size: 48px;
     // line-height: 1;
 }
 
@@ -22,6 +22,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.c-native-icon-spinner9:before {
+    content: "\e982";
+}
+.c-native-icon-search:before {
+    content: "\e986";
+}
 .c-native-icon-error:before {
     content: "\ea0f";
 }

@@ -23,4 +23,5 @@ import "./components/pagination/_pagination";
 import "./components/datepicker/_datepicker";
 import "./components/gallery/_gallery";
 import "./components/form/_form";
+import "./components/header/_header";
 

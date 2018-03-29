@@ -11,13 +11,9 @@ var CSearchbar = Vue.extend({
 
         }
     },
-    watch: {
-
-    },
     props: {
         value: [String, Number],
         placeholder: [String, Number],
-        
     },
     computed :{
         cls () {
@@ -55,8 +51,13 @@ var CSearchbar = Vue.extend({
             }
         } )
 
-        $box = hx( 'div.c-search-bar__box', {}, [
-            hx( 'i.c-icon-search', {}),
+        $box = hx('div.c-search-bar__box', {}, [
+            // c-native-icon-search
+            hx('i.c-native-icon-search', {
+                style: {
+                    fontSize: '14px'
+                }
+            }),
             $input,
             hx( 'a.c-icon-clear', {
                 attrs: {
@@ -73,7 +74,11 @@ var CSearchbar = Vue.extend({
                 }
             }
         }, [
-            hx('i.c-icon-search', {}),
+            hx('i.c-native-icon-search', {
+                style: {
+                    fontSize: '14px'
+                }
+            }),
             hx('span', {
                 domProps: {
                     innerHTML: '搜索'

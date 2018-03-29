@@ -1,0 +1,120 @@
+.c-header {
+    display: flex;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    padding: 5px;
+    z-index: 9;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    justify-content: space-between;
+
+    + div{
+        margin-top: 54px;
+    }
+
+    [class^="c-icon-"]{
+        line-height: 44px;
+    }
+
+    .c-header_content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        .c-header_left {
+            z-index: 9;
+            border-color: transparent;
+            background: none;
+            font-size: 100%;
+
+            // color: #444;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 15px;
+            height: 43px;
+            line-height: 44px;
+            
+            [class^="c-icon-"] {
+                margin-right: 5px;
+            }
+        }
+
+        .c-header_right {
+            z-index: 9;
+            border-color: transparent;
+            background: none;
+            font-size: 17px;
+
+            height: 43px;
+            line-height: 44px;
+            position: absolute;
+            right: 15px;
+            top: 0;
+            bottom: 0;
+
+            [class^="c-icon-"] {
+                margin-left: 5px;
+            }
+        }
+
+        .c-header_title {
+            font-weight: 500;
+            font-size: 17px;
+
+            height: 43px;
+            line-height: 44px;
+            text-align: center;
+            margin: 0 10px;
+            flex: 1;        
+            font-size: 100%;
+            
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}
+.c-header_light {
+    border-color: #ddd;
+    background-color: #fff;
+    color: #444;
+}
+
+.c-header_stable {
+    border-color: #b2b2b2;
+    background-color: #f5f5f5;
+    color: #444 ;
+}
+
+.c-header_positive {
+    border-color: #2275d7;
+    background-color: #4a90e2;
+    color: #fff ;
+}
+
+.c-header_dark {
+    border-color: #111;
+    background-color: #484746;
+    color: #fff ;
+}
+
+.c-header_assertive {
+    border-color: #e5311b;
+    background-color: #ea5a49;
+    color: #fff ;
+}
+
+.c-header_energized {
+    border-color: #eb9e05;
+    background-color: #ffbd17;
+    color: #fff ;
+}
